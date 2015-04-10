@@ -5,27 +5,32 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username/password.
  */
 public class LoginActivity extends Activity {
 
     /**
      * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
+     * TODO: Remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "vlecomte:hello", "slardinois:world"
     };
 
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    // Login fields.
+    private EditText mUsernameView, mPasswordView;
+    // Register fields.
+    private EditText mConfirmPasswordView, mEmailView;
+    // Buttons.
+    private Button mSignInButton, mRegisterButton;
+
+    private boolean registerShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +38,67 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
+        mUsernameView = (EditText) findViewById(R.id.username);
         mPasswordView = (EditText) findViewById(R.id.password);
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mSignInButton = (Button) findViewById(R.id.sign_in_button);
+        mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 attemptLogin();
             }
         });
+
+        // Set up the register form.
+        mConfirmPasswordView = (EditText) findViewById(R.id.confirm_password);
+        mEmailView = (EditText) findViewById(R.id.email);
+        mRegisterButton = (Button) findViewById(R.id.register_button);
+        mRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptRegister();
+            }
+        });
+    }
+
+    private void showRegister() {
+
+        registerShown = true;
+
+        // Hide login button
+        mSignInButton.setVisibility(View.GONE);
+
+        // Display additional fields and register button.
+        mConfirmPasswordView.setVisibility(View.VISIBLE);
+        mEmailView.setVisibility(View.VISIBLE);
+        mRegisterButton.setVisibility(View.VISIBLE);
+
+        // Change focus to the next field to fill.
+        mConfirmPasswordView.requestFocus();
+    }
+
+    private void hideRegister() {
+
+        registerShown = false;
+
+        // Hide additional fields and register button.
+        mRegisterButton.setVisibility(View.GONE);
+        mEmailView.setVisibility(View.GONE);
+        mConfirmPasswordView.setVisibility(View.GONE);
+
+        // Display login button.
+        mSignInButton.setVisibility(View.VISIBLE);
+
+        // Change focus to the username field.
+        mUsernameView.requestFocus();
+    }
+
+    @Override
+    public void finish() {
+        if (registerShown) {
+            hideRegister();
+        } else {
+            super.finish();
+        }
     }
 
 
@@ -54,59 +109,88 @@ public class LoginActivity extends Activity {
      */
     public void attemptLogin() {
 
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        resetErrors();
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
-        View focusView = null;
-
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
+        // Both fields are required.
+        if (TextUtils.isEmpty(username)) {
+            reportError(mUsernameView, getString(R.string.error_field_required));
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            reportError(mPasswordView, getString(R.string.error_field_required));
+            return;
         }
 
-        // Check for a valid email address.
+        // Both fields must be valid.
+        if (!isUsernameValid(username)) {
+            reportError(mUsernameView, getString(R.string.error_invalid_username));
+            return;
+        }
+        if (!isPasswordValid(password)) {
+            reportError(mPasswordView, getString(R.string.error_invalid_password));
+            return;
+        }
+
+        userLogin(username, password);
+    }
+
+    private void attemptRegister() {
+
+        resetErrors();
+
+        // Store values at the time of the login attempt.
+        String username = mUsernameView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        String confirmPassword = mConfirmPasswordView.getText().toString();
+        String email = mEmailView.getText().toString();
+
+        // All fields are required.
+        if (TextUtils.isEmpty(username)) {
+            reportError(mUsernameView, getString(R.string.error_field_required));
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            reportError(mPasswordView, getString(R.string.error_field_required));
+            return;
+        }
+        if (TextUtils.isEmpty(confirmPassword)) {
+            reportError(mConfirmPasswordView, getString(R.string.error_field_required));
+            return;
+        }
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
+            reportError(mEmailView, getString(R.string.error_field_required));
+            return;
         }
 
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            userLogin(email, password);
+        // All fields must be valid.
+        if (!isUsernameValid(username)) {
+            reportError(mUsernameView, getString(R.string.error_invalid_username));
+            return;
         }
+        if (!isPasswordValid(password)) {
+            reportError(mPasswordView, getString(R.string.error_invalid_password));
+            return;
+        }
+        if (!isEmailValid(email)) {
+            reportError(mEmailView, getString(R.string.error_invalid_email));
+            return;
+        }
+
+        // The passwords must match.
+        if (!password.equals(confirmPassword)) {
+            reportError(mConfirmPasswordView, getString(R.string.error_password_mismatch));
+            return;
+        }
+
+        userRegister(username, password, email);
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
+    private void userLogin(String email, String password) {
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
-
-    private void userLogin(String email, String password)
-    {
         boolean exists = false, success = false;
         for (String credential : DUMMY_CREDENTIALS) {
             String[] pieces = credential.split(":");
@@ -115,23 +199,49 @@ public class LoginActivity extends Activity {
                 success = pieces[1].equals(password);
             }
         }
+
         if (exists) {
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-        else
-        {
-            createUser();
+            // TODO: Switch to main menu
+            if (success) Toast.makeText(this, "Logging in.", Toast.LENGTH_SHORT).show();
+            else reportError(mPasswordView, getString(R.string.error_incorrect_password));
+        } else {
+            showRegister();
         }
     }
 
-    private void createUser()
-    {
+    private void userRegister(String username, String password, String email) {
+        // TODO: Register user
+        Toast.makeText(this, "Registering ("+username+", "+password+", "+email+").",
+                Toast.LENGTH_SHORT).show();
+        // TODO: Switch to main menu
+    }
 
+    private boolean isUsernameValid(String username) {
+        return username.length() >= 3 && username.length() <= 50;
+    }
+
+    private boolean isPasswordValid(String password) {
+        return password.length() >= 5 && password.length() <= 50;
+    }
+
+    private boolean isEmailValid(String email) {
+        // TODO: Find out an easy way to check an email
+        return email.contains("@");
+    }
+
+    private void reportError(EditText field, String message) {
+        field.setError(message);
+        field.requestFocus();
+    }
+
+    /**
+     * Resets errors on all fields.
+     */
+    private void resetErrors() {
+        mUsernameView.setError(null);
+        mPasswordView.setError(null);
+        mConfirmPasswordView.setError(null);
+        mEmailView.setError(null);
     }
 }
 
