@@ -3,5 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="under_app_title">8dp</dimen>
     <dimen name="form_before_submit_button">16dp</dimen>
 </resources>
