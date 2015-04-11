@@ -26,7 +26,7 @@ public class DaoUser {
         cv.put(COL_RANK, RANK_CUSTOMER);
         cv.put(COL_LANGUAGE, language);
         db.insert(TABLE_USER, null, cv);
-        return new Customer(username, email, language);
+        return new Customer(username, password, email, language);
     }
 
     public static User attemptLogin(String username, String password) {
@@ -43,11 +43,11 @@ public class DaoUser {
             switch (rank)
             {
                 case RANK_CUSTOMER:
-                    return new Customer(username, email, language);
+                    return new Customer(username, password, email, language);
                 case RANK_WAITER:
-                    return new Waiter(username, email, language);
+                    return new Waiter(username, password, email, language);
                 case RANK_ADMIN:
-                    return new Admin(username, email, language);
+                    return new Admin(username, password, email, language);
             }
             throw new IllegalArgumentException("Invalid rank.");
         } else {
@@ -76,17 +76,19 @@ public class DaoUser {
         return taken;
     }
 
-    public static void setEmail(String username, String email) {
+    public static void setEmail(String username, String password, String email) {
         SQLiteDatabase db = MyDbHelper.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_EMAIL, email);
-        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
+        db.update(TABLE_USER, cv,
+                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, password});
     }
 
-    public static void setLanguage(String username, String language) {
+    public static void setLanguage(String username, String password, String language) {
         SQLiteDatabase db = MyDbHelper.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_LANGUAGE, language);
-        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
+        db.update(TABLE_USER, cv,
+                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, password});
     }
 }

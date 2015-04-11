@@ -7,10 +7,11 @@ import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
  */
 public abstract class User {
 
-    private String mUsername, mEmail, mLanguage;
+    private String mUsername, mPassword, mEmail, mLanguage;
 
-    protected User(String username, String email, String language) {
+    protected User(String username, String password, String email, String language) {
         mUsername = username;
+        mPassword = password;
         mEmail = email;
         mLanguage = language;
     }
@@ -29,11 +30,11 @@ public abstract class User {
 
     public void setEmail(String email) {
         mEmail = email;
-        DaoUser.setEmail(mUsername, email);
+        DaoUser.setEmail(mUsername, mPassword, email);
     }
 
     public void setLanguage(String language) {
         mLanguage = language;
-        DaoUser.setLanguage(mLanguage, language);
+        DaoUser.setLanguage(mUsername, mPassword, language);
     }
 }
