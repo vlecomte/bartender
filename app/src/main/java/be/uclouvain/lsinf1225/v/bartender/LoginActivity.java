@@ -10,8 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import be.uclouvain.lsinf1225.v.bartender.dao.DAOUser;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.dao.MyDbHelper;
+import be.uclouvain.lsinf1225.v.bartender.model.User;
 
 
 /**
@@ -211,13 +212,16 @@ public class LoginActivity extends Activity {
      */
     private void userLogin(String username, String password) {
 
-        if (DAOUser.exists(username)) {
-            // TODO: Switch to main menu
-            if (DAOUser.isPasswordCorrect(username, password)) {
+        if (DaoUser.exists(username)) {
+
+            User user = DaoUser.attemptLogin(username, password);
+
+            if (user == null) {
+                reportError(mPasswordView, getString(R.string.error_incorrect_password));
+            } else {
                 Toast.makeText(this, getString(R.string.info_successful_login), Toast.LENGTH_SHORT)
                         .show();
-            } else {
-                reportError(mPasswordView, getString(R.string.error_incorrect_password));
+                // TODO: Switch to main menu
             }
         } else {
             showRegister();
@@ -235,20 +239,19 @@ public class LoginActivity extends Activity {
      */
     private void userRegister(String username, String password, String email) {
 
-        if (DAOUser.exists(username)) {
+        if (DaoUser.exists(username)) {
             reportError(mUsernameView, getString(R.string.error_username_taken));
             return;
         }
-        if (DAOUser.isEmailTaken(email)) {
+        if (DaoUser.isEmailTaken(email)) {
             reportError(mEmailView, getString(R.string.error_email_taken));
             return;
         }
         // TODO: Use constant for "customer"
         // TODO: Ask for language
-        DAOUser.create(username, password, email, "customer", "en");
+        User user = DaoUser.create(username, password, email, "customer", "en");
         Toast.makeText(this, getString(R.string.info_successful_register), Toast.LENGTH_SHORT)
                 .show();
-
         // TODO: Switch to main menu
     }
 

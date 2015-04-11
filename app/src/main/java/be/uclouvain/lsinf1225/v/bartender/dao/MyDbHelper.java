@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /**
- * Creates a database from the pre-existing SQLite asset.
+ * Database created from the pre-existing SQLite asset.
  */
 public class MyDbHelper extends SQLiteAssetHelper {
 
