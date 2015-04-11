@@ -1,17 +1,13 @@
 package be.uclouvain.lsinf1225.v.bartender.dao;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
+import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.*;
 
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.TABLE_USER;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.COL_EMAIL;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.COL_LANGUAGE;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.COL_PASSWORD;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.COL_RANK;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.COL_USERNAME;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Data access object for User.

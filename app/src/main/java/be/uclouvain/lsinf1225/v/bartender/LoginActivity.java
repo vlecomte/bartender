@@ -1,5 +1,9 @@
 package be.uclouvain.lsinf1225.v.bartender;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
+import be.uclouvain.lsinf1225.v.bartender.dao.MyDbHelper;
+import be.uclouvain.lsinf1225.v.bartender.model.User;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,10 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
-import be.uclouvain.lsinf1225.v.bartender.dao.MyDbHelper;
-import be.uclouvain.lsinf1225.v.bartender.model.User;
 
 
 /**
