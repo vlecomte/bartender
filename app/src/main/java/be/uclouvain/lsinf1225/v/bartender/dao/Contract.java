@@ -12,6 +12,9 @@ public final class Contract {
         public static final String COL_PASSWORD = "Password";
         public static final String COL_EMAIL = "Email";
         public static final String COL_RANK = "Rank";
+        public static final String RANK_CUSTOMER = "customer";
+        public static final String RANK_WAITER = "waiter";
+        public static final String RANK_ADMIN = "admin";
         public static final String COL_LANGUAGE = "Language";
     }
 }

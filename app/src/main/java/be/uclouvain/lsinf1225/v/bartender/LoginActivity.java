@@ -212,7 +212,7 @@ public class LoginActivity extends Activity {
      */
     private void userLogin(String username, String password) {
 
-        if (DaoUser.exists(username)) {
+        if (DaoUser.isUsernameTaken(username)) {
 
             User user = DaoUser.attemptLogin(username, password);
 
@@ -230,7 +230,7 @@ public class LoginActivity extends Activity {
 
     /**
      * Attempts to register a new user with the specified credentials.
-     * If the username already exists, an error is reported.
+     * If the username already isUsernameTaken, an error is reported.
      * Otherwise, we switch to the main menu.
      *
      * @param username The username of the account to be created.
@@ -239,7 +239,7 @@ public class LoginActivity extends Activity {
      */
     private void userRegister(String username, String password, String email) {
 
-        if (DaoUser.exists(username)) {
+        if (DaoUser.isUsernameTaken(username)) {
             reportError(mUsernameView, getString(R.string.error_username_taken));
             return;
         }
@@ -247,9 +247,8 @@ public class LoginActivity extends Activity {
             reportError(mEmailView, getString(R.string.error_email_taken));
             return;
         }
-        // TODO: Use constant for "customer"
         // TODO: Ask for language
-        User user = DaoUser.create(username, password, email, "customer", "en");
+        User user = DaoUser.create(username, password, email, "en");
         Toast.makeText(this, getString(R.string.info_successful_register), Toast.LENGTH_SHORT)
                 .show();
         // TODO: Switch to main menu

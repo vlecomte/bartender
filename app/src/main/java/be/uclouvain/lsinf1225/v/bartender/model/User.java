@@ -5,11 +5,11 @@ import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 /**
  * Any user of the application.
  */
-public class User {
+public abstract class User {
 
     private String mUsername, mEmail, mLanguage;
 
-    public User(String username, String email, String language) {
+    protected User(String username, String email, String language) {
         mUsername = username;
         mEmail = email;
         mLanguage = language;
