@@ -3,25 +3,21 @@ package be.uclouvain.lsinf1225.v.bartender;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DAOUser;
+import be.uclouvain.lsinf1225.v.bartender.dao.MyDbHelper;
+
 
 /**
  * A login screen that switches to a register screen if the username does not exist yet.
  */
 public class LoginActivity extends Activity {
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: Remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "vlecomte:hello", "slardinois:world"
-    };
 
     // Login fields.
     private EditText mUsernameView, mPasswordView;
@@ -36,6 +32,9 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Init the database.
+        MyDbHelper.init(this);
 
         // Set up the login form.
         mUsernameView = (EditText) findViewById(R.id.username);
@@ -69,6 +68,9 @@ public class LoginActivity extends Activity {
         // Hide login button
         mSignInButton.setVisibility(View.GONE);
 
+        // Change action bar title
+        setTitle(getString(R.string.title_register));
+
         // Display additional fields and register button.
         mConfirmPasswordView.setVisibility(View.VISIBLE);
         mEmailView.setVisibility(View.VISIBLE);
@@ -89,6 +91,9 @@ public class LoginActivity extends Activity {
         mEmailView.setVisibility(View.GONE);
         mConfirmPasswordView.setVisibility(View.GONE);
 
+        // Change action bar title
+        setTitle(getString(R.string.title_login));
+
         // Display login button.
         mSignInButton.setVisibility(View.VISIBLE);
 
@@ -97,14 +102,13 @@ public class LoginActivity extends Activity {
     }
 
     @Override
-    public void finish() {
+    public void onBackPressed() {
         if (registerShown) {
             hideRegister();
         } else {
-            super.finish();
+            finish();
         }
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -201,24 +205,20 @@ public class LoginActivity extends Activity {
      * If the username does not exist, the form switches to register mode.
      * If the password is incorrect, an error is reported.
      * Otherwise, we switch to the main menu.
+     *
      * @param username The username of the account to be accessed.
      * @param password The password to be checked.
      */
     private void userLogin(String username, String password) {
 
-        boolean exists = false, success = false;
-        for (String credential : DUMMY_CREDENTIALS) {
-            String[] pieces = credential.split(":");
-            if (pieces[0].equals(username)) {
-                exists = true;
-                success = pieces[1].equals(password);
-            }
-        }
-
-        if (exists) {
+        if (DAOUser.exists(username)) {
             // TODO: Switch to main menu
-            if (success) Toast.makeText(this, "Logging in.", Toast.LENGTH_SHORT).show();
-            else reportError(mPasswordView, getString(R.string.error_incorrect_password));
+            if (DAOUser.isPasswordCorrect(username, password)) {
+                Toast.makeText(this, getString(R.string.info_successful_login), Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                reportError(mPasswordView, getString(R.string.error_incorrect_password));
+            }
         } else {
             showRegister();
         }
@@ -228,19 +228,33 @@ public class LoginActivity extends Activity {
      * Attempts to register a new user with the specified credentials.
      * If the username already exists, an error is reported.
      * Otherwise, we switch to the main menu.
+     *
      * @param username The username of the account to be created.
      * @param password The password to be associated with the account.
-     * @param email The email address to be associated with the account.
+     * @param email    The email address to be associated with the account.
      */
     private void userRegister(String username, String password, String email) {
-        // TODO: Register user
-        Toast.makeText(this, "Registering ("+username+", "+password+", "+email+").",
-                Toast.LENGTH_SHORT).show();
+
+        if (DAOUser.exists(username)) {
+            reportError(mUsernameView, getString(R.string.error_username_taken));
+            return;
+        }
+        if (DAOUser.isEmailTaken(email)) {
+            reportError(mEmailView, getString(R.string.error_email_taken));
+            return;
+        }
+        // TODO: Use constant for "customer"
+        // TODO: Ask for language
+        DAOUser.create(username, password, email, "customer", "en");
+        Toast.makeText(this, getString(R.string.info_successful_register), Toast.LENGTH_SHORT)
+                .show();
+
         // TODO: Switch to main menu
     }
 
     /**
      * Checks that a username has a valid format.
+     *
      * @param username The username to be checked.
      * @return true if the username is valid, false otherwise.
      */
@@ -250,6 +264,7 @@ public class LoginActivity extends Activity {
 
     /**
      * Checks that a password has a valid format.
+     *
      * @param password The password to be checked.
      * @return true if the password is valid, false otherwise.
      */
@@ -259,17 +274,18 @@ public class LoginActivity extends Activity {
 
     /**
      * Checks that an email address has a valid format
+     *
      * @param email The email address to be checked.
      * @return true if the email address is valid, false otherwise.
      */
     private boolean isEmailValid(String email) {
-        // TODO: Find out an easy way to check an email
-        return email.contains("@");
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**
      * Reports an error on a field and moves the focus to it.
-     * @param field The field that has caused an error.
+     *
+     * @param field   The field that has caused an error.
      * @param message The error message to be displayed.
      */
     private void reportError(EditText field, String message) {

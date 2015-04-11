@@ -2,6 +2,10 @@
 
     <!-- Strings related to login -->
 
+    <!-- Action Bar titles -->
+    <string name="title_login">Sign in</string>
+    <string name="title_register">Register</string>
+
     <!-- Field prompts -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -12,11 +16,18 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_register">Register</string>
 
+    <!-- Error messages -->
     <string name="error_field_required">This field is required</string>
     <string name="error_invalid_username">This username is too short or too long</string>
     <string name="error_invalid_password">This password is too short or too long</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_password_mismatch">Those passwords do not match</string>
-    <string name="error_user_creation_not_supported">User creation is not yet supported</string>
+    <string name="error_password_mismatch">The passwords do not match</string>
+    <string name="error_username_taken">This username is already taken</string>
+    <string name="error_email_taken">This email address is already taken</string>
+
+    <!-- Info messages -->
+    <string name="info_successful_login">User successfully signed in</string>
+    <string name="info_successful_register">User successfully registered</string>
+
 </resources>
