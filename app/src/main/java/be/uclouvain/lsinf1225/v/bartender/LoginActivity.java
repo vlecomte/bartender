@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -32,6 +33,10 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (MyApp.getCurrentUser() != null) {
+            Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
+        }
 
         // Set up the login form.
         mUsernameView = (EditText) findViewById(R.id.username);

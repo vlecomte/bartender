@@ -39,11 +39,15 @@ public class MyApp extends Application {
         return sApp.getDbHelper().getWritableDatabase();
     }
 
+    public static boolean isUserLoggedIn() {
+        return sApp.mCurrentUser != null;
+    }
+
     public static User getCurrentUser() {
         return sApp.mCurrentUser;
     }
 
-    public static void disconnectUser() {
+    public static void logoutUser() {
         sApp.mCurrentUser = null;
     }
 
