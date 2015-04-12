@@ -1,6 +1,5 @@
+<!-- Strings related to login -->
 <resources>
-
-    <!-- Strings related to login -->
 
     <!-- Action Bar titles -->
     <string name="title_login">Sign in</string>

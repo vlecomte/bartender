@@ -1,7 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
-import be.uclouvain.lsinf1225.v.bartender.dao.MyDbHelper;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
 import android.app.Activity;
@@ -27,15 +26,12 @@ public class LoginActivity extends Activity {
     // Buttons.
     private Button mSignInButton, mRegisterButton;
     // Whether the registering part is shown.
-    private boolean registerShown = false;
+    private boolean mRegisterShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Init the database.
-        MyDbHelper.init(this);
 
         // Set up the login form.
         mUsernameView = (EditText) findViewById(R.id.username);
@@ -64,7 +60,7 @@ public class LoginActivity extends Activity {
      * Shows the registering part of the form.
      */
     private void showRegister() {
-        registerShown = true;
+        mRegisterShown = true;
 
         // Hide login button
         mSignInButton.setVisibility(View.GONE);
@@ -85,7 +81,7 @@ public class LoginActivity extends Activity {
      * Hides the registering part of the form.
      */
     private void hideRegister() {
-        registerShown = false;
+        mRegisterShown = false;
 
         // Hide additional fields and register button.
         mRegisterButton.setVisibility(View.GONE);
@@ -104,7 +100,7 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (registerShown) {
+        if (mRegisterShown) {
             hideRegister();
         } else {
             finish();
@@ -115,7 +111,7 @@ public class LoginActivity extends Activity {
      * Attempts to sign in or register the account specified by the login form.
      * If some of the fields are invalid, an error is reported and no actual attempt is made.
      */
-    public void attemptLogin() {
+    private void attemptLogin() {
 
         resetErrors();
 
@@ -219,6 +215,7 @@ public class LoginActivity extends Activity {
             if (user == null) {
                 reportError(mPasswordView, getString(R.string.error_incorrect_password));
             } else {
+                MyApp.setCurrentUser(user);
                 Toast.makeText(this, getString(R.string.info_successful_login), Toast.LENGTH_SHORT)
                         .show();
                 // TODO: Switch to main menu
@@ -248,7 +245,7 @@ public class LoginActivity extends Activity {
             return;
         }
         // TODO: Ask for language
-        User user = DaoUser.create(username, password, email, "en");
+        MyApp.setCurrentUser(DaoUser.create(username, password, email, "en"));
         Toast.makeText(this, getString(R.string.info_successful_register), Toast.LENGTH_SHORT)
                 .show();
         // TODO: Switch to main menu

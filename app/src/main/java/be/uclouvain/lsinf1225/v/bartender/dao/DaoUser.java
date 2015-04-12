@@ -3,6 +3,7 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.*;
 
+import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Admin;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
@@ -18,7 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class DaoUser {
 
     public static User create(String username, String password, String email, String language) {
-        SQLiteDatabase db = MyDbHelper.getWritableDb();
+        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_USERNAME, username);
         cv.put(COL_PASSWORD, password);
@@ -30,7 +31,7 @@ public class DaoUser {
     }
 
     public static User attemptLogin(String username, String password) {
-        SQLiteDatabase db = MyDbHelper.getReadableDb();
+        SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_USER, new String[]{COL_EMAIL, COL_LANGUAGE, COL_RANK},
                 COL_USERNAME +" = ? AND "+ COL_PASSWORD +" = ?", new String[]{username, password},
                 null, null, null);
@@ -57,7 +58,7 @@ public class DaoUser {
     }
 
     public static boolean isUsernameTaken(String username) {
-        SQLiteDatabase db = MyDbHelper.getReadableDb();
+        SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_USER, new String[]{},
                 COL_USERNAME + " = ?", new String[]{username},
                 null, null, null);
@@ -67,7 +68,7 @@ public class DaoUser {
     }
 
     public static boolean isEmailTaken(String email) {
-        SQLiteDatabase db = MyDbHelper.getReadableDb();
+        SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_USER, new String[]{},
                 COL_EMAIL +"= ?", new String[]{email},
                 null, null, null);
@@ -76,8 +77,16 @@ public class DaoUser {
         return taken;
     }
 
+    public static void setPassword(String username, String oldPassword, String newPassword) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_PASSWORD, newPassword);
+        db.update(TABLE_USER, cv,
+                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, oldPassword});
+    }
+
     public static void setEmail(String username, String password, String email) {
-        SQLiteDatabase db = MyDbHelper.getWritableDb();
+        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_EMAIL, email);
         db.update(TABLE_USER, cv,
@@ -85,7 +94,7 @@ public class DaoUser {
     }
 
     public static void setLanguage(String username, String password, String language) {
-        SQLiteDatabase db = MyDbHelper.getWritableDb();
+        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_LANGUAGE, language);
         db.update(TABLE_USER, cv,
