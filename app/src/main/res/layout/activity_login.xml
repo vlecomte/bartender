@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/form_before_submit_button"
-            android:text="@string/action_sign_in"
+            android:text="@string/button_sign_in"
             style="?android:textAppearanceSmall"
             android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/form_before_submit_button"
-            android:text="@string/action_register"
+            android:text="@string/button_register"
             style="?android:textAppearanceSmall"
             android:textStyle="bold"
             android:visibility="gone" />

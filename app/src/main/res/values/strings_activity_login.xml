@@ -2,8 +2,8 @@
 <resources>
 
     <!-- Action Bar titles -->
-    <string name="title_login">Sign in</string>
-    <string name="title_register">Register</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_register">Register</string>
 
     <!-- Field prompts -->
     <string name="prompt_username">Username</string>
@@ -12,8 +12,8 @@
     <string name="prompt_email">Email</string>
 
     <!-- Buttons -->
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_register">Register</string>
+    <string name="button_sign_in">Sign in or register</string>
+    <string name="button_register">Register</string>
 
     <!-- Error messages -->
     <string name="error_field_required">This field is required</string>

@@ -4,6 +4,7 @@ import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 /**
@@ -66,7 +66,7 @@ public class LoginActivity extends Activity {
         mSignInButton.setVisibility(View.GONE);
 
         // Change action bar title
-        setTitle(getString(R.string.title_register));
+        setTitle(getString(R.string.title_activity_register));
 
         // Display additional fields and register button.
         mConfirmPasswordView.setVisibility(View.VISIBLE);
@@ -89,7 +89,7 @@ public class LoginActivity extends Activity {
         mConfirmPasswordView.setVisibility(View.GONE);
 
         // Change action bar title
-        setTitle(getString(R.string.title_login));
+        setTitle(getString(R.string.title_activity_login));
 
         // Display login button.
         mSignInButton.setVisibility(View.VISIBLE);
@@ -216,9 +216,8 @@ public class LoginActivity extends Activity {
                 reportError(mPasswordView, getString(R.string.error_incorrect_password));
             } else {
                 MyApp.setCurrentUser(user);
-                Toast.makeText(this, getString(R.string.info_successful_login), Toast.LENGTH_SHORT)
-                        .show();
-                // TODO: Switch to main menu
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             }
         } else {
             showRegister();
@@ -244,11 +243,10 @@ public class LoginActivity extends Activity {
             reportError(mEmailView, getString(R.string.error_email_taken));
             return;
         }
-        // TODO: Ask for language
+        // TODO: Ask for language, or really?
         MyApp.setCurrentUser(DaoUser.create(username, password, email, "en"));
-        Toast.makeText(this, getString(R.string.info_successful_register), Toast.LENGTH_SHORT)
-                .show();
-        // TODO: Switch to main menu
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     /**

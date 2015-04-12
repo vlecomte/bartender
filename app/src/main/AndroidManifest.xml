@@ -10,7 +10,7 @@
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_login"
+            android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

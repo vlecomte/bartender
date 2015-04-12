@@ -43,6 +43,10 @@ public class MyApp extends Application {
         return sApp.mCurrentUser;
     }
 
+    public static void disconnectUser() {
+        sApp.mCurrentUser = null;
+    }
+
     public static void setCurrentUser(User user) {
         sApp.mCurrentUser = user;
     }
