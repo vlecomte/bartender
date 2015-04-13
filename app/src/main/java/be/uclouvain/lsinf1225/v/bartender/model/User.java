@@ -1,5 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
+import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 
 /**
@@ -10,39 +11,33 @@ public abstract class User {
     private final String mUsername;
     private String mPassword;
     private String mEmail;
-    private String mLanguage;
 
-    protected User(String username, String password, String email, String language) {
+    protected User(String username, String password, String email) {
         mUsername = username;
         mPassword = password;
         mEmail = email;
-        mLanguage = language;
     }
 
     public String getUsername() {
         return mUsername;
     }
 
+    public String getPassword() {
+        return mPassword;
+    }
+
     public String getEmail() {
         return mEmail;
     }
 
-    public String getLanguage() {
-        return mLanguage;
-    }
-
     public void setPassword(String password) {
         DaoUser.setPassword(mUsername, mPassword, password);
+        MyApp.writeUserInPreferences();
         mPassword = password;
     }
 
     public void setEmail(String email) {
         DaoUser.setEmail(mUsername, mPassword, email);
         mEmail = email;
-    }
-
-    public void setLanguage(String language) {
-        DaoUser.setLanguage(mUsername, mPassword, language);
-        mLanguage = language;
     }
 }

@@ -15,7 +15,12 @@ public class StartupActivity extends Activity {
         if (MyApp.isUserLoggedIn()) {
             toStart = MainActivity.class;
         } else {
-            toStart = LoginActivity.class;
+            MyApp.readUserFromPreferences();
+            if (MyApp.isUserLoggedIn()) {
+                toStart = MainActivity.class;
+            } else {
+                toStart = LoginActivity.class;
+            }
         }
         Intent intent = new Intent(this, toStart);
         startActivity(intent);

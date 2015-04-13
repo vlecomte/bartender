@@ -14,11 +14,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 
 /**
  * A login screen that switches to a register screen if the username does not exist yet.
  */
 public class LoginActivity extends Activity {
+
+    /** Valid character for a username: not an invisible or control character. */
+    private static final String VALID_USERNAME_CHAR = "[^\\p{Z}\\p{C}]";
+    /** Valid character for a password: not a control character. */
+    private static final String VALID_PASSWORD_CHAR = "[^\\p{C}]";
 
     // Login fields.
     private EditText mUsernameView, mPasswordView;
@@ -135,11 +142,11 @@ public class LoginActivity extends Activity {
         }
 
         // Both fields must be valid.
-        if (!isUsernameValid(username)) {
+        if (isUsernameInvalid(username)) {
             reportError(mUsernameView, getString(R.string.error_invalid_username));
             return;
         }
-        if (!isPasswordValid(password)) {
+        if (isPasswordInvalid(password)) {
             reportError(mPasswordView, getString(R.string.error_invalid_password));
             return;
         }
@@ -180,15 +187,15 @@ public class LoginActivity extends Activity {
         }
 
         // All fields must be valid.
-        if (!isUsernameValid(username)) {
+        if (isUsernameInvalid(username)) {
             reportError(mUsernameView, getString(R.string.error_invalid_username));
             return;
         }
-        if (!isPasswordValid(password)) {
+        if (isPasswordInvalid(password)) {
             reportError(mPasswordView, getString(R.string.error_invalid_password));
             return;
         }
-        if (!isEmailValid(email)) {
+        if (isEmailInvalid(email)) {
             reportError(mEmailView, getString(R.string.error_invalid_email));
             return;
         }
@@ -220,9 +227,7 @@ public class LoginActivity extends Activity {
             if (user == null) {
                 reportError(mPasswordView, getString(R.string.error_incorrect_password));
             } else {
-                MyApp.setCurrentUser(user);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                setUserAndSwitch(user);
             }
         } else {
             showRegister();
@@ -248,40 +253,43 @@ public class LoginActivity extends Activity {
             reportError(mEmailView, getString(R.string.error_email_taken));
             return;
         }
-        // TODO: Ask for language, or really?
-        MyApp.setCurrentUser(DaoUser.create(username, password, email, "en"));
+        setUserAndSwitch(DaoUser.create(username, password, email));
+    }
+
+    private void setUserAndSwitch(User user) {
+        MyApp.setCurrentUser(user);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     /**
-     * Checks that a username has a valid format.
+     * Checks whether a username has an invalid format.
      *
      * @param username The username to be checked.
-     * @return true if the username is valid, false otherwise.
+     * @return true if the username is invalid, false otherwise.
      */
-    private boolean isUsernameValid(String username) {
-        return username.length() >= 3 && username.length() <= 50;
+    private boolean isUsernameInvalid(String username) {
+        return !Pattern.compile("^"+VALID_USERNAME_CHAR+"{3,20}$").matcher(username).matches();
     }
 
     /**
-     * Checks that a password has a valid format.
+     * Checks whether a password has an invalid format.
      *
      * @param password The password to be checked.
      * @return true if the password is valid, false otherwise.
      */
-    private boolean isPasswordValid(String password) {
-        return password.length() >= 5 && password.length() <= 50;
+    private boolean isPasswordInvalid(String password) {
+        return !Pattern.compile("^"+VALID_PASSWORD_CHAR+"{5,50}$").matcher(password).matches();
     }
 
     /**
-     * Checks that an email address has a valid format
+     * Checks whether an email address has an invalid format.
      *
      * @param email The email address to be checked.
      * @return true if the email address is valid, false otherwise.
      */
-    private boolean isEmailValid(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    private boolean isEmailInvalid(String email) {
+        return !Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**

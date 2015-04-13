@@ -18,37 +18,36 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class DaoUser {
 
-    public static User create(String username, String password, String email, String language) {
+    public static User create(String username, String password, String email) {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_USERNAME, username);
         cv.put(COL_PASSWORD, password);
         cv.put(COL_EMAIL, email);
         cv.put(COL_RANK, RANK_CUSTOMER);
-        cv.put(COL_LANGUAGE, language);
+        cv.put(COL_LANGUAGE, "en"); // TODO: Ask for language or give up
         db.insert(TABLE_USER, null, cv);
-        return new Customer(username, password, email, language);
+        return new Customer(username, password, email);
     }
 
     public static User attemptLogin(String username, String password) {
         SQLiteDatabase db = MyApp.getReadableDb();
-        Cursor c = db.query(TABLE_USER, new String[]{COL_EMAIL, COL_LANGUAGE, COL_RANK},
+        Cursor c = db.query(TABLE_USER, new String[]{COL_EMAIL, COL_RANK},
                 COL_USERNAME +" = ? AND "+ COL_PASSWORD +" = ?", new String[]{username, password},
                 null, null, null);
 
         if (c.moveToFirst()) {
             String email = c.getString(c.getColumnIndex(COL_EMAIL));
-            String language = c.getString(c.getColumnIndex(COL_LANGUAGE));
             String rank = c.getString(c.getColumnIndex(COL_RANK));
             c.close();
             switch (rank)
             {
                 case RANK_CUSTOMER:
-                    return new Customer(username, password, email, language);
+                    return new Customer(username, password, email);
                 case RANK_WAITER:
-                    return new Waiter(username, password, email, language);
+                    return new Waiter(username, password, email);
                 case RANK_ADMIN:
-                    return new Admin(username, password, email, language);
+                    return new Admin(username, password, email);
             }
             throw new IllegalArgumentException("Invalid rank.");
         } else {
@@ -89,14 +88,6 @@ public class DaoUser {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_EMAIL, email);
-        db.update(TABLE_USER, cv,
-                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, password});
-    }
-
-    public static void setLanguage(String username, String password, String language) {
-        SQLiteDatabase db = MyApp.getWritableDb();
-        ContentValues cv = new ContentValues();
-        cv.put(COL_LANGUAGE, language);
         db.update(TABLE_USER, cv,
                 COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, password});
     }

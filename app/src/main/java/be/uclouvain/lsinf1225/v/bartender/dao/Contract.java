@@ -2,7 +2,7 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import android.provider.BaseColumns;
 
-public final class Contract {
+final class Contract {
 
     public static final String TABLE_USER = "User";
 
