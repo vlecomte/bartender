@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
+
 
 public class MainActivity extends Activity {
 
@@ -17,6 +19,9 @@ public class MainActivity extends Activity {
 
         TextView helloText = (TextView) findViewById(R.id.hello_text);
         helloText.setText("Hello " + MyApp.getCurrentUser().getUsername() + "!");
+
+        // TODO: Put this in an AsyncTask or something
+        DaoProduct.loadMenu();
     }
 
     @Override

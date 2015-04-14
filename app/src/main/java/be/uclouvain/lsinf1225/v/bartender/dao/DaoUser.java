@@ -1,7 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
-import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.UserTable.*;
 
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Admin;
@@ -25,7 +24,6 @@ public class DaoUser {
         cv.put(COL_PASSWORD, password);
         cv.put(COL_EMAIL, email);
         cv.put(COL_RANK, RANK_CUSTOMER);
-        cv.put(COL_LANGUAGE, "en"); // TODO: Ask for language or give up
         db.insert(TABLE_USER, null, cv);
         return new Customer(username, password, email);
     }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
+import java.util.Locale;
+
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
@@ -17,7 +19,7 @@ public class MyApp extends Application {
     public static class App extends Application {
 
         private static final String DATABASE_NAME = "bartender.sqlite";
-        private static final int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 4;
 
         private SQLiteAssetHelper mDbHelper;
         private User mCurrentUser;
@@ -29,6 +31,7 @@ public class MyApp extends Application {
         private synchronized SQLiteAssetHelper getDbHelper() {
             if (mDbHelper == null) {
                 mDbHelper = new SQLiteAssetHelper(this, DATABASE_NAME, null, DATABASE_VERSION);
+                mDbHelper.setForcedUpgrade();
             }
             return mDbHelper;
         }
@@ -96,5 +99,9 @@ public class MyApp extends Application {
 
     public static void logoutUser() {
         setCurrentUser(null);
+    }
+
+    public static String getLanguage() {
+        return Locale.getDefault().getLanguage();
     }
 }
