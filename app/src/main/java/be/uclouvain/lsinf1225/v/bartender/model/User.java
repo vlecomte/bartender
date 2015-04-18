@@ -45,6 +45,7 @@ public abstract class User {
         } else {
             mBasket.put(product, 1);
         }
+        product.takeOffStock();
     }
 
     public void removeFromBasket(Product product) {
@@ -56,6 +57,7 @@ public abstract class User {
         } else {
             mBasket.put(product, currentNumber-1);
         }
+        product.putBackStock();
     }
 
     public void clearBasket() {

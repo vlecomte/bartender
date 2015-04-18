@@ -5,6 +5,7 @@ import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Ingredient;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -41,11 +42,13 @@ public class DaoIngredient {
                 String displayName = c.getString(c.getColumnIndex(COL_INGREDIENT_DISPLAY_NAME));
                 double currentStock = c.getDouble(c.getColumnIndex(COL_CURRENT_STOCK));
                 Double criticalStock = null;
-                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK)))
+                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK))) {
                     criticalStock = c.getDouble(c.getColumnIndex(COL_CRITICAL_STOCK));
+                }
                 Double maxStock = null;
-                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK)))
+                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK))) {
                     maxStock = c.getDouble(c.getColumnIndex(COL_MAX_STOCK));
+                }
                 String units = c.getString(c.getColumnIndex(COL_UNITS_DISPLAY_NAME));
 
                 Ingredient ingredient = new Ingredient(name, displayName, currentStock,
@@ -61,5 +64,37 @@ public class DaoIngredient {
     public static Ingredient getByName(String name) {
         loadStock();
         return sIngredientByName.get(name);
+    }
+
+    public static void setCurrent(String name, double stock) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_CURRENT_STOCK, stock);
+        db.update(TABLE_INGREDIENT, cv,
+                COL_PRODUCT_NAME+" = ?", new String[]{name});
+    }
+
+    public static void setCritical(String name, Double stock) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+        ContentValues cv = new ContentValues();
+        if (stock == null) {
+            cv.putNull(COL_CRITICAL_STOCK);
+        } else {
+            cv.put(COL_CRITICAL_STOCK, stock);
+        }
+        db.update(TABLE_INGREDIENT, cv,
+                COL_PRODUCT_NAME+" = ?", new String[]{name});
+    }
+
+    public static void setMax(String name, Double stock) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+        ContentValues cv = new ContentValues();
+        if (stock == null) {
+            cv.putNull(COL_MAX_STOCK);
+        } else {
+            cv.put(COL_MAX_STOCK, stock);
+        }
+        db.update(TABLE_INGREDIENT, cv,
+                COL_PRODUCT_NAME+" = ?", new String[]{name});
     }
 }

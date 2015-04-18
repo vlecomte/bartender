@@ -1,5 +1,7 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
+
 public class Ingredient {
     private String mName, mDisplayName;
     private double mCurrentStock;
@@ -42,13 +44,17 @@ public class Ingredient {
     }
 
     public void setCurrent(double stock) {
-        // TODO: Call DAO
+        DaoIngredient.setCurrent(mName, stock);
         mCurrentStock = stock;
     }
 
-    public void setCriticalStock(double stock) {
-        // TODO
+    public void setCritical(Double stock) {
+        DaoIngredient.setCritical(mName, stock);
+        mCriticalStock = stock;
     }
 
-    // TODO: setMaxStock
+    public void setMax(Double stock) {
+        DaoIngredient.setMax(mName, stock);
+        mMaxStock = stock;
+    }
 }
