@@ -8,13 +8,18 @@ public class Product {
     private String mName;
     private String mDisplayName;
     private double mPrice;
+    private String mTypeIconFilename;
+    private String mDescriptionFilename;
 
     private ArrayList<Pair<Ingredient, Double>> mUsages;
 
-    public Product(String name, String displayName, double price) {
+    public Product(String name, String displayName, double price, String typeIconFilename,
+                   String descriptionFilename) {
         mName = name;
         mDisplayName = displayName;
         mPrice = price;
+        mTypeIconFilename = typeIconFilename;
+        mDescriptionFilename = descriptionFilename;
         mUsages = new ArrayList<>();
     }
 
@@ -28,6 +33,14 @@ public class Product {
 
     public double getPrice() {
         return mPrice;
+    }
+
+    public String getTypeIconFilename() {
+        return mTypeIconFilename;
+    }
+
+    public String getDescriptionFilename() {
+        return mDescriptionFilename;
     }
 
     public void addUsage(Ingredient ingredient, double quantity) {
