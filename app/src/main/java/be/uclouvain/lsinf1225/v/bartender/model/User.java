@@ -1,5 +1,7 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
+import java.util.Map;
+
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 
@@ -11,6 +13,8 @@ public abstract class User {
     private final String mUsername;
     private String mPassword;
     private String mEmail;
+
+    private Map<Product, Integer> mBasket;
 
     protected User(String username, String password, String email) {
         mUsername = username;
@@ -28,6 +32,33 @@ public abstract class User {
 
     public String getEmail() {
         return mEmail;
+    }
+
+    public Map<Product, Integer> getBasket() {
+        return mBasket;
+    }
+
+    public void addToBasket(Product product) {
+        if (mBasket.containsKey(product)) {
+            mBasket.put(product, mBasket.get(product)+1);
+        } else {
+            mBasket.put(product, 1);
+        }
+    }
+
+    public void removeFromBasket(Product product) {
+        if (!mBasket.containsKey(product))
+            throw new IllegalArgumentException("The product to be removed is not in the basket.");
+        int currentNumber = mBasket.get(product);
+        if (currentNumber == 1) {
+            mBasket.remove(product);
+        } else {
+            mBasket.put(product, currentNumber-1);
+        }
+    }
+
+    public void clearBasket() {
+        mBasket.clear();
     }
 
     public void setPassword(String password) {
