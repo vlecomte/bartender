@@ -92,8 +92,7 @@ public class DaoProduct {
                     return lhs.getDisplayName().compareTo(rhs.getDisplayName());
                 }
             });
-        }
-        else {
+        } else {
             Arrays.sort(sMenu, new Comparator<Product>() {
                 @Override
                 public int compare(Product lhs, Product rhs) {
@@ -112,8 +111,7 @@ public class DaoProduct {
                     return ((Double) lhs.getPrice()).compareTo(rhs.getPrice());
                 }
             });
-        }
-        else {
+        } else {
             Arrays.sort(sMenu, new Comparator<Product>() {
                 @Override
                 public int compare(Product lhs, Product rhs) {

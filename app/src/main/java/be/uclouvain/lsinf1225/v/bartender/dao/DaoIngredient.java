@@ -40,8 +40,12 @@ public class DaoIngredient {
                 String name = c.getString(c.getColumnIndex(COL_INGREDIENT_NAME));
                 String displayName = c.getString(c.getColumnIndex(COL_INGREDIENT_DISPLAY_NAME));
                 double currentStock = c.getDouble(c.getColumnIndex(COL_CURRENT_STOCK));
-                double criticalStock = c.getDouble(c.getColumnIndex(COL_CRITICAL_STOCK));
-                double maxStock = c.getDouble(c.getColumnIndex(COL_MAX_STOCK));
+                Double criticalStock = null;
+                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK)))
+                    criticalStock = c.getDouble(c.getColumnIndex(COL_CRITICAL_STOCK));
+                Double maxStock = null;
+                if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK)))
+                    maxStock = c.getDouble(c.getColumnIndex(COL_MAX_STOCK));
                 String units = c.getString(c.getColumnIndex(COL_UNITS_DISPLAY_NAME));
 
                 Ingredient ingredient = new Ingredient(name, displayName, currentStock,
