@@ -39,6 +39,14 @@ public abstract class User {
         return mBasket;
     }
 
+    public int getNumInBasket(Product product) {
+        if (mBasket.containsKey(product)) {
+            return mBasket.get(product);
+        } else {
+            return 0;
+        }
+    }
+
     public void addToBasket(Product product) {
         if (mBasket.containsKey(product)) {
             mBasket.put(product, mBasket.get(product)+1);
