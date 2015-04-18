@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,8 @@ public class DaoProduct {
                             +", pdn."+COL_PRODUCT_DISPLAY_NAME
                     +" FROM "+TABLE_PRODUCT+" p, "+TABLE_PRODUCT_DISPLAY_NAME+" pdn"
                     +" WHERE p."+COL_PRODUCT_NAME+" = pdn."+COL_PRODUCT_NAME
-                    +" AND pdn."+COL_LANGUAGE+" = ?",
+                    +" AND pdn."+COL_LANGUAGE+" = ?"
+                    +" ORDER BY p."+COL_TYPE_NAME,
                     new String[]{MyApp.getLanguage()});
             c.moveToFirst();
 
@@ -72,6 +75,51 @@ public class DaoProduct {
             for (int i = 0; i < numProducts; i++) {
                 Log.v("Listing products", sMenu[i].getName());
             }
+        }
+    }
+
+    public static Product[] getMenu() {
+        loadMenu();
+        return sMenu;
+    }
+
+    public void sortByDisplayName(boolean increasing) {
+        loadMenu();
+        if (increasing) {
+            Arrays.sort(sMenu, new Comparator<Product>() {
+                @Override
+                public int compare(Product lhs, Product rhs) {
+                    return lhs.getDisplayName().compareTo(rhs.getDisplayName());
+                }
+            });
+        }
+        else {
+            Arrays.sort(sMenu, new Comparator<Product>() {
+                @Override
+                public int compare(Product lhs, Product rhs) {
+                    return rhs.getDisplayName().compareTo(lhs.getDisplayName());
+                }
+            });
+        }
+    }
+
+    public void sortByPrice(boolean increasing) {
+        loadMenu();
+        if (increasing) {
+            Arrays.sort(sMenu, new Comparator<Product>() {
+                @Override
+                public int compare(Product lhs, Product rhs) {
+                    return ((Double) lhs.getPrice()).compareTo(rhs.getPrice());
+                }
+            });
+        }
+        else {
+            Arrays.sort(sMenu, new Comparator<Product>() {
+                @Override
+                public int compare(Product lhs, Product rhs) {
+                    return ((Double) rhs.getPrice()).compareTo(lhs.getPrice());
+                }
+            });
         }
     }
 
