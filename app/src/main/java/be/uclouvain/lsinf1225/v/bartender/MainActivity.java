@@ -49,7 +49,9 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 finish();
                 return true;
-
+            case R.id.action_new_command:
+                Intent intent2 = new Intent(this, NewCommandActivity.class);
+                startActivity(intent2);
             default:
                 return super.onOptionsItemSelected(item);
         }

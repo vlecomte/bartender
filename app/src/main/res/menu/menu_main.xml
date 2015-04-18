@@ -5,5 +5,7 @@
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
         app:showAsAction="never" />
-
+    <item android:id="@+id/action_new_command"
+        android:title="@string/action_new_command"
+        app:showAsAction="never" />
 </menu>

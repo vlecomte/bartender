@@ -3,10 +3,15 @@
     <string name="title_activity_main">Main Activity</string>
 
     <string name="action_logout">Sign out</string>
+    <string name="action_new_command">Nouvelle Commande</string>
 
     <string name="preference_file_key">
         be.uclouvain.lsinf1225.v.bartender.PREFERENCES
     </string>
     <string name="saved_username">SAVED_USERNAME</string>
     <string name="saved_password">SAVED_PASSWORD</string>
+    <string name="title_activity_new_command">NewCommandActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
