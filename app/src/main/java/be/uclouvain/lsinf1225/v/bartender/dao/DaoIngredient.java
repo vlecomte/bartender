@@ -17,8 +17,8 @@ public class DaoIngredient {
     private static Map<String, Ingredient> sIngredientByName;
 
     public static synchronized void loadStock() {
-        if (sStock == null) {
 
+        if (sStock == null) {
             SQLiteDatabase db = MyApp.getReadableDb();
             Cursor c = db.rawQuery(
                     "SELECT i."+COL_INGREDIENT_NAME +", i."+COL_CURRENT_STOCK
@@ -58,6 +58,24 @@ public class DaoIngredient {
                 c.moveToNext();
             }
             c.close();
+        }
+    }
+
+    public static void refreshStock() {
+        loadStock();
+        SQLiteDatabase db = MyApp.getReadableDb();
+        Cursor c = db.query(TABLE_INGREDIENT, new String[]{COL_INGREDIENT_NAME, COL_CURRENT_STOCK},
+                null, null,
+                null, null, null);
+        c.moveToFirst();
+
+        int numIngredients = c.getCount();
+        for (int i = 0; i < numIngredients; i++) {
+            String ingredientName = c.getString(c.getColumnIndex(COL_INGREDIENT_NAME));
+            double stock = c.getDouble(c.getColumnIndex(COL_CURRENT_STOCK));
+            getByName(ingredientName).refreshCurrent(stock);
+
+            c.moveToNext();
         }
     }
 

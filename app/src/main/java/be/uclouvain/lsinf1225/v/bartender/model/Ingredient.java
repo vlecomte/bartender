@@ -43,6 +43,10 @@ public class Ingredient {
         mCurrentStock -= quantity;
     }
 
+    public void refreshCurrent(double stock) {
+        mCurrentStock = stock;
+    }
+
     public void setCurrent(double stock) {
         DaoIngredient.setCurrent(mName, stock);
         mCurrentStock = stock;

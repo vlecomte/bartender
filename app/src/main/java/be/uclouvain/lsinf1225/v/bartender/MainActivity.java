@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 
 
@@ -22,10 +23,12 @@ public class MainActivity extends Activity {
 
         // TODO: Put this in an AsyncTask or something
         DaoProduct.loadMenu();
-        // Test to see if it crashes
-        // TODO: Remove this
+
+        // TODO: Test to see if it crashes, to remove
         MyApp.getCurrentUser().addToBasket(DaoProduct.getMenu()[0]);
+        MyApp.getCurrentUser().getNumInBasket(DaoProduct.getMenu()[0]);
         MyApp.getCurrentUser().removeFromBasket(DaoProduct.getMenu()[0]);
+        DaoIngredient.refreshStock();
     }
 
     @Override
