@@ -72,6 +72,7 @@ public class DaoProduct {
             c.close();
 
 
+            // TODO: remove this
             for (int i = 0; i < numProducts; i++) {
                 Log.v("Listing products", sMenu[i].getName());
             }

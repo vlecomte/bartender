@@ -1,5 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
@@ -14,7 +15,7 @@ public abstract class User {
     private String mPassword;
     private String mEmail;
 
-    private Map<Product, Integer> mBasket;
+    private Map<Product, Integer> mBasket = new HashMap<>();
 
     protected User(String username, String password, String email) {
         mUsername = username;

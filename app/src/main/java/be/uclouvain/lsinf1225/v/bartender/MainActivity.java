@@ -22,6 +22,10 @@ public class MainActivity extends Activity {
 
         // TODO: Put this in an AsyncTask or something
         DaoProduct.loadMenu();
+        // Test to see if it crashes
+        // TODO: Remove this
+        MyApp.getCurrentUser().addToBasket(DaoProduct.getMenu()[0]);
+        MyApp.getCurrentUser().removeFromBasket(DaoProduct.getMenu()[0]);
     }
 
     @Override
