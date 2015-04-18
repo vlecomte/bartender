@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.Locale;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
 public class MyApp extends Application {
@@ -23,6 +24,10 @@ public class MyApp extends Application {
 
         private SQLiteAssetHelper mDbHelper;
         private User mCurrentUser;
+        /**
+         * Product to be displayed by the product details activity.
+         */
+        private Product mDisplayedProduct;
 
         public App() {
             sApp = this;
@@ -91,6 +96,14 @@ public class MyApp extends Application {
     public static void setCurrentUser(User user) {
         sApp.mCurrentUser = user;
         writeUserInPreferences();
+    }
+
+    public static Product getDisplayedProduct() {
+        return sApp.mDisplayedProduct;
+    }
+
+    public static void setDisplayedProduct(Product product) {
+        sApp.mDisplayedProduct = product;
     }
 
     public static boolean isUserLoggedIn() {
