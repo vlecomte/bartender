@@ -27,6 +27,7 @@ public class DescriptionActivity extends Activity {
     private String desc = "";
     private User user;
     private Button add;
+    private Button remove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,8 @@ public class DescriptionActivity extends Activity {
         compte = (TextView) findViewById(R.id.compte_desc);
         conso = MyApp.getDisplayedProduct();
         user = MyApp.getCurrentUser();
-        add = (Button) findViewById(R.id.rem_pro);
+        add = (Button) findViewById(R.id.add_pro);
+        remove = (Button) findViewById(R.id.rem_pro);
         try {
             String lu = "";
             String filename = conso.getDescriptionFilename();
@@ -71,6 +73,31 @@ public class DescriptionActivity extends Activity {
         sstitre.setText("");
         setTitle(conso.getDisplayName() + " - " + conso.getPrice() +"€");
         descText.setText(desc);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.addToBasket(conso);
+                Toast.makeText(DescriptionActivity.this, "+1 '" +conso.getDisplayName()+"'", Toast.LENGTH_LONG).show();
+                updateAdd();
+                updateCompte();
+            }
+        });
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    user.removeFromBasket(conso);
+                    Toast.makeText(DescriptionActivity.this, "-1 '" +conso.getDisplayName()+"'", Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(DescriptionActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                } finally {
+                    updateAdd();
+                    updateCompte();
+                }
+            }
+        });
     }
 
     protected void updateCompte() {
