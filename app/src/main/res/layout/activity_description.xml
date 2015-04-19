@@ -53,8 +53,9 @@
         android:layout_height="wrap_content"
         android:text="+"
         android:id="@+id/remove_pro"
+        android:layout_toRightOf="@+id/tV_descr"
+        android:layout_toEndOf="@+id/tV_descr"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/grdtextdescr"
-        android:layout_toEndOf="@+id/grdtextdescr" />
+/>
 
 </RelativeLayout>
