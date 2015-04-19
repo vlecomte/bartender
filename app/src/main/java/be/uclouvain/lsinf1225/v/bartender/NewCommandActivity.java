@@ -39,7 +39,7 @@ public class NewCommandActivity extends Activity {
         CustomList adapter = new CustomList(this,productName,ids);
         list = (ListView) findViewById(R.id.list_consommation);
         list.setAdapter(adapter);
-        setTitle(R.string.title_activity_new_command);
+        setTitle(R.string.new_command_activity_title);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

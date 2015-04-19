@@ -3,14 +3,14 @@ package be.uclouvain.lsinf1225.v.bartender;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.app.Activity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,6 +26,7 @@ public class DescriptionActivity extends Activity {
     private BufferedReader reader;
     private String desc = "";
     private User user;
+    private Button add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class DescriptionActivity extends Activity {
         compte = (TextView) findViewById(R.id.compte_desc);
         conso = MyApp.getDisplayedProduct();
         user = MyApp.getCurrentUser();
+        add = (Button) findViewById(R.id.rem_pro);
         try {
             String lu = "";
             String filename = conso.getDescriptionFilename();
@@ -61,7 +63,9 @@ public class DescriptionActivity extends Activity {
         }
 
         String indexFile = conso.getDescriptionFilename();
+        add.setVisibility(View.INVISIBLE);
         updateCompte();
+        updateAdd();
         indexFile = indexFile.substring(0,indexFile.length() -4);
         image.setImageResource(getResources().getIdentifier(indexFile, "drawable", getPackageName()));
         sstitre.setText("");
@@ -71,5 +75,15 @@ public class DescriptionActivity extends Activity {
 
     protected void updateCompte() {
         compte.setText("n°: "+ user.getNumInBasket(conso) + "  [" + user.getNumInBasket(conso) * conso.getPrice()+"€]");
+    }
+
+    protected void updateAdd() {
+        int stock = conso.getNumAvailable();
+        if(stock>0) {
+            add.setVisibility(View.VISIBLE);
+        } else {
+            add.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, R.string.not_enough_stock + ":" + conso.getDisplayName(), Toast.LENGTH_LONG).show();
+        }
     }
 }
