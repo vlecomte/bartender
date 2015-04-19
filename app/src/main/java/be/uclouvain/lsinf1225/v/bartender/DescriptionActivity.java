@@ -83,7 +83,7 @@ public class DescriptionActivity extends Activity {
             add.setVisibility(View.VISIBLE);
         } else {
             add.setVisibility(View.INVISIBLE);
-            Toast.makeText(DescriptionActivity.this, R.string.not_enough_stock + ":" + conso.getDisplayName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(DescriptionActivity.this, R.string.not_enough_stock + ":" + conso.getDisplayName(), Toast.LENGTH_LONG).show(); //
         }
     }
 }
