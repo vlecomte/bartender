@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import java.lang.String;
 
 public class NewCommandActivity extends Activity {
     ListView list;
@@ -26,7 +26,8 @@ public class NewCommandActivity extends Activity {
         productName = new String[menu.length];
 
         for(int i=0;i<menu.length;i++){
-            fileName[i]=menu[i].getTypeIconFilename();
+            String nim=menu[i].getTypeIconFilename();
+            fileName[i]= nim.substring(0, (nim.length())-4);
             productName[i] = menu[i].getDisplayName();
         }
 
