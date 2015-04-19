@@ -6,6 +6,8 @@
     <string name="action_logout">Sign out</string>
     <string name="action_new_command">Nouvelle Commande</string>
 
+    <string name="new_command_activity_title">Nouvelle Commande</string>
+
     <string name="preference_file_key">
         be.uclouvain.lsinf1225.v.bartender.PREFERENCES
     </string>
