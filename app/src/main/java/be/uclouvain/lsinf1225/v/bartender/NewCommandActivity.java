@@ -3,6 +3,7 @@ package be.uclouvain.lsinf1225.v.bartender;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -41,7 +42,9 @@ public class NewCommandActivity extends Activity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(NewCommandActivity.this, "Conso sélectionnée " + productName[+position], Toast.LENGTH_SHORT).show();
+                MyApp.setDisplayedProduct(menu[position]);
+                Intent intent = new Intent(NewCommandActivity.this, DescriptionActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -7,9 +7,12 @@
     tools:context="be.uclouvain.lsinf1225.v.bartender.DescriptionActivity">
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/imgDesc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="4"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,21 +20,41 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Description"
         android:id="@+id/tV_descr"
-        android:layout_marginRight="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_alignTop="@+id/img"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:layout_alignTop="@+id/imgDesc"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Descripion"
+        android:layout_weight="5"
+        android:layout_gravity="left"
         android:id="@+id/grdtextdescr"
-        android:layout_alignParentRight="true"
-        android:layout_alignRight="@+id/tV_descr"
-        android:layout_alignEnd="@+id/tV_descr"
-        android:layout_alignLeft="@+id/tV_descr"
-        android:layout_alignStart="@+id/tV_descr" />
+        android:layout_marginBottom="93dp"
+        android:layout_above="@+id/add_pro"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/add_pro"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/remove_pro"
+        android:layout_toEndOf="@+id/remove_pro" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/remove_pro"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/grdtextdescr"
+        android:layout_toEndOf="@+id/grdtextdescr" />
 
 </RelativeLayout>
