@@ -10,16 +10,18 @@ public class Product {
     private double mPrice;
     private String mTypeIconFilename;
     private String mDescriptionFilename;
+    private String mImageFilename;
 
     private ArrayList<Pair<Ingredient, Double>> mUsages;
 
     public Product(String name, String displayName, double price, String typeIconFilename,
-                   String descriptionFilename) {
+                   String descriptionFilename, String imageFilename) {
         mName = name;
         mDisplayName = displayName;
         mPrice = price;
         mTypeIconFilename = typeIconFilename;
         mDescriptionFilename = descriptionFilename;
+        mImageFilename = imageFilename;
         mUsages = new ArrayList<>();
     }
 
@@ -41,6 +43,10 @@ public class Product {
 
     public String getDescriptionFilename() {
         return mDescriptionFilename;
+    }
+
+    public String getImageFilename() {
+        return mImageFilename;
     }
 
     public void addUsage(Ingredient ingredient, double quantity) {

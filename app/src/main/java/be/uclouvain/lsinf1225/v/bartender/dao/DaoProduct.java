@@ -26,7 +26,7 @@ public class DaoProduct {
             Cursor c = db.rawQuery(
                     "SELECT p."+COL_PRODUCT_NAME+", p."+COL_PRICE
                             +", pdn."+COL_PRODUCT_DISPLAY_NAME
-                            +", t."+COL_ICON+", d."+COL_TEXT
+                            +", t."+COL_ICON+", d."+COL_TEXT+", d."+COL_IMAGE
                     +" FROM "+TABLE_PRODUCT+" p, "+TABLE_PRODUCT_DISPLAY_NAME+" pdn, "
                             +TABLE_TYPE+" t, "+TABLE_DESCRIPTION+" d"
                     +" WHERE p."+COL_PRODUCT_NAME+" = pdn."+COL_PRODUCT_NAME
@@ -48,9 +48,10 @@ public class DaoProduct {
                 String displayName = c.getString(c.getColumnIndex(COL_PRODUCT_DISPLAY_NAME));
                 String typeIconFilename = c.getString(c.getColumnIndex(COL_ICON));
                 String descriptionFilename = c.getString(c.getColumnIndex(COL_TEXT));
+                String imageFilename = c.getString(c.getColumnIndex(COL_IMAGE));
 
                 Product product = new Product(name, displayName, price, typeIconFilename,
-                        descriptionFilename);
+                        descriptionFilename, imageFilename);
                 sMenu[i] = product;
                 sProductByName.put(name, product);
                 c.moveToNext();

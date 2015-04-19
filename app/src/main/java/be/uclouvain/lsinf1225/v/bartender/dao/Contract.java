@@ -28,6 +28,7 @@ final class Contract {
     public static final String COL_ICON = "Icon";
 
     public static final String COL_DESCRIPTION_NAME = "DescriptionName";
+    public static final String COL_IMAGE = "Image";
     public static final String COL_TEXT = "Text";
 
     public static final String COL_INGREDIENT_NAME = "IngredientName";
