@@ -31,7 +31,7 @@
         android:layout_weight="5"
         android:layout_gravity="bottom"
         android:id="@+id/grdtextdescr"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="50dp"
         android:layout_above="@+id/add_pro"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -56,5 +56,17 @@
         android:layout_toEndOf="@+id/tV_descr"
         android:layout_alignParentBottom="true"
 />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/compte_desc"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_alignBottom="@+id/add_pro"
+        android:layout_toRightOf="@+id/add_pro"
+        android:layout_toEndOf="@+id/add_pro" />
 
 </RelativeLayout>

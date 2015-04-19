@@ -1,6 +1,7 @@
 package be.uclouvain.lsinf1225.v.bartender;
 
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
+import be.uclouvain.lsinf1225.v.bartender.model.User;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,13 +16,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
+
 public class DescriptionActivity extends Activity {
     private TextView sstitre;
     private TextView descText;
+    private TextView compte;
     private ImageView image;
     private Product conso;
     private BufferedReader reader;
     private String desc = "";
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,9 @@ public class DescriptionActivity extends Activity {
         sstitre = (TextView) findViewById(R.id.tV_descr);
         descText = (TextView) findViewById(R.id.grdtextdescr);
         image = (ImageView) findViewById(R.id.imgDesc);
+        compte = (TextView) findViewById(R.id.compte_desc);
         conso = MyApp.getDisplayedProduct();
-        System.out.println(conso.getDescriptionFilename());
+        user = MyApp.getCurrentUser();
         try {
             String lu = "";
             String filename = conso.getDescriptionFilename();
@@ -56,10 +61,15 @@ public class DescriptionActivity extends Activity {
         }
 
         String indexFile = conso.getDescriptionFilename();
+        updateCompte();
         indexFile = indexFile.substring(0,indexFile.length() -4);
         image.setImageResource(getResources().getIdentifier(indexFile, "drawable", getPackageName()));
         sstitre.setText("");
         setTitle(conso.getDisplayName() + " - " + conso.getPrice() +"€");
         descText.setText(desc);
+    }
+
+    protected void updateCompte() {
+        compte.setText("n°: "+ user.getNumInBasket(conso) + "  [" + user.getNumInBasket(conso) * conso.getPrice()+"€]");
     }
 }
