@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.graphics.drawable.Drawable;
 
 public class CustomList extends ArrayAdapter<String> {
 
@@ -25,10 +26,11 @@ public class CustomList extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent){
         View layout = RelativeLayout.inflate(context, R.layout.list_view_component, null);
-        TextView text = (TextView) layout.findViewById(R.id.txt);
+
         ImageView image = (ImageView) layout.findViewById(R.id.img);
-        text.setText(nom[position]);
         image.setImageResource(imageId[position]);
+        TextView text = (TextView) layout.findViewById(R.id.txt);
+        text.setText(nom[position]);
         return layout;
     }
 }
