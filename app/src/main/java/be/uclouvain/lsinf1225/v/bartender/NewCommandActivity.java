@@ -1,5 +1,8 @@
 package be.uclouvain.lsinf1225.v.bartender;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,27 +14,33 @@ import android.widget.Toast;
 
 public class NewCommandActivity extends Activity {
     ListView list;
-    String[] nom = {
-            "Chimay bleue",
-            "Maes",
-            "Jupiler"};
-
-    Integer[] img = {
-            R.drawable.chimaybl,
-            R.drawable.maes,
-            R.drawable.jupiler};
+    Product[] menu;
+    String[] fileName;
+    String[] productName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_command);
+        menu = DaoProduct.getMenu();
+        fileName = new String[menu.length];
+        productName = new String[menu.length];
 
-        CustomList adapter = new CustomList(this, nom, img);
+        for(int i=0;i<menu.length;i++){
+            fileName[i]=menu[i].getTypeIconFilename();
+            productName[i] = menu[i].getDisplayName();
+        }
+
+        Integer[] ids = new Integer[menu.length];
+        for(int i =0;i<menu.length;i++) {
+            ids[i] = getResources().getIdentifier(fileName[i], "drawable", getPackageName()); //test avec "coca" à la place de filenName[i], ça fonctionne
+        }
+        CustomList adapter = new CustomList(this,productName,ids);
         list = (ListView) findViewById(R.id.list_consommation);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(NewCommandActivity.this, "Conso sélectionnée " + nom[+position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewCommandActivity.this, "Conso sélectionnée " + productName[+position], Toast.LENGTH_SHORT).show();
             }
         });
     }
