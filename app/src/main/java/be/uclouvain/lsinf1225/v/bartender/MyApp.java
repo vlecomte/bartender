@@ -20,7 +20,7 @@ public class MyApp extends Application {
     public static class App extends Application {
 
         private static final String DATABASE_NAME = "bartender.sqlite";
-        private static final int DATABASE_VERSION = 4;
+        private static final int DATABASE_VERSION = 5;
 
         private SQLiteAssetHelper mDbHelper;
         private User mCurrentUser;
