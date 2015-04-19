@@ -5,9 +5,11 @@
 
     <string name="action_logout">Sign out</string>
     <string name="action_new_command">Nouvelle Commande</string>
-
+    <string name="action_show_basket">Afficher panier</string>
     <string name="new_command_activity_title">Nouvelle Commande</string>
     <string name="not_enough_stock">Plus possible de commander</string>
+    <string name="basket_title">Panier actuel</string>
+    <string name="basket_ss">Panier</string>
 
 
     <string name="preference_file_key">
@@ -19,4 +21,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_basket_show">BasketShowActivity</string>
 </resources>
