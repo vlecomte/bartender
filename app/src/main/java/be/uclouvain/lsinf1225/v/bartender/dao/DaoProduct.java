@@ -73,6 +73,13 @@ public class DaoProduct {
 
                 Product product = sProductByName.get(productName);
                 Ingredient ingredient = DaoIngredient.getByName(ingredientName);
+                if (product == null) {
+                    throw new IllegalArgumentException(
+                            "In usage, there is no product by that name: "+productName);
+                } else if (ingredient == null) {
+                    throw new IllegalArgumentException(
+                            "In usage, there is no ingredient by that name: "+ingredientName);
+                }
                 product.addUsage(ingredient, quantity);
 
                 c.moveToNext();

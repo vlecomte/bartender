@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (MyApp.getCurrentUser() != null) {
+        if (MyApp.getUser() != null) {
             Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
         }
 
@@ -257,7 +257,7 @@ public class LoginActivity extends Activity {
     }
 
     private void setUserAndSwitch(User user) {
-        MyApp.setCurrentUser(user);
+        MyApp.setUser(user);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

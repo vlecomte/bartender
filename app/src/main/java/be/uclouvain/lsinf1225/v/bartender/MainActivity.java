@@ -19,15 +19,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         TextView helloText = (TextView) findViewById(R.id.hello_text);
-        helloText.setText("Hello " + MyApp.getCurrentUser().getUsername() + "!");
+        helloText.setText("Hello " + MyApp.getUser().getUsername() + "!");
 
         // TODO: Put this in an AsyncTask or something
         DaoProduct.loadMenu();
 
         // TODO: Test to see if it crashes, to remove
-        MyApp.getCurrentUser().addToBasket(DaoProduct.getMenu()[0]);
-        MyApp.getCurrentUser().getNumInBasket(DaoProduct.getMenu()[0]);
-        MyApp.getCurrentUser().removeFromBasket(DaoProduct.getMenu()[0]);
         DaoIngredient.refreshStock();
     }
 

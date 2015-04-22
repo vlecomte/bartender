@@ -1,16 +1,13 @@
 package be.uclouvain.lsinf1225.v.bartender;
 
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
-import be.uclouvain.lsinf1225.v.bartender.model.User;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.app.Activity;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Map;
 
@@ -22,7 +19,7 @@ public class BasketShowActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket_show);
-        Map<Product, Integer> basket_elem = MyApp.getCurrentUser().getBasket();
+        Map<Product, Integer> basket_elem = MyApp.getCustomer().getBasket();
         String[] tab_elem = new String[basket_elem.size()];
         Double[] tab_prix_elem = new Double[basket_elem.size()];
         int i =0;

@@ -77,6 +77,7 @@ public class DaoIngredient {
 
             c.moveToNext();
         }
+        c.close();
     }
 
     public static Ingredient getByName(String name) {

@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.Locale;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
+import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 
@@ -81,6 +82,7 @@ public class MyApp extends Application {
         return sApp.getDbHelper().getWritableDatabase();
     }
 
+
     public static void readUserFromPreferences() {
         sApp.readUserFromPreferences();
     }
@@ -89,14 +91,27 @@ public class MyApp extends Application {
         sApp.writeUserInPreferences();
     }
 
-    public static User getCurrentUser() {
+    public static User getUser() {
         return sApp.mCurrentUser;
     }
 
-    public static void setCurrentUser(User user) {
+    public static void setUser(User user) {
         sApp.mCurrentUser = user;
         writeUserInPreferences();
     }
+
+    public static boolean isUserLoggedIn() {
+        return getUser() != null;
+    }
+
+    public static void logoutUser() {
+        setUser(null);
+    }
+
+    public static Customer getCustomer() {
+        return (Customer) getUser();
+    }
+
 
     public static Product getDisplayedProduct() {
         return sApp.mDisplayedProduct;
@@ -106,13 +121,6 @@ public class MyApp extends Application {
         sApp.mDisplayedProduct = product;
     }
 
-    public static boolean isUserLoggedIn() {
-        return getCurrentUser() != null;
-    }
-
-    public static void logoutUser() {
-        setCurrentUser(null);
-    }
 
     public static String getLanguage() {
         return Locale.getDefault().getLanguage();

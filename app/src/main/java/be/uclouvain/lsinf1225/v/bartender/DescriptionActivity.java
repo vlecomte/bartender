@@ -25,7 +25,6 @@ public class DescriptionActivity extends Activity {
     private Product conso;
     private BufferedReader reader;
     private String desc = "";
-    private User user;
     private Button add;
     private Button remove;
 
@@ -38,7 +37,6 @@ public class DescriptionActivity extends Activity {
         image = (ImageView) findViewById(R.id.imgDesc);
         compte = (TextView) findViewById(R.id.compte_desc);
         conso = MyApp.getDisplayedProduct();
-        user = MyApp.getCurrentUser();
         add = (Button) findViewById(R.id.add_pro);
         remove = (Button) findViewById(R.id.rem_pro);
         try {
@@ -77,7 +75,7 @@ public class DescriptionActivity extends Activity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.addToBasket(conso);
+                MyApp.getCustomer().addToBasket(conso);
                 Toast.makeText(DescriptionActivity.this, "+1 '" +conso.getDisplayName()+"'", Toast.LENGTH_LONG).show();
                 updateAdd();
                 updateCompte();
@@ -88,7 +86,7 @@ public class DescriptionActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                    user.removeFromBasket(conso);
+                    MyApp.getCustomer().removeFromBasket(conso);
                     Toast.makeText(DescriptionActivity.this, "-1 '" +conso.getDisplayName()+"'", Toast.LENGTH_LONG).show();
                 }catch (Exception e){
                     Toast.makeText(DescriptionActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -101,7 +99,7 @@ public class DescriptionActivity extends Activity {
     }
 
     protected void updateCompte() {
-        compte.setText("n°: "+ user.getNumInBasket(conso) + "  [" + user.getNumInBasket(conso) * conso.getPrice()+"€]");
+        compte.setText("n°: "+ MyApp.getCustomer().getNumInBasket(conso) + "  [" + MyApp.getCustomer().getNumInBasket(conso) * conso.getPrice()+"€]");
     }
 
     protected void updateAdd() {
