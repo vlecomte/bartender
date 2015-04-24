@@ -5,15 +5,20 @@ import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.app.Activity;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
+import android.content.Intent;
 
 import java.util.Map;
 
 public class BasketShowActivity extends Activity {
     private ListView list;
     private TextView total;
+    private Button button;
     private double count_total=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,18 @@ public class BasketShowActivity extends Activity {
         setTitle(R.string.basket_title);
         total = (TextView) findViewById(R.id.total_basket);
         total.setText("TOTAL: "+count_total+"€");
+        button = (Button) findViewById(R.id.confirm_basket_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //CONFIRMATION PANIER
+                MyApp.getCustomer().clearBasket();
+                Intent intent = new Intent(BasketShowActivity.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(BasketShowActivity.this, R.string.confirmed_basket, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
 

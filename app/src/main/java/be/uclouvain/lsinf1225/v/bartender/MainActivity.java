@@ -5,18 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 
 
 public class MainActivity extends Activity {
-
+    private Button action_new_command;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        action_new_command = (Button) findViewById(R.id.new_command_button);
+        action_new_command.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(MainActivity.this, NewCommandActivity.class);
+                startActivity(intent2);
+            }
+        });
 
         TextView helloText = (TextView) findViewById(R.id.hello_text);
         helloText.setText("Hello " + MyApp.getUser().getUsername() + "!");
@@ -46,9 +57,7 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.action_new_command:
-                Intent intent2 = new Intent(this, NewCommandActivity.class);
-                startActivity(intent2);
+
             default:
                 return super.onOptionsItemSelected(item);
         }
