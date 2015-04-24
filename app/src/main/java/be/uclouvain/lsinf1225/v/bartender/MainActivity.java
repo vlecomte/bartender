@@ -15,6 +15,7 @@ import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 
 public class MainActivity extends Activity {
     private Button action_new_command;
+    private Button action_show_details;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,17 @@ public class MainActivity extends Activity {
                 startActivity(intent2);
             }
         });
+
+        action_show_details = (Button) findViewById(R.id.action_show_details);
+        action_show_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent show = new Intent(MainActivity.this, ShowDetailsActivity.class);
+                startActivity(show);
+            }
+        });
+
+        updateShowDetails();
 
         TextView helloText = (TextView) findViewById(R.id.hello_text);
         helloText.setText("Hello " + MyApp.getUser().getUsername() + "!");
@@ -61,5 +73,14 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateShowDetails() {
+    if(!MyApp.isWaiter()) {
+        action_show_details.setVisibility(View.INVISIBLE);
+    } else {
+        action_show_details.setVisibility(View.VISIBLE);
+        action_show_details.requestFocus();
+    }
     }
 }

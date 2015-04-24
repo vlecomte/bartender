@@ -41,6 +41,10 @@
             android:name=".BasketShowActivity"
             android:label="@string/title_activity_basket_show" >
         </activity>
+        <activity
+            android:name=".ShowDetailsActivity"
+            android:label="@string/title_activity_show_details" >
+        </activity>
     </application>
 
 </manifest>
