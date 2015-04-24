@@ -4,6 +4,7 @@ final class Contract {
 
     public static final String TABLE_USER = "User";
     public static final String TABLE_ORDER = "\"Order\"";
+    public static final String TABLE_DETAIL = "Detail";
     public static final String TABLE_PRODUCT = "Product";
     public static final String TABLE_TYPE = "Type";
     public static final String TABLE_DESCRIPTION = "Description";
@@ -26,6 +27,10 @@ final class Contract {
     public static final String COL_TABLE_NUM = "TableNum";
     public static final String COL_CUSTOMER_USERNAME = "CustomerUsername";
     public static final String COL_DATE_PAID = "DatePaid";
+
+    public static final String COL_DATE_ADDED = "DateAdded";
+    public static final String COL_DATE_DELIVERED = "DateDelivered";
+    public static final String COL_WAITER_USERNAME = "WaiterUsername";
 
     public static final String COL_PRODUCT_NAME = "ProductName";
     public static final String COL_PRICE = "Price";

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
+import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
 
 public class DaoOrder {
@@ -52,9 +53,9 @@ public class DaoOrder {
         if (c.moveToFirst()) {
             int orderNum = c.getInt(c.getColumnIndex(COL_ORDER_NUM));
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
-            // TODO: Load details
+            Detail[] details = DaoDetail.getInOrder(orderNum);
             c.close();
-            return new Order(orderNum, customer, tableNum);
+            return new Order(orderNum, customer, tableNum, details);
         } else {
             c.close();
             return null;

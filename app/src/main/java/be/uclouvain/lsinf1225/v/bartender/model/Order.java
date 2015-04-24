@@ -25,8 +25,11 @@ public class Order {
     }
 
     private double computeTotal() {
-        // TODO
-        return 0.0;
+        double total = 0.0;
+        for (Detail detail : mDetails) {
+            total += detail.getProduct().getPrice();
+        }
+        return total;
     }
 
     public int getOrderNum() {
