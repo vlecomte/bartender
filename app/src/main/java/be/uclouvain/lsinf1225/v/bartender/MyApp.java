@@ -10,9 +10,11 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.Locale;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
+import be.uclouvain.lsinf1225.v.bartender.model.Admin;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
+import be.uclouvain.lsinf1225.v.bartender.model.Waiter;
 
 public class MyApp extends Application {
 
@@ -110,6 +112,14 @@ public class MyApp extends Application {
 
     public static Customer getCustomer() {
         return (Customer) getUser();
+    }
+
+    public static boolean isWaiter() {
+        return getUser() instanceof Waiter;
+    }
+
+    public static boolean isAdmin() {
+        return getUser() instanceof Admin;
     }
 
 
