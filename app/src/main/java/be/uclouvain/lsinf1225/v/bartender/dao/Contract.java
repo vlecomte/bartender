@@ -15,6 +15,9 @@ final class Contract {
     public static final String TABLE_UNITS_DISPLAY_NAME = "UnitsDisplayName";
 
 
+    public static final String COL_ID = "rowid";
+
+
     public static final String COL_USERNAME = "Username";
     public static final String COL_PASSWORD = "Password";
     public static final String COL_EMAIL = "Email";

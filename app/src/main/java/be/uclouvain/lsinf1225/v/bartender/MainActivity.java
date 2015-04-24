@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
 
         // TODO: Test to see if it crashes, to remove
         DaoIngredient.refreshStock();
+        DaoDetail.getOpenByTable();
     }
 
     @Override
