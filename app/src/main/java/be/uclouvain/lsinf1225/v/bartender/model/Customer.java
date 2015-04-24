@@ -7,12 +7,16 @@ import java.util.Map;
  * A customer who can order drinks.
  */
 public class Customer extends User {
-    protected Map<Product, Integer> mBasket;
     private Order mCurrentOrder;
+    protected Map<Product, Integer> mBasket;
 
     public Customer(String username, String password, String email) {
         super(username, password, email);
         mBasket = new HashMap<>();
+    }
+
+    public void setCurrentOrder(Order order) {
+        mCurrentOrder = order;
     }
 
     public Map<Product, Integer> getBasket() {

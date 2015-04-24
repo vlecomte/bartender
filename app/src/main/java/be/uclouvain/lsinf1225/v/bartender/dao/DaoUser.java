@@ -38,16 +38,23 @@ public class DaoUser {
             String email = c.getString(c.getColumnIndex(COL_EMAIL));
             String rank = c.getString(c.getColumnIndex(COL_RANK));
             c.close();
+            Customer user;
             switch (rank)
             {
                 case RANK_CUSTOMER:
-                    return new Customer(username, password, email);
+                    user = new Customer(username, password, email);
+                    break;
                 case RANK_WAITER:
-                    return new Waiter(username, password, email);
+                    user = new Waiter(username, password, email);
+                    break;
                 case RANK_ADMIN:
-                    return new Admin(username, password, email);
+                    user = new Admin(username, password, email);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid rank.");
             }
-            throw new IllegalArgumentException("Invalid rank.");
+            user.setCurrentOrder(DaoOrder.getOpen(user));
+            return user;
         } else {
             c.close();
             return null;

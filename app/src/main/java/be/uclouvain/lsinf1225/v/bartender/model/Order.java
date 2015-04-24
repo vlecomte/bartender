@@ -12,12 +12,21 @@ public class Order {
     private List<Detail> mDetails;
     private double mTotal;
 
-    public Order(int orderNum, Customer customer, int tableNum, Detail[] details, double total) {
+    public Order(int orderNum, Customer customer, int tableNum, Detail[] details) {
         mOrderNum = orderNum;
         mCustomer = customer;
         mTableNum = tableNum;
         mDetails = new ArrayList<>(Arrays.asList(details));
-        mTotal = total;
+        mTotal = computeTotal();
+    }
+
+    public Order(int orderNum, Customer customer, int tableNum) {
+        this(orderNum, customer, tableNum, new Detail[]{});
+    }
+
+    private double computeTotal() {
+        // TODO
+        return 0.0;
     }
 
     public int getOrderNum() {
