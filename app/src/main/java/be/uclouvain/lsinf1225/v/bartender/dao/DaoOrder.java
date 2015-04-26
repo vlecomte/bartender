@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class DaoOrder {
     private static Order getWithDetails(int orderNum, String customerUsername, int tableNum) {
         Order order = sOrderByNum.get(orderNum);
         if (order != null) return order;
+
         List<Detail> details = DaoDetail.getFromOrder(orderNum);
         order = new Order(orderNum, customerUsername, tableNum, details);
         sOrderByNum.put(orderNum, order);
@@ -40,14 +42,15 @@ public class DaoOrder {
 
     public static Order create(String customerUsername, int tableNum) {
         int orderNum = getBiggestOrderNum() + 1;
-        SQLiteDatabase db = MyApp.getWritableDb();
+
         ContentValues cv = new ContentValues();
         cv.put(COL_ORDER_NUM, orderNum);
         cv.put(COL_TABLE_NUM, tableNum);
-        if (customerUsername != null) {
-            cv.put(COL_CUSTOMER_USERNAME, customerUsername);
-        }
+        if (customerUsername != null) cv.put(COL_CUSTOMER_USERNAME, customerUsername);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
         db.insert(TABLE_ORDER, null, cv);
+
         Order order = new Order(orderNum, customerUsername, tableNum);
         sOrderByNum.put(orderNum, order);
         return order;
@@ -76,8 +79,7 @@ public class DaoOrder {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM},
-                COL_TABLE_NUM+" = ? AND "+COL_DATE_PAID+" = NULL",
-                new String[]{""+tableNum},
+                COL_TABLE_NUM+" = ? AND "+COL_DATE_PAID+" = NULL", new String[]{""+tableNum},
                 null, null, null);
 
         if (c.moveToFirst()) {
@@ -97,11 +99,9 @@ public class DaoOrder {
                 COL_DATE_PAID+" = NULL", new String[]{},
                 null, null, null);
 
-        int numOpenOrders = c.getCount();
-        Order[] openOrders = new Order[numOpenOrders];
-        c.moveToFirst();
+        ArrayList<Order> openOrders = new ArrayList<>();
 
-        for (int i = 0; i < numOpenOrders; i++) {
+        while (c.moveToNext()) {
             int orderNum = c.getInt(c.getColumnIndex(COL_ORDER_NUM));
             String customerUsername = null;
             if (!c.isNull(c.getColumnIndex(COL_CUSTOMER_USERNAME))) {
@@ -109,20 +109,19 @@ public class DaoOrder {
             }
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
 
-            openOrders[i] = getWithDetails(orderNum, customerUsername, tableNum);
-            c.moveToNext();
+            openOrders.add(getWithDetails(orderNum, customerUsername, tableNum));
         }
         c.close();
 
-        return openOrders;
+        return openOrders.toArray(new Order[openOrders.size()]);
     }
 
     public static void setPaid(int orderNum) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_DATE_PAID, System.currentTimeMillis());
-        db.update(TABLE_ORDER, cv,
-                COL_ORDER_NUM+" = ?", new String[]{""+orderNum});
+
+        SQLiteDatabase db = MyApp.getWritableDb();
+        db.update(TABLE_ORDER, cv, COL_ORDER_NUM+" = ?", new String[]{""+orderNum});
     }
 
     public static boolean isPaid(int orderNum) {
@@ -131,10 +130,11 @@ public class DaoOrder {
                 new String[]{COL_DATE_PAID},
                 COL_ORDER_NUM+" = ?", new String[]{""+orderNum},
                 null, null, null);
-        c.moveToFirst();
 
+        c.moveToFirst();
         boolean paid = !c.isNull(c.getColumnIndex(COL_DATE_PAID));
         c.close();
+
         return paid;
     }
 }

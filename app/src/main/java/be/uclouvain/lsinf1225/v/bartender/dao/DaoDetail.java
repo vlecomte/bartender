@@ -88,21 +88,19 @@ public class DaoDetail {
     }
 
     public static void markDelivered(List<Detail> details) {
-
         StringBuilder whereClause = new StringBuilder();
+        String[] detailIds = new String[details.size()];
+
         for (int i = 0; i < details.size(); i++) {
             if (i != 0) whereClause.append(" OR ");
             whereClause.append(COL_ID+" = ?");
-        }
-        ArrayList<String> detailIds = new ArrayList<>();
-        for (Detail detail : details) {
-            detailIds.add(""+detail.getDetailId());
+            detailIds[i] = ""+details.get(i).getDetailId();
         }
 
         ContentValues cv = new ContentValues();
         cv.put(COL_DATE_DELIVERED, System.currentTimeMillis());
 
         SQLiteDatabase db = MyApp.getWritableDb();
-        db.update(TABLE_DETAIL, cv, whereClause.toString(), (String[]) detailIds.toArray());
+        db.update(TABLE_DETAIL, cv, whereClause.toString(), detailIds);
     }
 }

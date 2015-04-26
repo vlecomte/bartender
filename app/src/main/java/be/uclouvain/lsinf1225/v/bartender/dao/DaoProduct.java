@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -20,7 +21,6 @@ public class DaoProduct {
     private static Map<String, Product> sProductByName;
 
     public static synchronized void loadMenu() {
-
         if (sMenu == null) {
             SQLiteDatabase db = MyApp.getReadableDb();
             Cursor c = db.rawQuery(
@@ -35,14 +35,11 @@ public class DaoProduct {
                     +" AND p."+COL_DESCRIPTION_NAME+" = d."+COL_DESCRIPTION_NAME
                     +" ORDER BY p."+COL_TYPE_NAME,
                     new String[]{MyApp.getLanguage()});
-            c.moveToFirst();
 
-            int numProducts = c.getCount();
-            sMenu = new Product[numProducts];
+            ArrayList<Product> productList = new ArrayList<>();
             sProductByName = new HashMap<>();
 
-            for (int i = 0; i < numProducts; i++) {
-
+            while (c.moveToNext()) {
                 String name = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
                 double price = c.getDouble(c.getColumnIndex(COL_PRICE));
                 String displayName = c.getString(c.getColumnIndex(COL_PRODUCT_DISPLAY_NAME));
@@ -52,46 +49,27 @@ public class DaoProduct {
 
                 Product product = new Product(name, displayName, price, typeIconFilename,
                         descriptionFilename, imageFilename);
-                sMenu[i] = product;
+                productList.add(product);
                 sProductByName.put(name, product);
-                c.moveToNext();
             }
             c.close();
 
+            sMenu = productList.toArray(new Product[productList.size()]);
+
             c = db.query(TABLE_USAGE,
                     new String[]{COL_PRODUCT_NAME, COL_INGREDIENT_NAME, COL_QUANTITY},
-                    null, null,
-                    null, null, null);
-            c.moveToFirst();
+                    null, null, null, null, null);
 
-            int numUsages = c.getCount();
-            for (int i = 0; i < numUsages; i++) {
-
+            while (c.moveToNext()) {
                 String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
                 String ingredientName = c.getString(c.getColumnIndex(COL_INGREDIENT_NAME));
                 double quantity = c.getDouble(c.getColumnIndex(COL_QUANTITY));
 
                 Product product = sProductByName.get(productName);
                 Ingredient ingredient = DaoIngredient.getByName(ingredientName);
-                if (product == null) {
-                    throw new IllegalArgumentException(
-                            "In usage, there is no product by that name: "+productName);
-                } else if (ingredient == null) {
-                    throw new IllegalArgumentException(
-                            "In usage, there is no ingredient by that name: "+ingredientName);
-                }
                 product.addUsage(ingredient, quantity);
-
-                c.moveToNext();
             }
             c.close();
-
-
-            // TODO: remove this
-            /*for (int i = 0; i < numProducts; i++) {
-                Log.v("Listing products", sMenu[i].getName()+sMenu[i].getDescriptionFilename());
-            }*/
-            Log.v("Number of products", ""+numProducts);
         }
     }
 

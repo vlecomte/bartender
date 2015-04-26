@@ -18,12 +18,13 @@ import android.database.sqlite.SQLiteDatabase;
 public class DaoUser {
 
     public static User create(String username, String password, String email) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_USERNAME, username);
         cv.put(COL_PASSWORD, password);
         cv.put(COL_EMAIL, email);
         cv.put(COL_RANK, RANK_CUSTOMER);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
         db.insert(TABLE_USER, null, cv);
         return new Customer(username, password, email);
     }
@@ -81,23 +82,26 @@ public class DaoUser {
     }
 
     public static void setPassword(String username, String newPassword) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_PASSWORD, newPassword);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
     }
 
     public static void setEmail(String username, String email) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_EMAIL, email);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
     }
 
     public static void setRank(String username, String rank) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_RANK, rank);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
     }
 }

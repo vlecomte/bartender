@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DaoIngredient {
@@ -23,7 +24,6 @@ public class DaoIngredient {
     }
 
     public static synchronized void loadStock() {
-
         if (sStock == null) {
             SQLiteDatabase db = MyApp.getReadableDb();
             Cursor c = db.rawQuery(
@@ -37,16 +37,16 @@ public class DaoIngredient {
                     +" AND i."+COL_UNITS+" = udn."+COL_UNITS
                             +" AND udn."+COL_LANGUAGE+" = ?",
                     new String[]{MyApp.getLanguage(), MyApp.getLanguage()});
-            c.moveToFirst();
 
-            int numIngredients = c.getCount();
-            sStock = new Ingredient[numIngredients];
+            ArrayList<Ingredient> ingredientList = new ArrayList<>();
             sIngredientByName = new HashMap<>();
-            for (int i = 0; i < numIngredients; i++) {
 
+            while (c.moveToNext()) {
                 String name = c.getString(c.getColumnIndex(COL_INGREDIENT_NAME));
                 String displayName = c.getString(c.getColumnIndex(COL_INGREDIENT_DISPLAY_NAME));
                 double currentStock = c.getDouble(c.getColumnIndex(COL_CURRENT_STOCK));
+                String units = c.getString(c.getColumnIndex(COL_UNITS_DISPLAY_NAME));
+
                 Double criticalStock = null;
                 if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK))) {
                     criticalStock = c.getDouble(c.getColumnIndex(COL_CRITICAL_STOCK));
@@ -55,15 +55,15 @@ public class DaoIngredient {
                 if (!c.isNull(c.getColumnIndex(COL_CRITICAL_STOCK))) {
                     maxStock = c.getDouble(c.getColumnIndex(COL_MAX_STOCK));
                 }
-                String units = c.getString(c.getColumnIndex(COL_UNITS_DISPLAY_NAME));
 
                 Ingredient ingredient = new Ingredient(name, displayName, currentStock,
                         criticalStock, maxStock, units);
-                sStock[i] = ingredient;
+                ingredientList.add(ingredient);
                 sIngredientByName.put(name, ingredient);
-                c.moveToNext();
             }
             c.close();
+
+            sStock = ingredientList.toArray(new Ingredient[ingredientList.size()]);
         }
     }
 
@@ -73,15 +73,11 @@ public class DaoIngredient {
         Cursor c = db.query(TABLE_INGREDIENT, new String[]{COL_INGREDIENT_NAME, COL_CURRENT_STOCK},
                 null, null,
                 null, null, null);
-        c.moveToFirst();
 
-        int numIngredients = c.getCount();
-        for (int i = 0; i < numIngredients; i++) {
+        while (c.moveToNext()) {
             String ingredientName = c.getString(c.getColumnIndex(COL_INGREDIENT_NAME));
             double stock = c.getDouble(c.getColumnIndex(COL_CURRENT_STOCK));
             getByName(ingredientName).refreshCurrent(stock);
-
-            c.moveToNext();
         }
         c.close();
     }
@@ -92,8 +88,9 @@ public class DaoIngredient {
         ArrayList<Ingredient> insufficient = new ArrayList<>();
 
         for (Ingredient ingredient : sStock) {
-            if (ingredient.getRemaining() < 0.0)
+            if (ingredient.getRemaining() < 0.0) {
                 insufficient.add(ingredient);
+            }
         }
         return (Ingredient[]) insufficient.toArray();
     }
@@ -101,13 +98,16 @@ public class DaoIngredient {
     public static void applyUsages() {
         loadStock();
         SQLiteDatabase db = MyApp.getWritableDb();
+
         // TODO: Do this in one command maybe?
         for (Ingredient ingredient : sStock) {
             // TODO: Add a tolerance
             if (ingredient.getCurrentUsage() > 0.0) {
                 ingredient.applyUsage();
+
                 ContentValues cv = new ContentValues();
                 cv.put(COL_CURRENT_STOCK, ingredient.getCurrent());
+
                 db.update(TABLE_INGREDIENT, cv,
                         COL_INGREDIENT_NAME+" = ?", new String[]{ingredient.getName()});
             }
@@ -116,34 +116,28 @@ public class DaoIngredient {
 
 
     public static void setCurrent(String name, double stock) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_CURRENT_STOCK, stock);
-        db.update(TABLE_INGREDIENT, cv,
-                COL_INGREDIENT_NAME+" = ?", new String[]{name});
+
+        SQLiteDatabase db = MyApp.getWritableDb();
+        db.update(TABLE_INGREDIENT, cv, COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 
     public static void setCritical(String name, Double stock) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
-        if (stock == null) {
-            cv.putNull(COL_CRITICAL_STOCK);
-        } else {
-            cv.put(COL_CRITICAL_STOCK, stock);
-        }
-        db.update(TABLE_INGREDIENT, cv,
-                COL_INGREDIENT_NAME+" = ?", new String[]{name});
+        if (stock == null) cv.putNull(COL_CRITICAL_STOCK);
+        else cv.put(COL_CRITICAL_STOCK, stock);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
+        db.update(TABLE_INGREDIENT, cv, COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 
     public static void setMax(String name, Double stock) {
-        SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
-        if (stock == null) {
-            cv.putNull(COL_MAX_STOCK);
-        } else {
-            cv.put(COL_MAX_STOCK, stock);
-        }
-        db.update(TABLE_INGREDIENT, cv,
-                COL_INGREDIENT_NAME+" = ?", new String[]{name});
+        if (stock == null) cv.putNull(COL_MAX_STOCK);
+        else cv.put(COL_MAX_STOCK, stock);
+
+        SQLiteDatabase db = MyApp.getWritableDb();
+        db.update(TABLE_INGREDIENT, cv, COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 }
