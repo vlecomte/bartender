@@ -53,7 +53,7 @@ public class DaoUser {
                 default:
                     throw new IllegalArgumentException("Invalid rank.");
             }
-            user.setCurrentOrder(DaoOrder.getOpen(user));
+            user.setCurrentOrder(DaoOrder.getOpen(user.getUsername()));
             return user;
         } else {
             c.close();

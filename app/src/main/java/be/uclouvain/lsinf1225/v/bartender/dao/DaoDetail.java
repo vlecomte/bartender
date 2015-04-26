@@ -14,9 +14,11 @@ import be.uclouvain.lsinf1225.v.bartender.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 
 public class DaoDetail {
-    private static Map<Integer, Detail> sDetailById;
+    private static Map<Integer, Detail> sDetailById = new HashMap<>();
 
-    public static Detail[] getInOrder(int orderNum) {
+    //public static Detail[] create(int orderNum, )
+
+    public static Detail[] getFromOrder(int orderNum) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_DETAIL,
                 new String[]{COL_ID, COL_PRODUCT_NAME},
@@ -36,7 +38,9 @@ public class DaoDetail {
                 details[i] = new Detail(detailId, DaoProduct.getByName(productName));
                 sDetailById.put(detailId, details[i]);
             }
+            c.moveToNext();
         }
+        c.close();
 
         return details;
     }
@@ -68,6 +72,8 @@ public class DaoDetail {
                 openDetailsByTable.put(tableNum, new ArrayList<Detail>());
             }
             openDetailsByTable.get(tableNum).add(detail);
+
+            c.moveToNext();
         }
         c.close();
 

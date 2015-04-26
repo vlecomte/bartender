@@ -7,21 +7,21 @@ import java.util.List;
 
 public class Order {
     private int mOrderNum;
-    private Customer mCustomer;
+    private String mCustomerUsername;
     private int mTableNum;
     private List<Detail> mDetails;
     private double mTotal;
 
-    public Order(int orderNum, Customer customer, int tableNum, Detail[] details) {
+    public Order(int orderNum, String customerUsername, int tableNum, Detail[] details) {
         mOrderNum = orderNum;
-        mCustomer = customer;
+        mCustomerUsername = customerUsername;
         mTableNum = tableNum;
         mDetails = new ArrayList<>(Arrays.asList(details));
         mTotal = computeTotal();
     }
 
-    public Order(int orderNum, Customer customer, int tableNum) {
-        this(orderNum, customer, tableNum, new Detail[]{});
+    public Order(int orderNum, String customerUsername, int tableNum) {
+        this(orderNum, customerUsername, tableNum, new Detail[]{});
     }
 
     private double computeTotal() {
@@ -36,8 +36,8 @@ public class Order {
         return mOrderNum;
     }
 
-    public Customer getCustomer() {
-        return mCustomer;
+    public String getCustomerUsername() {
+        return mCustomerUsername;
     }
 
     public int getTableNum() {
