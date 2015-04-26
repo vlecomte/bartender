@@ -3,6 +3,8 @@ package be.uclouvain.lsinf1225.v.bartender.model;
 import android.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Product {
     private String mName;
@@ -12,7 +14,7 @@ public class Product {
     private String mDescriptionFilename;
     private String mImageFilename;
 
-    private ArrayList<Pair<Ingredient, Double>> mUsages;
+    private Map<Ingredient, Double> mUsages;
 
     public Product(String name, String displayName, double price, String typeIconFilename,
                    String descriptionFilename, String imageFilename) {
@@ -22,7 +24,7 @@ public class Product {
         mTypeIconFilename = typeIconFilename;
         mDescriptionFilename = descriptionFilename;
         mImageFilename = imageFilename;
-        mUsages = new ArrayList<>();
+        mUsages = new HashMap<>();
     }
 
     public String getName() {
@@ -50,33 +52,33 @@ public class Product {
     }
 
     public void addUsage(Ingredient ingredient, double quantity) {
-        mUsages.add(new Pair<>(ingredient, quantity));
+        mUsages.put(ingredient, quantity);
     }
 
     public int getNumAvailable() {
         int numAvailable = Integer.MAX_VALUE;
-        for (Pair<Ingredient, Double> usage : mUsages) {
-            Ingredient ingredient = usage.first;
-            double quantity = usage.second;
+        for (Map.Entry<Ingredient, Double> usage : mUsages.entrySet()) {
+            Ingredient ingredient = usage.getKey();
+            double quantity = usage.getValue();
             numAvailable = Math.min(numAvailable,
-                    (int) Math.floor(ingredient.getCurrent() / quantity));
+                    (int) Math.floor((ingredient.getRemaining()) / quantity));
         }
         return numAvailable;
     }
 
     public void takeOffStock() {
-        for (Pair<Ingredient, Double> usage : mUsages) {
-            Ingredient ingredient = usage.first;
-            double quantity = usage.second;
-            ingredient.remove(quantity);
+        for (Map.Entry<Ingredient, Double> usage : mUsages.entrySet()) {
+            Ingredient ingredient = usage.getKey();
+            double quantity = usage.getValue();
+            ingredient.addUsage(quantity);
         }
     }
 
     public void putBackStock() {
-        for (Pair<Ingredient, Double> usage : mUsages) {
-            Ingredient ingredient = usage.first;
-            double quantity = usage.second;
-            ingredient.add(quantity);
+        for (Map.Entry<Ingredient, Double> usage : mUsages.entrySet()) {
+            Ingredient ingredient = usage.getKey();
+            double quantity = usage.getValue();
+            ingredient.removeUsage(quantity);
         }
     }
 }

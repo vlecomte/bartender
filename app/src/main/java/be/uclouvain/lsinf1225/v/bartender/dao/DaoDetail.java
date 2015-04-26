@@ -2,6 +2,7 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,34 +12,51 @@ import java.util.List;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
 public class DaoDetail {
     private static Map<Integer, Detail> sDetailById = new HashMap<>();
 
-    //public static Detail[] create(int orderNum, )
+    private static Detail getOrCreate(int detailId, String productName) {
+        if (!sDetailById.containsKey(detailId)) {
+            sDetailById.put(detailId, new Detail(detailId, DaoProduct.getByName(productName)));
+        }
+        return sDetailById.get(detailId);
+    }
 
-    public static Detail[] getFromOrder(int orderNum) {
+    public static void create(int orderNum, Customer.Basket basket) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+
+        // TODO: Do it in one request maybe?
+        for (Map.Entry<Product, Integer> productGroup : basket.entrySet()) {
+            Product product = productGroup.getKey();
+            int number = productGroup.getValue();
+
+            for (int i = 0; i < number; i++) {
+                ContentValues cv = new ContentValues();
+                cv.put(COL_ORDER_NUM, orderNum);
+                cv.put(COL_PRODUCT_NAME, product.getName());
+                cv.put(COL_DATE_ADDED, System.currentTimeMillis());
+                db.insert(TABLE_DETAIL, null, cv);
+            }
+        }
+    }
+
+    public static List<Detail> getFromOrder(int orderNum) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_DETAIL,
                 new String[]{COL_ID, COL_PRODUCT_NAME},
                 COL_ORDER_NUM+" = ?", new String[]{""+orderNum},
                 null, null, null);
-        c.moveToFirst();
 
-        int numDetails = c.getCount();
-        Detail[] details = new Detail[numDetails];
+        List<Detail> details = new ArrayList<>();
 
-        for (int i = 0; i < numDetails; i++) {
+        while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
-            if (sDetailById.containsKey(detailId)) {
-                details[i] = sDetailById.get(detailId);
-            } else {
-                details[i] = new Detail(detailId, DaoProduct.getByName(productName));
-                sDetailById.put(detailId, details[i]);
-            }
-            c.moveToNext();
+            details.add(getOrCreate(detailId, productName));
         }
         c.close();
 
@@ -47,36 +65,44 @@ public class DaoDetail {
 
     public static Map<Integer, List<Detail>> getOpenByTable() {
         SQLiteDatabase db = MyApp.getReadableDb();
-        Cursor c = db.rawQuery("SELECT d."+COL_ID+", d."+COL_ID+", o."+COL_TABLE_NUM
-                +" FROM "+TABLE_DETAIL+" d, "+TABLE_ORDER+" o"
-                +" WHERE d."+COL_DATE_DELIVERED+" = NULL",
+        Cursor c = db.rawQuery("SELECT d." + COL_ID + ", d." + COL_ID + ", o." + COL_TABLE_NUM
+                        + " FROM " + TABLE_DETAIL + " d, " + TABLE_ORDER + " o"
+                        + " WHERE d." + COL_DATE_DELIVERED + " = NULL",
                 new String[]{});
-        c.moveToFirst();
 
-        int numDetails = c.getCount();
         Map<Integer, List<Detail>> openDetailsByTable = new HashMap<>();
 
-        for (int i = 0; i < numDetails; i++) {
+        while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
-            Detail detail;
-            if (sDetailById.containsKey(detailId)) {
-                detail = sDetailById.get(detailId);
-            } else {
-                detail = new Detail(detailId, DaoProduct.getByName(COL_PRODUCT_NAME));
-                sDetailById.put(detailId, detail);
-            }
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
 
             if (!openDetailsByTable.containsKey(tableNum)) {
                 openDetailsByTable.put(tableNum, new ArrayList<Detail>());
             }
-            openDetailsByTable.get(tableNum).add(detail);
-
-            c.moveToNext();
+            openDetailsByTable.get(tableNum).add(getOrCreate(detailId, productName));
         }
         c.close();
 
         return openDetailsByTable;
+    }
+
+    public static void markDelivered(List<Detail> details) {
+
+        StringBuilder whereClause = new StringBuilder();
+        for (int i = 0; i < details.size(); i++) {
+            if (i != 0) whereClause.append(" OR ");
+            whereClause.append(COL_ID+" = ?");
+        }
+        ArrayList<String> detailIds = new ArrayList<>();
+        for (Detail detail : details) {
+            detailIds.add(""+detail.getDetailId());
+        }
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_DATE_DELIVERED, System.currentTimeMillis());
+
+        SQLiteDatabase db = MyApp.getWritableDb();
+        db.update(TABLE_DETAIL, cv, whereClause.toString(), (String[]) detailIds.toArray());
     }
 }

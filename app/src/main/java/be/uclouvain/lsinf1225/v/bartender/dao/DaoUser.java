@@ -53,7 +53,6 @@ public class DaoUser {
                 default:
                     throw new IllegalArgumentException("Invalid rank.");
             }
-            user.setCurrentOrder(DaoOrder.getOpen(user.getUsername()));
             return user;
         } else {
             c.close();
@@ -81,19 +80,24 @@ public class DaoUser {
         return taken;
     }
 
-    public static void setPassword(String username, String oldPassword, String newPassword) {
+    public static void setPassword(String username, String newPassword) {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_PASSWORD, newPassword);
-        db.update(TABLE_USER, cv,
-                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, oldPassword});
+        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
     }
 
-    public static void setEmail(String username, String password, String email) {
+    public static void setEmail(String username, String email) {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_EMAIL, email);
-        db.update(TABLE_USER, cv,
-                COL_USERNAME+" = ? AND "+COL_PASSWORD+" = ?", new String[]{username, password});
+        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
+    }
+
+    public static void setRank(String username, String rank) {
+        SQLiteDatabase db = MyApp.getWritableDb();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_RANK, rank);
+        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
     }
 }

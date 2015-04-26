@@ -9,12 +9,18 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DaoIngredient {
     private static Ingredient[] sStock;
     private static Map<String, Ingredient> sIngredientByName;
+
+    public static Ingredient getByName(String name) {
+        loadStock();
+        return sIngredientByName.get(name);
+    }
 
     public static synchronized void loadStock() {
 
@@ -80,17 +86,41 @@ public class DaoIngredient {
         c.close();
     }
 
-    public static Ingredient getByName(String name) {
-        loadStock();
-        return sIngredientByName.get(name);
+
+    public static Ingredient[] getInsufficient() {
+        refreshStock();
+        ArrayList<Ingredient> insufficient = new ArrayList<>();
+
+        for (Ingredient ingredient : sStock) {
+            if (ingredient.getRemaining() < 0.0)
+                insufficient.add(ingredient);
+        }
+        return (Ingredient[]) insufficient.toArray();
     }
+
+    public static void applyUsages() {
+        loadStock();
+        SQLiteDatabase db = MyApp.getWritableDb();
+        // TODO: Do this in one command maybe?
+        for (Ingredient ingredient : sStock) {
+            // TODO: Add a tolerance
+            if (ingredient.getCurrentUsage() > 0.0) {
+                ingredient.applyUsage();
+                ContentValues cv = new ContentValues();
+                cv.put(COL_CURRENT_STOCK, ingredient.getCurrent());
+                db.update(TABLE_INGREDIENT, cv,
+                        COL_INGREDIENT_NAME+" = ?", new String[]{ingredient.getName()});
+            }
+        }
+    }
+
 
     public static void setCurrent(String name, double stock) {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_CURRENT_STOCK, stock);
         db.update(TABLE_INGREDIENT, cv,
-                COL_PRODUCT_NAME+" = ?", new String[]{name});
+                COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 
     public static void setCritical(String name, Double stock) {
@@ -102,7 +132,7 @@ public class DaoIngredient {
             cv.put(COL_CRITICAL_STOCK, stock);
         }
         db.update(TABLE_INGREDIENT, cv,
-                COL_PRODUCT_NAME+" = ?", new String[]{name});
+                COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 
     public static void setMax(String name, Double stock) {
@@ -114,6 +144,6 @@ public class DaoIngredient {
             cv.put(COL_MAX_STOCK, stock);
         }
         db.update(TABLE_INGREDIENT, cv,
-                COL_PRODUCT_NAME+" = ?", new String[]{name});
+                COL_INGREDIENT_NAME+" = ?", new String[]{name});
     }
 }

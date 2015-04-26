@@ -45,7 +45,7 @@ public class BasketShowActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //CONFIRMATION PANIER
-                MyApp.getCustomer().clearBasket();
+                //MyApp.getCustomer().clearBasket();
                 Intent intent = new Intent(BasketShowActivity.this, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(BasketShowActivity.this, R.string.confirmed_basket, Toast.LENGTH_LONG).show();

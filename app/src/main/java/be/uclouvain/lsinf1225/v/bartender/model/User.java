@@ -34,13 +34,13 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
-        DaoUser.setPassword(mUsername, mPassword, password);
-        MyApp.writeUserInPreferences();
         mPassword = password;
+        DaoUser.setPassword(mUsername, password);
+        MyApp.writeUserInPreferences();
     }
 
     public void setEmail(String email) {
-        DaoUser.setEmail(mUsername, mPassword, email);
+        DaoUser.setEmail(mUsername, email);
         mEmail = email;
     }
 }

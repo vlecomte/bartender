@@ -2,6 +2,8 @@ package be.uclouvain.lsinf1225.v.bartender.model;
 
 import java.util.HashMap;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoOrder;
+
 /**
  * A customer who can order drinks.
  */
@@ -21,7 +23,7 @@ public class Customer extends User {
 
         public void addOne(Product product) {
             if (containsKey(product)) {
-                put(product, get(product)+1);
+                put(product, get(product) + 1);
             } else {
                 put(product, 1);
             }
@@ -33,7 +35,7 @@ public class Customer extends User {
             if (currentNumber == 1) {
                 remove(product);
             } else {
-                put(product, currentNumber-1);
+                put(product, currentNumber - 1);
             }
             product.putBackStock();
         }
@@ -41,11 +43,25 @@ public class Customer extends User {
 
     public Customer(String username, String password, String email) {
         super(username, password, email);
+        mCurrentOrder = null;
         mBasket = new Basket();
     }
 
-    public void setCurrentOrder(Order order) {
-        mCurrentOrder = order;
+    public Order getCurrentOrder() {
+        if (mCurrentOrder == null) {
+            mCurrentOrder = DaoOrder.getOpen(getUsername());
+        } else if (DaoOrder.isPaid(mCurrentOrder.getOrderNum())) {
+            mCurrentOrder = null;
+        }
+        return mCurrentOrder;
+    }
+
+    public boolean hasCurrentOrder() {
+        return getCurrentOrder() != null;
+    }
+
+    public void openOrder(int tableNum) {
+        mCurrentOrder = DaoOrder.create(getUsername(), tableNum);
     }
 
     public Basket getBasket() {
@@ -64,7 +80,9 @@ public class Customer extends User {
         mBasket.removeOne(product);
     }
 
-    public void clearBasket() {
+    // Assumes a current order exists!!
+    public void confirmBasket() {
+        mCurrentOrder.addBasket(mBasket);
         mBasket.clear();
     }
 }

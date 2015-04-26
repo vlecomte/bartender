@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.MyApp;
@@ -19,7 +20,7 @@ public class DaoOrder {
     private static Order getWithDetails(int orderNum, String customerUsername, int tableNum) {
         Order order = sOrderByNum.get(orderNum);
         if (order != null) return order;
-        Detail[] details = DaoDetail.getFromOrder(orderNum);
+        List<Detail> details = DaoDetail.getFromOrder(orderNum);
         order = new Order(orderNum, customerUsername, tableNum, details);
         sOrderByNum.put(orderNum, order);
         return order;
@@ -28,7 +29,7 @@ public class DaoOrder {
     private static int getBiggestOrderNum() {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.rawQuery("SELECT MAX("+COL_ORDER_NUM+")"
-                +" FROM"+TABLE_ORDER,
+                +" FROM "+TABLE_ORDER,
                 new String[]{});
 
         c.moveToFirst();
@@ -52,10 +53,6 @@ public class DaoOrder {
         return order;
     }
 
-    public static Order createFor(int tableNum) {
-        return create(null, tableNum);
-    }
-
     public static Order getOpen(String customerUsername) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
@@ -75,7 +72,7 @@ public class DaoOrder {
         }
     }
 
-    public static Order getOpenFor(int tableNum) {
+    public static Order getOpenOrCreateFor(int tableNum) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM},
@@ -89,7 +86,7 @@ public class DaoOrder {
             return getWithDetails(orderNum, null, tableNum);
         } else {
             c.close();
-            return null;
+            return create(null, tableNum);
         }
     }
 
@@ -120,7 +117,7 @@ public class DaoOrder {
         return openOrders;
     }
 
-    public void setPaid(int orderNum) {
+    public static void setPaid(int orderNum) {
         SQLiteDatabase db = MyApp.getWritableDb();
         ContentValues cv = new ContentValues();
         cv.put(COL_DATE_PAID, System.currentTimeMillis());
@@ -128,7 +125,7 @@ public class DaoOrder {
                 COL_ORDER_NUM+" = ?", new String[]{""+orderNum});
     }
 
-    public boolean isPaid(int orderNum) {
+    public static boolean isPaid(int orderNum) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_DATE_PAID},

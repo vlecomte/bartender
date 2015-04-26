@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
+
 public class Order {
     private int mOrderNum;
     private String mCustomerUsername;
@@ -12,16 +14,16 @@ public class Order {
     private List<Detail> mDetails;
     private double mTotal;
 
-    public Order(int orderNum, String customerUsername, int tableNum, Detail[] details) {
+    public Order(int orderNum, String customerUsername, int tableNum, List<Detail> details) {
         mOrderNum = orderNum;
         mCustomerUsername = customerUsername;
         mTableNum = tableNum;
-        mDetails = new ArrayList<>(Arrays.asList(details));
+        mDetails = details;
         mTotal = computeTotal();
     }
 
     public Order(int orderNum, String customerUsername, int tableNum) {
-        this(orderNum, customerUsername, tableNum, new Detail[]{});
+        this(orderNum, customerUsername, tableNum, new ArrayList<Detail>(){});
     }
 
     private double computeTotal() {
@@ -44,11 +46,13 @@ public class Order {
         return mTableNum;
     }
 
-    public Detail[] getDetails() {
-        return (Detail[]) mDetails.toArray();
-    }
-
     public double getTotal() {
         return mTotal;
+    }
+
+
+    public void addBasket(Customer.Basket basket) {
+        DaoDetail.create(mOrderNum, basket);
+        mDetails = DaoDetail.getFromOrder(mOrderNum);
     }
 }
