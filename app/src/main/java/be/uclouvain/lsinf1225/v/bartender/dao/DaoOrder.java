@@ -35,7 +35,7 @@ public class DaoOrder {
                 new String[]{});
 
         c.moveToFirst();
-        int biggestOrderNum = c.getInt(c.getColumnIndex(COL_ORDER_NUM));
+        int biggestOrderNum = c.getInt(c.getColumnIndex("MAX("+COL_ORDER_NUM+")"));
         c.close();
         return biggestOrderNum;
     }
