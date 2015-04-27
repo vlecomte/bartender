@@ -60,7 +60,7 @@ public class DaoOrder {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM, COL_TABLE_NUM},
-                COL_CUSTOMER_USERNAME+" = ? AND "+COL_DATE_PAID+" = NULL",
+                COL_CUSTOMER_USERNAME+" = ? AND "+COL_DATE_PAID+" IS NULL",
                 new String[]{customerUsername},
                 null, null, null);
 
@@ -79,7 +79,7 @@ public class DaoOrder {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM},
-                COL_TABLE_NUM+" = ? AND "+COL_DATE_PAID+" = NULL", new String[]{""+tableNum},
+                COL_TABLE_NUM+" = ? AND "+COL_DATE_PAID+" IS NULL", new String[]{""+tableNum},
                 null, null, null);
 
         if (c.moveToFirst()) {
@@ -96,7 +96,7 @@ public class DaoOrder {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM, COL_CUSTOMER_USERNAME, COL_TABLE_NUM},
-                COL_DATE_PAID+" = NULL", new String[]{},
+                COL_DATE_PAID+" IS NULL", new String[]{},
                 null, null, null);
 
         ArrayList<Order> openOrders = new ArrayList<>();
