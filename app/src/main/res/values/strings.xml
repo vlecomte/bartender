@@ -16,6 +16,8 @@
     <string name="show_details_button">Commandes ouvertes</string>
     <string name="title_Activity_list_details">Commandes ouvertes</string>
     <string name="inWait_details_text">détail(s) ouvert(s)</string>
+    <string name="choose_table">Choix de table</string>
+    <string name="confrim_table">Confirmer table</string>
 
 
     <string name="preference_file_key">
