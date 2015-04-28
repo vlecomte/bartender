@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Bartender</string>
-    <string name="title_activity_main">Main Activity</string>
     <string name="title_activity_new_command">NewCommandActivity</string>
 
-    <string name="action_logout">Sign out</string>
-    <string name="action_new_command">Nouvelle commande</string>
     <string name="action_show_basket">Afficher panier</string>
+    <string name="action_logout">Sign out</string>
     <string name="new_command_activity_title">Nouvelle Commande</string>
     <string name="not_enough_stock">Plus possible de commander</string>
     <string name="basket_title">Panier actuel</string>
@@ -13,7 +11,6 @@
     <string name="confirm_basket_button">Confirmer panier</string>
     <string name="confirmed_basket">Votre panier a été confirmé. Un serveur se charge de votre commande.</string>
     <string name="new_command_button">Nouvelle commande</string>
-    <string name="show_details_button">Commandes ouvertes</string>
     <string name="title_Activity_list_details">Commandes ouvertes</string>
     <string name="inWait_details_text">détail(s) ouvert(s)</string>
     <string name="choose_table">Choix de table</string>

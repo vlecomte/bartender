@@ -11,48 +11,46 @@ import android.widget.Button;
 
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.R;
-import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
-import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 
 
 public class MainActivity extends Activity {
-    private Button action_new_command;
-    private Button action_show_details;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        action_new_command = (Button) findViewById(R.id.new_command_button);
-        action_new_command.setOnClickListener(new View.OnClickListener() {
+        Button displayMenuButton = (Button) findViewById(R.id.button_display_menu);
+        displayMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(MainActivity.this, NewCommandActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivity.this, NewCommandActivity.class);
+                startActivity(intent);
             }
         });
 
-        action_show_details = (Button) findViewById(R.id.action_show_details);
-        action_show_details.setOnClickListener(new View.OnClickListener() {
+        Button showOrdersButton = (Button) findViewById(R.id.action_show_details);
+        showOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent show = new Intent(MainActivity.this, ShowDetailsActivity.class);
-                startActivity(show);
+                Intent intent = new Intent(MainActivity.this, ShowDetailsActivity.class);
+                startActivity(intent);
             }
         });
 
-        updateShowDetails();
+        TextView loggedInText = (TextView) findViewById(R.id.text_logged_in);
+        loggedInText.setText(getString(R.string.text_logged_in_as) + MyApp.getUser().getUsername());
 
-        TextView helloText = (TextView) findViewById(R.id.hello_text);
-        helloText.setText("Hello " + MyApp.getUser().getUsername() + "!");
+        initButtonVisibilities(showOrdersButton);
 
         // TODO: Put this in an AsyncTask or something
         DaoProduct.loadMenu();
+    }
 
-        // TODO: Test to see if it crashes, to remove
-        DaoIngredient.refreshStock();
-        DaoDetail.getOpenByTable();
+    private void initButtonVisibilities(Button showOrdersButton) {
+        if (!MyApp.isWaiter()) {
+            showOrdersButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -77,14 +75,5 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void updateShowDetails() {
-    if(!MyApp.isWaiter()) {
-        action_show_details.setVisibility(View.INVISIBLE);
-    } else {
-        action_show_details.setVisibility(View.VISIBLE);
-        action_show_details.requestFocus();
-    }
     }
 }
