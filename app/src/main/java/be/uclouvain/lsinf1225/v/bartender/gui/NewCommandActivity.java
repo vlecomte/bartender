@@ -1,10 +1,12 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.gui;
 
+import be.uclouvain.lsinf1225.v.bartender.util.CustomList;
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -12,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.lang.String;
 
 public class NewCommandActivity extends Activity {

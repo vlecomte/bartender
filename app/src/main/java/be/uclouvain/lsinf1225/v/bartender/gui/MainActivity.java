@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.gui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;

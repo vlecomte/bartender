@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.graphics.drawable.Drawable;
+
+import be.uclouvain.lsinf1225.v.bartender.R;
 
 public class CustomList extends ArrayAdapter<String> {
 

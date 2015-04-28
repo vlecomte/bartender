@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.util;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,6 +9,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.Locale;
 
+import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.model.Admin;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;

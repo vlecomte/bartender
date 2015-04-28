@@ -2,7 +2,6 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
 
-import be.uclouvain.lsinf1225.v.bartender.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Ingredient;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 

@@ -1,7 +1,9 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.gui;
 
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
-import be.uclouvain.lsinf1225.v.bartender.model.User;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;

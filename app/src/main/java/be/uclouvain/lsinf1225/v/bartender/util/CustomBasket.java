@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import be.uclouvain.lsinf1225.v.bartender.R;
 
 
 public class CustomBasket extends ArrayAdapter<String> {

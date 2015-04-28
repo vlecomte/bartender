@@ -1,9 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import be.uclouvain.lsinf1225.v.bartender.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 
 /**

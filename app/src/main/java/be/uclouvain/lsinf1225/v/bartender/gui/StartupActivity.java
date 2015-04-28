@@ -1,9 +1,11 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.gui;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 public class StartupActivity extends Activity {
     @Override

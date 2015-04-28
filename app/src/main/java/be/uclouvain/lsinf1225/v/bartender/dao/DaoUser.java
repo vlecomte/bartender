@@ -2,7 +2,7 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
 
-import be.uclouvain.lsinf1225.v.bartender.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.model.Admin;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.User;

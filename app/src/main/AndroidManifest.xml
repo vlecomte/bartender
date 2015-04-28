@@ -3,13 +3,13 @@
     package="be.uclouvain.lsinf1225.v.bartender" >
 
     <application
-        android:name=".MyApp$App"
+        android:name=".util.MyApp$App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name=".StartupActivity"
+            android:name=".gui.StartupActivity"
             android:label="@string/app_name"
             android:noHistory="true"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
@@ -20,29 +20,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".gui.LoginActivity"
             android:label="@string/title_activity_login"
             android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".gui.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".NewCommandActivity"
+            android:name=".gui.NewCommandActivity"
             android:label="@string/title_activity_new_command" >
         </activity>
         <activity
-            android:name=".DescriptionActivity"
+            android:name=".gui.DescriptionActivity"
             android:label="@string/title_activity_description" >
         </activity>
         <activity
-            android:name=".BasketShowActivity"
+            android:name=".gui.BasketShowActivity"
             android:label="@string/title_activity_basket_show" >
         </activity>
         <activity
-            android:name=".ShowDetailsActivity"
+            android:name=".gui.ShowDetailsActivity"
             android:label="@string/title_activity_show_details" >
         </activity>
     </application>

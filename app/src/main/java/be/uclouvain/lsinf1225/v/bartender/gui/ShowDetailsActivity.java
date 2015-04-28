@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.v.bartender;
+package be.uclouvain.lsinf1225.v.bartender.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import be.uclouvain.lsinf1225.v.bartender.util.CustomListTable;
+import be.uclouvain.lsinf1225.v.bartender.R;
 
 public class ShowDetailsActivity extends Activity {
     ListView tableList;
