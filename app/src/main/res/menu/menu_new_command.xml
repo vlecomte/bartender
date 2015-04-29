@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- Sign out, should always be in the overflow -->
-    <item android:id="@+id/action_show_basket"
-        android:title="@string/action_show_basket"
-        app:showAsAction="never" />
-</menu>

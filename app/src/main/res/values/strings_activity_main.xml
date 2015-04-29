@@ -1,12 +1,11 @@
 <resources>
-    <!-- Action Bar title -->
-    <string name="title_activity_main">Main Activity</string>
+    <!-- Tab names -->
+    <string name="tab_basket">Basket</string>
+    <string name="tab_menu">Menu</string>
+    <string name="tab_bill">Bill</string>
 
-    <!-- Text -->
-    <string name="text_logo">Bartender</string>
-    <string name="text_logged_in_as">Logged in as&#160;</string>
-
-    <!-- Buttons -->
-    <string name="action_display_menu">Display menu</string>
-    <string name="show_details_button">Commandes ouvertes</string>
+    <!-- Table picker dialog -->
+    <string name="dialog_title_pick_table">Pick your table</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
 </resources>

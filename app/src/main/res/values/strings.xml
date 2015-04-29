@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Bartender</string>
-    <string name="title_activity_new_command">NewCommandActivity</string>
 
-    <string name="action_show_basket">Afficher panier</string>
     <string name="action_logout">Sign out</string>
-    <string name="new_command_activity_title">Nouvelle Commande</string>
+
     <string name="not_enough_stock">Plus possible de commander</string>
     <string name="basket_title">Panier actuel</string>
     <string name="basket_ss">Panier</string>
@@ -17,15 +15,12 @@
     <string name="confrim_table">Confirmer table</string>
 
 
+
     <string name="preference_file_key">
         be.uclouvain.lsinf1225.v.bartender.PREFERENCES
     </string>
     <string name="saved_username">SAVED_USERNAME</string>
     <string name="saved_password">SAVED_PASSWORD</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_description">DescriptionActivity</string>
-    <string name="title_activity_basket_show">BasketShowActivity</string>
-    <string name="title_activity_show_details">ShowDetailsActivity</string>
 </resources>
