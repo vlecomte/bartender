@@ -2,7 +2,7 @@
     <!-- Tab names -->
     <string name="tab_basket">Basket</string>
     <string name="tab_menu">Menu</string>
-    <string name="tab_bill">Bill</string>
+    <string name="tab_to_serve">To serve</string>
 
     <!-- Table picker dialog -->
     <string name="dialog_title_pick_table">Pick your table</string>

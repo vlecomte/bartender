@@ -21,7 +21,7 @@ import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.util.CustomDetList;
 import be.uclouvain.lsinf1225.v.bartender.util.CustomListTable;
 
-public class BillFragment extends Fragment {
+public class ToServeFragment extends Fragment {
     ListView tableList;
     ListView detailsList;
     Button annuleButton;
