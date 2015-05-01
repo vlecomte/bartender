@@ -67,7 +67,8 @@ public class DaoDetail {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.rawQuery("SELECT d."+COL_ID+", d."+COL_PRODUCT_NAME+", o."+COL_TABLE_NUM
                         +" FROM "+TABLE_DETAIL+" d, "+TABLE_ORDER+" o"
-                        +" WHERE d."+COL_DATE_DELIVERED+" IS NULL",
+                        +" WHERE o."+COL_ORDER_NUM+" = d."+COL_ORDER_NUM
+                                +" AND d."+COL_DATE_DELIVERED+" IS NULL",
                 new String[]{});
 
         Map<Integer, List<Detail>> openDetailsByTable = new HashMap<>();

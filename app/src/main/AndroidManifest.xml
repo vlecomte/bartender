@@ -26,13 +26,19 @@
             android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+
         <activity
             android:name=".gui.MainActivity"
             android:label="@string/app_name" >
         </activity>
+
         <activity
             android:name=".gui.DescriptionActivity"
             android:label="@string/title_activity_description" >
+        </activity>
+
+        <activity
+            android:name=".gui.TableTestActivity" >
         </activity>
     </application>
 
