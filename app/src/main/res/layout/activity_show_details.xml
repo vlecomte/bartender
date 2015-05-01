@@ -27,7 +27,16 @@
         android:text="@string/annuler"
         android:id="@+id/action_annule_button"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/tableList"
+        android:layout_alignEnd="@+id/tableList" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_below="@+id/action_annule_button"
+        android:layout_alignRight="@+id/tableList"
+        android:layout_alignEnd="@+id/tableList" />
 
 </RelativeLayout>
