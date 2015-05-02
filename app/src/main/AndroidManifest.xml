@@ -8,7 +8,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
-
         <activity
             android:name=".gui.StartupActivity"
             android:label="@string/app_name"
@@ -16,29 +15,25 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".gui.LoginActivity"
             android:label="@string/title_activity_login"
             android:noHistory="true"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
-
         <activity
             android:name=".gui.MainActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".gui.DescriptionActivity"
             android:label="@string/title_activity_description" >
         </activity>
-
-        <activity
-            android:name=".gui.TableTestActivity" >
+        <activity android:name=".gui.TableTestActivity" >
         </activity>
     </application>
 

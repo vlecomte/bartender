@@ -16,6 +16,7 @@
     <string name="annuler">Annuler</string>
     <string name="set_payed">Marquer payé</string>
     <string name="refresh">Refresh</string>
+    <string name="tab_account_settings">Account settings</string>
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
 
@@ -28,4 +29,8 @@
     <string name="saved_password">SAVED_PASSWORD</string>
 
     <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
