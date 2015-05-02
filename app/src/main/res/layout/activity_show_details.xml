@@ -26,17 +26,40 @@
         android:layout_height="wrap_content"
         android:text="@string/annuler"
         android:id="@+id/action_annule_button"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/tableList"
-        android:layout_alignEnd="@+id/tableList" />
+        android:layout_alignTop="@+id/tableList"
+        android:layout_alignLeft="@+id/refresh_button"
+        android:layout_alignStart="@+id/refresh_button"
+        android:layout_marginTop="67dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
+        android:text="@string/set_payed"
+        android:id="@+id/set_payed"
+        android:layout_below="@+id/refresh_button"
+        android:layout_alignLeft="@+id/refresh_button"
+        android:layout_alignStart="@+id/refresh_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/refresh"
+        android:id="@+id/refresh_button"
         android:layout_below="@+id/action_annule_button"
-        android:layout_alignRight="@+id/tableList"
-        android:layout_alignEnd="@+id/tableList" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/txtDetails"
+        android:layout_above="@+id/action_annule_button"
+        android:layout_alignRight="@+id/action_annule_button"
+        android:layout_alignEnd="@+id/action_annule_button"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="138dp" />
 
 </RelativeLayout>

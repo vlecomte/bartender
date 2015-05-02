@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.app.Activity;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 
@@ -30,7 +31,7 @@ public class CustomListTable extends ArrayAdapter<String> {
         TextView text = (TextView) layout.findViewById(R.id.txt_basket1);
         TextView text2 = (TextView) layout.findViewById(R.id.txt_basket2);
         text.setText(table[position]);
-        text2.setText(nbr[position] + " ");
+        text2.setText(nbr[position] + context.getResources().getString(R.string.unMarketDetails));
         System.out.println(nbr[position]);
         return layout;
     }

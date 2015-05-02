@@ -2,6 +2,7 @@ package be.uclouvain.lsinf1225.v.bartender.gui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.internal.widget.ContentFrameLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,12 @@ public class ToServeFragment extends Fragment {
     ListView Details;
     Button annule;
     Button Confirmer;
+    Button refresh;
     TextView text;
     View v;
     boolean choice_table;
+
+    List<Detail> currentList;
 
     String[] tabDestDescr;
 
@@ -54,17 +58,21 @@ public class ToServeFragment extends Fragment {
         if(choice_table) {
             Details.setVisibility(View.INVISIBLE);
             annule.setVisibility(View.INVISIBLE);
+            Confirmer.setVisibility(View.INVISIBLE);
+            text.setVisibility(View.INVISIBLE);
             Tables.setVisibility(View.VISIBLE);
             choice_table = false;
         } else {
             Details.setVisibility(View.VISIBLE);
             annule.setVisibility(View.VISIBLE);
+            text.setVisibility(View.VISIBLE);
+            Confirmer.setVisibility(View.VISIBLE);
             Tables.setVisibility(View.INVISIBLE);
             choice_table = true;
         }
     }
 
-    private void UpdateView(){
+    public void UpdateView(){
         Tables = (ListView) v.findViewById(R.id.tableList);
         Details = (ListView) v.findViewById(R.id.detailList);
         annule = (Button) v.findViewById(R.id.action_annule_button);
@@ -74,8 +82,16 @@ public class ToServeFragment extends Fragment {
                 updateLayout();
             }
         });
+        refresh = (Button) v.findViewById(R.id.refresh_button);
+        text = (TextView) v.findViewById(R.id.txtDetails);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateView();
+            }
+        });
         Map<Integer, List<Detail>> liste = DaoDetail.getOpenByTable();
-        String[] tabTables = new String[liste.size()];
+        final String[] tabTables = new String[liste.size()];
         Integer[] tabNbrDetByTable = new Integer[liste.size()];
         final List[] tabList = new List[liste.size()];
         int i=0;
@@ -85,15 +101,32 @@ public class ToServeFragment extends Fragment {
             tabList[i] = entry.getValue();
             i++;
         }
+        Confirmer = (Button) v.findViewById(R.id.set_payed);
+        Confirmer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DaoDetail.markDelivered(currentList);
+                UpdateView();
+                updateLayout();
+            }
+        });
         Tables.setAdapter(new CustomListTable(getActivity(), tabTables,tabNbrDetByTable));
         Tables.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 tabDestDescr = new String[tabList[position].size()];
+                currentList = tabList[position];
                 generateTabFromList(tabList[position],tabDestDescr);
+                text.setText(tabTables[position]);
                 Details.setAdapter(new CustomDetList(getActivity(), tabDestDescr));
                 updateLayout();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UpdateView();
     }
 }

@@ -14,7 +14,10 @@
     <string name="choose_table">Choix de table</string>
     <string name="confrim_table">Confirmer table</string>
     <string name="annuler">Annuler</string>
-    <string name="set_payed">Annuler</string>
+    <string name="set_payed">Marquer payé</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="unMarketDetails">Consommation(s) non payée(s)</string>
 
 
 
