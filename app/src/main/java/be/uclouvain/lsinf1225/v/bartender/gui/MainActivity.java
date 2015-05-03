@@ -47,7 +47,7 @@ public class MainActivity extends FragmentActivity {
                 return true;
 
             case R.id.action_settings:
-                intent = new Intent(this, SettingsFragment.class);
+                intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
 

@@ -3,12 +3,7 @@ package be.uclouvain.lsinf1225.v.bartender.gui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +13,7 @@ import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 
-public class SettingsFragment extends Activity{
+public class SettingsActivity extends Activity{
     Button chgemail;
     Button chgemdp;
     Button showPass;
@@ -37,7 +32,7 @@ public class SettingsFragment extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_fragment);
+        setContentView(R.layout.activity_settings);
         isHidden = true;
         logintxt = (TextView) findViewById(R.id.user_name);
         emailtxt = (TextView) findViewById(R.id.email_txt);
@@ -102,13 +97,13 @@ public class SettingsFragment extends Activity{
                         MyApp.getUser().setPassword(newe.getText().toString());
                         hide();
                         updateLayout();
-                    } else Toast.makeText(SettingsFragment.this, getText(R.string.error_change_passe), Toast.LENGTH_LONG).show();
+                    } else Toast.makeText(SettingsActivity.this, getText(R.string.error_change_passe), Toast.LENGTH_LONG).show();
                 } else {
                     if(MyApp.getUser().getEmail().equals(olde.getText().toString()) && newe.getText().toString().equals(confirme.getText().toString())){
                         MyApp.getUser().setEmail(newe.getText().toString());
                         hide();
                         updateLayout();
-                    } else Toast.makeText(SettingsFragment.this, getText(R.string.error_change_mail), Toast.LENGTH_LONG).show();
+                    } else Toast.makeText(SettingsActivity.this, getText(R.string.error_change_mail), Toast.LENGTH_LONG).show();
                 }
             }
         });
