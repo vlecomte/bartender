@@ -92,7 +92,7 @@ public class DaoOrder {
         }
     }
 
-    public static Order[] getAllOpen() {
+    public static List<Order> getAllOpen() {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_ORDER,
                 new String[]{COL_ORDER_NUM, COL_CUSTOMER_USERNAME, COL_TABLE_NUM},
@@ -113,7 +113,7 @@ public class DaoOrder {
         }
         c.close();
 
-        return openOrders.toArray(new Order[openOrders.size()]);
+        return openOrders;
     }
 
     public static void setPaid(int orderNum) {

@@ -20,7 +20,7 @@ public class MainActivity extends FragmentActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabbed);
+        setContentView(R.layout.activity_main);
 
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -74,8 +74,8 @@ public class MainActivity extends FragmentActivity {
                 case POS_BASKET:
                     return new BasketFragment();
                 case POS_BILL:
-                    // TODO: if user is a waiter, show all bills instead
-                    return new MyBillFragment();
+                    if (MyApp.isWaiter()) return new OrdersFragment();
+                    else return new MyBillFragment();
                 case POS_TO_SERVE:
                     return new ToServeFragment();
                 default:

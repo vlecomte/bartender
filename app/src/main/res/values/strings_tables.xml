@@ -1,7 +1,18 @@
+<!-- Strings included in tables -->
 <resources>
+
+    <!-- Column names -->
     <string name="col_product_name">Name</string>
     <string name="col_time">Time</string>
     <string name="col_price">Price</string>
-    <string name="col_number">Number</string>
+    <string name="col_username_or_table">Name or table</string>
+    <string name="col_total">Total</string>
+    <!--<string name="col_number">Number</string>-->
+
+    <!-- Elements and placeholders -->
     <string name="elem_total">TOTAL</string>
+    <string name="elem_table_with_space">Table&#160;</string>
+    <string name="elem_no_order">There is no open order.</string>
+    <string name="elem_no_own_order">You have no open order.</string>
+
 </resources>

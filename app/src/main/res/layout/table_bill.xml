@@ -1,0 +1,59 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/table_vertical_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/col_product_name"
+                android:layout_weight="1"
+                style="@style/TableCell.Header" />
+            <TextView
+                android:text="@string/col_time"
+                android:layout_width="@dimen/col_width_time"
+                android:gravity="center_horizontal"
+                style="@style/TableCell.Header" />
+            <TextView
+                android:text="@string/col_price"
+                android:layout_width="@dimen/col_width_price"
+                android:gravity="center_horizontal"
+                style="@style/TableCell.Header" />
+        </TableRow>
+
+        <include layout="@layout/rule_table_header" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="@dimen/table_vertical_margin">
+        <LinearLayout
+            android:id="@+id/bill_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/row_no_own_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/elem_no_own_order"
+                android:visibility="gone"
+                style="@style/TableCell.Placeholder" />
+
+        </LinearLayout>
+    </ScrollView>
+</TableLayout>

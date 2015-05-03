@@ -1,15 +1,14 @@
 <TableRow
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row_total"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
         android:text="@string/elem_total"
         android:layout_weight="1"
-        style="@style/TableElement.Header" />
+        style="@style/TableCell.Header" />
     <TextView
         android:id="@+id/elem_total_price"
         android:layout_width="@dimen/col_width_price"
         android:gravity="end"
-        style="@style/TableElement.Header" />
+        style="@style/TableCell.Header" />
 </TableRow>

@@ -38,6 +38,10 @@ public class Order {
         return mOrderNum;
     }
 
+    public boolean hasCustomer() {
+        return mCustomerUsername != null;
+    }
+
     public String getCustomerUsername() {
         return mCustomerUsername;
     }

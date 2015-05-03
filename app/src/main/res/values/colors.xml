@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Tables -->
+    <color name="header_bar_black">#000000</color>
+    <color name="placeholder_gray">#A0A0A0</color>
+
+</resources>

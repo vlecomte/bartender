@@ -1,9 +1,17 @@
 <resources>
-    <style name="TableElement">
+
+    <style name="TableCell">
         <item name="android:padding">8dp</item>
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="TableElement.Header">
+
+    <style name="TableCell.Header">
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="TableCell.Placeholder">
+        <item name="android:textColor">@color/placeholder_gray</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
 </resources>

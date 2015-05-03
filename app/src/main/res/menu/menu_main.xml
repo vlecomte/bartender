@@ -7,7 +7,7 @@
         app:showAsAction="never" />
     <!-- Settings -->
     <item android:id="@+id/action_settings"
-        android:title="@string/tab_account_settings"
+        android:title="@string/action_account_settings"
         app:showAsAction="never" />
 
 </menu>
