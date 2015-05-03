@@ -17,6 +17,23 @@
     <string name="set_payed">Marquer payé</string>
     <string name="refresh">Refresh</string>
     <string name="tab_account_settings">Account settings</string>
+    <string name="change_user_name_button">Changer login</string>
+    <string name="change_user_email_button">Changer email</string>
+    <string name="login_txt">login:</string>
+    <string name="email_txt">email:</string>
+    <string name="show_pass">Montrer mdp</string>
+    <string name="hide_pass">Cacher mdp</string>
+    <string name="change_pass">Changer mdp</string>
+    <string name="old_mdp">Ancien mdp:</string>
+    <string name="new_mdp">Nouveau mdp:</string>
+    <string name="confirmation_mdp">Confirmer mdp:</string>
+    <string name="old_email">Ancien email:</string>
+    <string name="new_email">Nouveau email:</string>
+    <string name="confirmation_email">Confirmer email:</string>
+    <string name="valider_change_pass">Valider</string>
+    <string name="error_change_passe">Erreur: données insuffisantes ou incorrectes</string>
+    <string name="error_change_mail">Erreur: données insuffisantes ou incorrectes</string>
+
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
 
