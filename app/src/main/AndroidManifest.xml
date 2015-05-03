@@ -37,8 +37,6 @@
             android:name=".gui.SettingsFragment"
             android:label="@string/title_activity_settings_fragment" >
         </activity>
-        <activity android:name=".gui.TableTestActivity" >
-        </activity>
     </application>
 
 </manifest>
