@@ -14,8 +14,9 @@ import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 public class MainActivity extends FragmentActivity {
-    private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4;
-    private static final int POS_MENU = 0, POS_BASKET = 1, POS_TO_SERVE = 3, POS_SETTINGS = 2;
+    private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4, NUM_ITEMS_ADMIN = 6;
+    private static final int POS_MENU = 0, POS_BASKET = 1, POS_BILL = 2, POS_TO_SERVE = 3,
+            POS_STOCK = 4, POS_GRAPHS = 5;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +37,18 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items.
+        Intent intent;
         switch (item.getItemId()) {
-
             case R.id.action_logout:
                 MyApp.logoutUser();
-                Intent intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+                return true;
+
+            case R.id.action_settings:
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -67,10 +73,11 @@ public class MainActivity extends FragmentActivity {
                     return new MenuFragment();
                 case POS_BASKET:
                     return new BasketFragment();
+                case POS_BILL:
+                    // TODO: if user is a waiter, show all bills instead
+                    return new MyBillFragment();
                 case POS_TO_SERVE:
                     return new ToServeFragment();
-                case POS_SETTINGS:
-                    return new SettingsFragment();
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }
@@ -83,10 +90,11 @@ public class MainActivity extends FragmentActivity {
                     return getString(R.string.tab_menu);
                 case POS_BASKET:
                     return getString(R.string.tab_basket);
+                case POS_BILL:
+                    if (MyApp.isWaiter()) return getString(R.string.tab_bills);
+                    else return getString(R.string.tab_my_bill);
                 case POS_TO_SERVE:
                     return getString(R.string.tab_to_serve);
-                case POS_SETTINGS:
-                    return getString(R.string.tab_account_settings);
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }

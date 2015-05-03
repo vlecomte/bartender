@@ -1,0 +1,7 @@
+<resources>
+    <string name="col_product_name">Name</string>
+    <string name="col_time">Time</string>
+    <string name="col_price">Price</string>
+    <string name="col_number">Number</string>
+    <string name="elem_total">TOTAL</string>
+</resources>

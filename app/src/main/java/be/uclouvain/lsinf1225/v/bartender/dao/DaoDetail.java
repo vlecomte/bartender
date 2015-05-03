@@ -6,7 +6,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +21,10 @@ import be.uclouvain.lsinf1225.v.bartender.model.Product;
 public class DaoDetail {
     private static Map<Integer, Detail> sDetailById = new HashMap<>();
 
-    private static Detail getOrCreate(int detailId, String productName) {
+    private static Detail getOrCreate(int detailId, String productName, Date dateAdded) {
         if (!sDetailById.containsKey(detailId)) {
-            sDetailById.put(detailId, new Detail(detailId, DaoProduct.getByName(productName)));
+            sDetailById.put(detailId, new Detail(detailId, DaoProduct.getByName(productName),
+                    dateAdded));
         }
         return sDetailById.get(detailId);
     }
@@ -47,16 +50,18 @@ public class DaoDetail {
     public static List<Detail> getFromOrder(int orderNum) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_DETAIL,
-                new String[]{COL_ID, COL_PRODUCT_NAME},
+                new String[]{COL_ID, COL_PRODUCT_NAME, COL_DATE_ADDED},
                 COL_ORDER_NUM+" = ?", new String[]{""+orderNum},
-                null, null, null);
+                null, null,
+                COL_DATE_ADDED+", "+COL_PRODUCT_NAME);
 
         List<Detail> details = new ArrayList<>();
 
         while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
-            details.add(getOrCreate(detailId, productName));
+            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)));
+            details.add(getOrCreate(detailId, productName, dateAdded));
         }
         c.close();
 
@@ -65,10 +70,12 @@ public class DaoDetail {
 
     public static Map<Integer, List<Detail>> getOpenByTable() {
         SQLiteDatabase db = MyApp.getReadableDb();
-        Cursor c = db.rawQuery("SELECT d."+COL_ID+", d."+COL_PRODUCT_NAME+", o."+COL_TABLE_NUM
+        Cursor c = db.rawQuery("SELECT d."+COL_ID+", d."+COL_PRODUCT_NAME+", d."+COL_DATE_ADDED
+                                +", o."+COL_TABLE_NUM
                         +" FROM "+TABLE_DETAIL+" d, "+TABLE_ORDER+" o"
                         +" WHERE o."+COL_ORDER_NUM+" = d."+COL_ORDER_NUM
-                                +" AND d."+COL_DATE_DELIVERED+" IS NULL",
+                                +" AND d."+COL_DATE_DELIVERED+" IS NULL"
+                        +" ORDER BY d."+COL_DATE_ADDED+", d."+COL_PRODUCT_NAME,
                 new String[]{});
 
         Map<Integer, List<Detail>> openDetailsByTable = new HashMap<>();
@@ -76,12 +83,13 @@ public class DaoDetail {
         while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
+            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)));
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
 
             if (!openDetailsByTable.containsKey(tableNum)) {
                 openDetailsByTable.put(tableNum, new ArrayList<Detail>());
             }
-            openDetailsByTable.get(tableNum).add(getOrCreate(detailId, productName));
+            openDetailsByTable.get(tableNum).add(getOrCreate(detailId, productName, dateAdded));
         }
         c.close();
 

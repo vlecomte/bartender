@@ -1,0 +1,50 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/activity_vertical_small_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/col_product_name"
+                android:layout_weight="1"
+                style="@style/TableElement.Header" />
+            <TextView
+                android:text="@string/col_time"
+                android:layout_width="@dimen/col_width_time"
+                android:gravity="center_horizontal"
+                style="@style/TableElement.Header" />
+            <TextView
+                android:text="@string/col_price"
+                android:layout_width="@dimen/col_width_price"
+                android:gravity="center_horizontal"
+                style="@style/TableElement.Header" />
+        </TableRow>
+
+        <LinearLayout
+            android:background="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:id="@+id/bill_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_small_margin"
+            android:orientation="vertical" />
+    </ScrollView>
+</TableLayout>

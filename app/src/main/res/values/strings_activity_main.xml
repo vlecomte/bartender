@@ -1,8 +1,12 @@
 <resources>
     <!-- Tab names -->
-    <string name="tab_basket">Basket</string>
     <string name="tab_menu">Menu</string>
+    <string name="tab_basket">Basket</string>
+    <string name="tab_my_bill">My bill</string>
+    <string name="tab_bills">Bills</string>
     <string name="tab_to_serve">To serve</string>
+    <string name="tab_stock">Stock</string>
+    <string name="tab_graphs">Graphs</string>
 
     <!-- Table picker dialog -->
     <string name="dialog_title_pick_table">Pick your table</string>

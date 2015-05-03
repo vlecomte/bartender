@@ -1,0 +1,9 @@
+<resources>
+    <style name="TableElement">
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TableElement.Header">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

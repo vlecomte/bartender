@@ -2,9 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_small_margin">8dp</dimen>
 
     <!-- Custom dimensions -->
     <dimen name="separator_margin">16dp</dimen>
     <dimen name="logo_text_size">40sp</dimen>
     <dimen name="logged_in_text_size">5sp</dimen>
+
+    <!-- Table column dimensions -->
+    <dimen name="col_width_time">60dp</dimen>
+    <dimen name="col_width_price">70dp</dimen>
 </resources>

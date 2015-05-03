@@ -46,6 +46,10 @@ public class Order {
         return mTableNum;
     }
 
+    public List<Detail> getDetails() {
+        return mDetails;
+    }
+
     public double getTotal() {
         return mTotal;
     }

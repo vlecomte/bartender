@@ -1,20 +1,28 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
 
-public class Detail {
-    private Product mProduct;
-    private int mDetailId;
+import java.util.Date;
 
-    public Detail(int detailId, Product product) {
-        mProduct = product;
+public class Detail {
+    private int mDetailId;
+    private Product mProduct;
+    private Date mDateAdded;
+
+    public Detail(int detailId, Product product, Date dateAdded) {
         mDetailId = detailId;
+        mProduct = product;
+        mDateAdded = dateAdded;
+    }
+
+    public int getDetailId() {
+        return mDetailId;
     }
 
     public Product getProduct() {
         return mProduct;
     }
 
-    public int getDetailId() {
-        return mDetailId;
+    public Date getDateAdded() {
+        return mDateAdded;
     }
 }
