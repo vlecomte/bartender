@@ -14,8 +14,8 @@ import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 public class MainActivity extends FragmentActivity {
-    private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4;
-    private static final int POS_MENU = 0, POS_BASKET = 1, POS_TO_SERVE = 3, POS_SETTINGS = 2;
+    private static final int NUM_ITEMS_CUSTOMER = 2, NUM_ITEMS_WAITER = 3;
+    private static final int POS_MENU = 0, POS_BASKET = 1, POS_TO_SERVE = 2;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,9 @@ public class MainActivity extends FragmentActivity {
                 startActivity(intent);
                 finish();
                 return true;
-
+            case R.id.action_settings:
+                Intent intent2 = new Intent(this, SettingsFragment.class);
+                startActivity(intent2);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -69,8 +71,6 @@ public class MainActivity extends FragmentActivity {
                     return new BasketFragment();
                 case POS_TO_SERVE:
                     return new ToServeFragment();
-                case POS_SETTINGS:
-                    return new SettingsFragment();
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }
@@ -85,8 +85,6 @@ public class MainActivity extends FragmentActivity {
                     return getString(R.string.tab_basket);
                 case POS_TO_SERVE:
                     return getString(R.string.tab_to_serve);
-                case POS_SETTINGS:
-                    return getString(R.string.tab_account_settings);
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }
