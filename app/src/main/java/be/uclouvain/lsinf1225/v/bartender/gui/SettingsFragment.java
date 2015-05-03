@@ -97,7 +97,6 @@ public class SettingsFragment extends Activity{
         valide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("boolean="+MyApp.getUser().getPassword().equals(olde.getText().toString())+ "    mode="+modetype);
                 if(modetype==1){
                     if(MyApp.getUser().getPassword().equals(olde.getText().toString()) && newe.getText().toString().equals(confirme.getText().toString())){
                         MyApp.getUser().setPassword(newe.getText().toString());
