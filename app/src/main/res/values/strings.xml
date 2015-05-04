@@ -5,6 +5,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_logout">Sign out</string>
     <string name="action_account_settings">Account settings</string>
+    <string name="action_manage_users">Manage users</string>
 
     <string name="not_enough_stock">Plus possible de commander</string>
     <string name="basket_title">Panier actuel</string>
@@ -53,5 +54,6 @@
 
     <string name="title_activity_description">DescriptionActivity</string>
     <string name="title_activity_bill">Bill details</string>
-    <string name="title_activity_settings_fragment">SettingsFragment</string>
+    <string name="title_activity_settings">SettingsFragment</string>
+    <string name="title_activity_users">Manage users</string>
 </resources>

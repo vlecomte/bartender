@@ -1,6 +1,6 @@
 package be.uclouvain.lsinf1225.v.bartender.dao;
 
-final class Contract {
+public final class Contract {
 
     public static final String TABLE_USER = "User";
     public static final String TABLE_ORDER = "\"Order\"";

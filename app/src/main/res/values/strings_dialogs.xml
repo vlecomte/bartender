@@ -1,0 +1,9 @@
+<resources>
+    <!-- Table picker dialog -->
+    <string name="dialog_title_pick_table">Pick your table</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
+
+    <!-- Rank picker dialog -->
+    <string name="dialog_title_pick_rank">Pick the new rank</string>
+</resources>

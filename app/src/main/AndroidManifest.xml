@@ -38,7 +38,11 @@
         </activity>
         <activity
             android:name=".gui.SettingsActivity"
-            android:label="@string/title_activity_settings_fragment" >
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".gui.UsersActivity"
+            android:label="@string/title_activity_users" >
         </activity>
     </application>
 

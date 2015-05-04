@@ -39,13 +39,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/bill_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingBottom="@dimen/table_vertical_margin"
             android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/bill_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
             <TextView
                 android:id="@+id/row_no_own_order"

@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/elem_username"
+            android:layout_weight="1"
+            style="@style/TableCell" />
+        <TextView
+            android:id="@+id/elem_rank"
+            android:layout_width="@dimen/col_width_rank"
+            style="@style/TableCell" />
+        <ImageButton
+            android:id="@+id/button_edit_rank"
+            android:layout_width="@dimen/col_width_button"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_edit"
+            android:contentDescription="@string/button_desc_edit_rank"
+            style="?android:attr/borderlessButtonStyle" />
+    </TableRow>
+    <include layout="@layout/rule_table_inter" />
+</LinearLayout>

@@ -33,6 +33,9 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (MyApp.isAdmin()) {
+            menu.findItem(R.id.action_manage_users).setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -50,6 +53,11 @@ public class MainActivity extends FragmentActivity {
 
             case R.id.action_settings:
                 intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_manage_users:
+                intent = new Intent(this, UsersActivity.class);
                 startActivity(intent);
                 return true;
 

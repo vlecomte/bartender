@@ -40,7 +40,7 @@ public class TablePickerDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        TablePickerDialogFragment.this.getDialog().cancel();
+                        getDialog().cancel();
                     }
                 });
 
@@ -51,11 +51,11 @@ public class TablePickerDialogFragment extends DialogFragment {
         return mTablePicker.getValue();
     }
 
-    public static interface TableNumListener {
-        public void onObtainTableNum(int tableNum);
+    public interface TableNumListener {
+        void onObtainTableNum(int tableNum);
     }
 
-    public void setListener(BasketFragment basketFragment) {
-        mListener = basketFragment;
+    public void setListener(TableNumListener listener) {
+        mListener = listener;
     }
 }

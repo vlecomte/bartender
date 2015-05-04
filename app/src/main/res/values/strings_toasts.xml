@@ -1,0 +1,3 @@
+<resources>
+    <string name="toast_cannot_modify_own_rank">You cannot modify your own rank</string>
+</resources>

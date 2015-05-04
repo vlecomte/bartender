@@ -12,6 +12,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Data access object for User.
  */
@@ -32,7 +35,7 @@ public class DaoUser {
     public static User attemptLogin(String username, String password) {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.query(TABLE_USER, new String[]{COL_EMAIL, COL_RANK},
-                COL_USERNAME +" = ? AND "+ COL_PASSWORD +" = ?", new String[]{username, password},
+                COL_USERNAME + " = ? AND " + COL_PASSWORD + " = ?", new String[]{username, password},
                 null, null, null);
 
         if (c.moveToFirst()) {
@@ -86,7 +89,7 @@ public class DaoUser {
         cv.put(COL_PASSWORD, newPassword);
 
         SQLiteDatabase db = MyApp.getWritableDb();
-        db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
+        db.update(TABLE_USER, cv, COL_USERNAME + " = ?", new String[]{username});
     }
 
     public static void setEmail(String username, String email) {
@@ -103,5 +106,21 @@ public class DaoUser {
 
         SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_USER, cv, COL_USERNAME+" = ?", new String[]{username});
+    }
+
+    public static Map<String, String> getAllRanks() {
+        SQLiteDatabase db = MyApp.getReadableDb();
+        Cursor c = db.query(TABLE_USER, new String[]{COL_USERNAME, COL_RANK},
+                null, null, null, null, null);
+
+        Map<String, String> rankByUsername = new HashMap<>();
+        while (c.moveToNext()) {
+            String username = c.getString(c.getColumnIndex(COL_USERNAME));
+            String rank = c.getString(c.getColumnIndex(COL_RANK));
+            rankByUsername.put(username, rank);
+        }
+        c.close();
+
+        return rankByUsername;
     }
 }

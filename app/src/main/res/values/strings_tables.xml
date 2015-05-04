@@ -7,6 +7,8 @@
     <string name="col_price">Price</string>
     <string name="col_username_or_table">Name or table</string>
     <string name="col_total">Total</string>
+    <string name="col_username">Username</string>
+    <string name="col_rank">Rank</string>
     <!--<string name="col_number">Number</string>-->
 
     <!-- Elements and placeholders -->
@@ -14,6 +16,14 @@
     <string name="elem_table_with_space">Table&#160;</string>
     <string name="elem_no_order">There is no open order.</string>
     <string name="elem_no_own_order">You have no open order.</string>
+
+    <!-- Rank display names -->
+    <string name="rank_customer">Customer</string>
+    <string name="rank_waiter">Waiter</string>
+    <string name="rank_admin">Admin</string>
+
+    <!-- Image button descriptions -->
     <string name="button_desc_open_bill">Open bill</string>
+    <string name="button_desc_edit_rank">Edit rank</string>
 
 </resources>
