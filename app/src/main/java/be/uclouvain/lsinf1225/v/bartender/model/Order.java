@@ -14,24 +14,19 @@ public class Order {
     private List<Detail> mDetails;
     private double mTotal;
 
-    public Order(int orderNum, String customerUsername, int tableNum, List<Detail> details) {
+    public Order(int orderNum, String customerUsername, int tableNum) {
         mOrderNum = orderNum;
         mCustomerUsername = customerUsername;
         mTableNum = tableNum;
-        mDetails = details;
-        mTotal = computeTotal();
+        mDetails = new ArrayList<>();
+        refreshTotal();
     }
 
-    public Order(int orderNum, String customerUsername, int tableNum) {
-        this(orderNum, customerUsername, tableNum, new ArrayList<Detail>(){});
-    }
-
-    private double computeTotal() {
-        double total = 0.0;
+    private void refreshTotal() {
+        mTotal = 0.0;
         for (Detail detail : mDetails) {
-            total += detail.getProduct().getPrice();
+            mTotal += detail.getProduct().getPrice();
         }
-        return total;
     }
 
     public int getOrderNum() {
@@ -52,6 +47,11 @@ public class Order {
 
     public List<Detail> getDetails() {
         return mDetails;
+    }
+
+    public void setDetails(List<Detail> details) {
+        mDetails = details;
+        refreshTotal();
     }
 
     public double getTotal() {

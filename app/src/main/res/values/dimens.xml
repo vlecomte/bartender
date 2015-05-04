@@ -14,8 +14,10 @@
     <dimen name="col_width_time">60dp</dimen>
     <dimen name="col_width_price">70dp</dimen>
     <dimen name="col_width_total">70dp</dimen>
+    <dimen name="col_width_button">60dp</dimen>
 
-    <!-- Horizontal table header rule -->
+    <!-- Horizontal table rules -->
     <dimen name="header_rule_width">1.5dp</dimen>
+    <dimen name="inter_rule_width">0.5dp</dimen>
 
 </resources>

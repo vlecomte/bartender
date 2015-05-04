@@ -1,5 +1,5 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/header_rule_black"
+    android:background="@color/inter_rule_gray"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/header_rule_width" />
+    android:layout_height="@dimen/inter_rule_width" />
