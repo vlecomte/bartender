@@ -25,4 +25,13 @@
         android:layout_height="wrap_content"
         android:text="@string/confirm_basket_button"
         android:id="@+id/confirm_basket_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valide_for_table"
+        android:id="@+id/confirm_client_button"
+        android:layout_toRightOf="@+id/confirm_basket_content"
+        android:layout_toEndOf="@+id/confirm_basket_content"/>
+
 </LinearLayout>

@@ -68,6 +68,10 @@ public class Customer extends User {
         return mBasket;
     }
 
+    public void setBasket(Basket basket){
+        mBasket = basket;
+    }
+
     public int getNumInBasket(Product product) {
         return mBasket.getOccur(product);
     }
