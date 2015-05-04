@@ -1,7 +1,10 @@
 package be.uclouvain.lsinf1225.v.bartender.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.gui.BillActivity;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
 
@@ -54,11 +58,12 @@ public class TableFiller {
     }
 
     public void fillOrders(List<Order> orders) {
-        for (Order order : orders) {
-            TableRow row = (TableRow) mInflater.inflate(R.layout.row_order, mTable, false);
+        for (final Order order : orders) {
+            LinearLayout row = (LinearLayout) mInflater.inflate(R.layout.row_order, mTable, false);
 
             TextView usernameOrTable = (TextView) row.findViewById(R.id.elem_username_or_table);
             TextView total = (TextView) row.findViewById(R.id.elem_total);
+            ImageButton openBill = (ImageButton) row.findViewById(R.id.button_open_bill);
 
             if (order.hasCustomer()) {
                 usernameOrTable.setText(order.getCustomerUsername());
@@ -67,6 +72,14 @@ public class TableFiller {
                         + order.getTableNum());
             }
             total.setText(String.format(PRICE_FORMAT, order.getTotal()));
+            openBill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, BillActivity.class);
+                    intent.putExtra("order_num", order.getOrderNum());
+                    mContext.startActivity(intent);
+                }
+            });
 
             mTable.addView(row);
         }

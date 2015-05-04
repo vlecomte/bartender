@@ -20,10 +20,11 @@ public class DaoOrder {
 
     private static Order getWithDetails(int orderNum, String customerUsername, int tableNum) {
         Order order = sOrderByNum.get(orderNum);
-        if (order != null) return order;
+        if (order == null) order = new Order(orderNum, customerUsername, tableNum);
 
         List<Detail> details = DaoDetail.getFromOrder(orderNum);
-        order = new Order(orderNum, customerUsername, tableNum, details);
+        order.setDetails(details);
+
         sOrderByNum.put(orderNum, order);
         return order;
     }
@@ -38,6 +39,10 @@ public class DaoOrder {
         int biggestOrderNum = c.getInt(c.getColumnIndex("MAX("+COL_ORDER_NUM+")"));
         c.close();
         return biggestOrderNum;
+    }
+
+    public static Order getByNum(int orderNum) {
+        return sOrderByNum.get(orderNum);
     }
 
     public static Order create(String customerUsername, int tableNum) {

@@ -14,5 +14,6 @@
     <string name="elem_table_with_space">Table&#160;</string>
     <string name="elem_no_order">There is no open order.</string>
     <string name="elem_no_own_order">You have no open order.</string>
+    <string name="button_desc_open_bill">Open bill</string>
 
 </resources>

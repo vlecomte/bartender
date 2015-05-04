@@ -12,19 +12,21 @@ import android.view.MenuItem;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 
 public class MainActivity extends FragmentActivity {
     private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4, NUM_ITEMS_ADMIN = 6;
     private static final int POS_MENU = 0, POS_BASKET = 1, POS_BILL = 2, POS_TO_SERVE = 3,
             POS_STOCK = 4, POS_GRAPHS = 5;
+    private ViewPager mPager;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(adapter);
     }
 
     @Override
@@ -51,6 +53,13 @@ public class MainActivity extends FragmentActivity {
                 startActivity(intent);
                 return true;
 
+            case R.id.action_refresh:
+                Fragment fragment = getCurrentFragment();
+                if (fragment instanceof Refreshable) {
+                    ((Refreshable) fragment).refresh();
+                }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -60,6 +69,7 @@ public class MainActivity extends FragmentActivity {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public int getCount() {
             if (MyApp.isWaiter()) return NUM_ITEMS_WAITER;
@@ -99,5 +109,10 @@ public class MainActivity extends FragmentActivity {
                     throw new IllegalArgumentException("Position out of bounds");
             }
         }
+    }
+
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":"
+                + mPager.getCurrentItem());
     }
 }

@@ -13,9 +13,10 @@ import java.util.List;
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoOrder;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
+import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
-public class OrdersFragment extends Fragment {
+public class OrdersFragment extends Fragment implements Refreshable {
     LinearLayout mOrdersTable;
     TextView mRowNoOrder;
     TableFiller mFiller;
@@ -28,6 +29,7 @@ public class OrdersFragment extends Fragment {
         mOrdersTable = (LinearLayout) view.findViewById(R.id.orders_content);
         mRowNoOrder = (TextView) view.findViewById(R.id.row_no_order);
         mFiller = new TableFiller(mOrdersTable, inflater);
+
         refresh();
 
         return view;

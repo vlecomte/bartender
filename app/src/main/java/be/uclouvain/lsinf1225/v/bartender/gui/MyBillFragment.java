@@ -11,26 +11,43 @@ import android.widget.TextView;
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
-public class MyBillFragment extends Fragment {
+public class MyBillFragment extends Fragment implements Refreshable {
+    LinearLayout mBillTable;
+    TextView mRowNoOwnOrder;
+    TableFiller mFiller;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
 
-        if (MyApp.getCustomer().hasCurrentOrder()) {
-            LinearLayout billTable = (LinearLayout) view.findViewById(R.id.bill_content);
-            TableFiller filler = new TableFiller(billTable, inflater);
+        mBillTable = (LinearLayout) view.findViewById(R.id.bill_content);
+        mRowNoOwnOrder = (TextView) view.findViewById(R.id.row_no_own_order);
+        mFiller = new TableFiller(mBillTable, inflater);
 
-            Order order = MyApp.getCustomer().getCurrentOrder();
-            filler.fillBill(order);
-        } else {
-            TextView rowNoOwnOrder = (TextView) view.findViewById(R.id.row_no_own_order);
-            rowNoOwnOrder.setVisibility(View.VISIBLE);
-        }
+        refresh();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    public void refresh() {
+        mBillTable.removeAllViews();
+
+        if (MyApp.getCustomer().hasCurrentOrder()) {
+            mRowNoOwnOrder.setVisibility(View.GONE);
+            Order order = MyApp.getCustomer().getCurrentOrder();
+            mFiller.fillBill(order);
+        } else {
+            mRowNoOwnOrder.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -2,6 +2,7 @@
     <string name="app_name">Bartender</string>
 
     <!-- Menu actions -->
+    <string name="action_refresh">Refresh</string>
     <string name="action_logout">Sign out</string>
     <string name="action_account_settings">Account settings</string>
 
@@ -34,6 +35,7 @@
     <string name="valider_change_pass">Valider</string>
     <string name="error_change_passe">Erreur: données insuffisantes ou incorrectes</string>
     <string name="error_change_mail">Erreur: données insuffisantes ou incorrectes</string>
+    <string name="button_mark_paid">Mark as paid</string>
 
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
@@ -47,5 +49,6 @@
     <string name="saved_password">SAVED_PASSWORD</string>
 
     <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_bill">Bill details</string>
     <string name="title_activity_settings_fragment">SettingsFragment</string>
 </resources>

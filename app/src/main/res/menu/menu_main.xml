@@ -1,13 +1,18 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Sign out -->
-    <item android:id="@+id/action_logout"
-        android:title="@string/action_logout"
-        app:showAsAction="never" />
-    <!-- Settings -->
-    <item android:id="@+id/action_settings"
+    <!-- I know it shows errors, just ignore it. Android... -->
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
         android:title="@string/action_account_settings"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        android:showAsAction="never" />
 
 </menu>
