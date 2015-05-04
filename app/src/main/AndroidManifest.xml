@@ -15,6 +15,7 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,6 +44,10 @@
         <activity
             android:name=".gui.UsersActivity"
             android:label="@string/title_activity_users" >
+        </activity>
+        <activity
+            android:name=".gui.InsufStockActivity"
+            android:label="@string/title_activity_insuf_stock" >
         </activity>
     </application>
 

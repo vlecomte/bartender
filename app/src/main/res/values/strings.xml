@@ -43,6 +43,12 @@
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
     <string name="valide">Valider choix</string>
+    <string name="show_insuffisant">Insuffisance de stock</string>
+    <string name="show_stock">Etat complet du stock</string>
+    <string name="stock_main_title">Etat du stock</string>
+    <string name="stock_actuel">STOCK ACTUEL:</string>
+    <string name="stock_seuil">STOCK SEUIL:</string>
+
 
 
     <!-- Preferences -->
@@ -56,4 +62,8 @@
     <string name="title_activity_bill">Bill details</string>
     <string name="title_activity_settings">SettingsFragment</string>
     <string name="title_activity_users">Manage users</string>
+    <string name="title_activity_insuf_stock">InsufStockActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

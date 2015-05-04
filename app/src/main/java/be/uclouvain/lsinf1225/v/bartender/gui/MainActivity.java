@@ -81,7 +81,8 @@ public class MainActivity extends FragmentActivity {
         @Override
         public int getCount() {
             if (MyApp.isWaiter()) return NUM_ITEMS_WAITER;
-            else return NUM_ITEMS_CUSTOMER;
+            else if(MyApp.isAdmin())return NUM_ITEMS_ADMIN;
+             else return NUM_ITEMS_CUSTOMER;
         }
 
         @Override
@@ -96,6 +97,8 @@ public class MainActivity extends FragmentActivity {
                     else return new MyBillFragment();
                 case POS_TO_SERVE:
                     return new ToServeFragment();
+                case POS_STOCK:
+                    return new StockFragment();
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }
@@ -113,6 +116,8 @@ public class MainActivity extends FragmentActivity {
                     else return getString(R.string.tab_my_bill);
                 case POS_TO_SERVE:
                     return getString(R.string.tab_to_serve);
+                case POS_STOCK:
+                    return "test Stok";
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }
