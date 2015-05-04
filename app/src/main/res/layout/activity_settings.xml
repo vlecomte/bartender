@@ -68,19 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/old_mdp"
-        android:id="@+id/old_mdp"
-        android:layout_below="@+id/show_pass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/new_mdp"
         android:id="@+id/new_mdp"
-        android:layout_below="@+id/edit_old"
+        android:layout_below="@+id/show_pass"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -91,16 +81,6 @@
         android:text="@string/confirmation_mdp"
         android:id="@+id/confirm_mdp"
         android:layout_below="@+id/edit_new"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/edit_old"
-        android:layout_below="@+id/old_mdp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -129,9 +109,8 @@
         android:layout_height="wrap_content"
         android:text="@string/valider_change_pass"
         android:id="@+id/valider_change_pass"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/edit_confirm"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="39dp" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

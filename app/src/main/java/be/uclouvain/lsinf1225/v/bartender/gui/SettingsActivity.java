@@ -20,11 +20,9 @@ public class SettingsActivity extends Activity{
     TextView logintxt;
     TextView emailtxt;
     TextView pass;
-    TextView old;
     TextView newc;
     TextView confirm;
     Button valide;
-    EditText olde;
     EditText newe;
     EditText confirme;
     int modetype;
@@ -36,18 +34,14 @@ public class SettingsActivity extends Activity{
         isHidden = true;
         logintxt = (TextView) findViewById(R.id.user_name);
         emailtxt = (TextView) findViewById(R.id.email_txt);
-        old = (TextView) findViewById(R.id.old_mdp);
         newc = (TextView) findViewById(R.id.new_mdp);
         confirm = (TextView) findViewById(R.id.confirm_mdp);
         valide = (Button) findViewById(R.id.valider_change_pass);
-        olde = (EditText) findViewById(R.id.edit_old);
         newe = (EditText) findViewById(R.id.edit_new);
         confirme = (EditText) findViewById(R.id.edit_confirm);
-        old.setVisibility(View.INVISIBLE);
         newc.setVisibility(View.INVISIBLE);
         confirm.setVisibility(View.INVISIBLE);
         valide.setVisibility(View.INVISIBLE);
-        olde.setVisibility(View.INVISIBLE);
         newe.setVisibility(View.INVISIBLE);
         confirme.setVisibility(View.INVISIBLE);
         pass = (TextView) findViewById(R.id.pass_txt);
@@ -93,13 +87,13 @@ public class SettingsActivity extends Activity{
             @Override
             public void onClick(View v) {
                 if(modetype==1){
-                    if(MyApp.getUser().getPassword().equals(olde.getText().toString()) && newe.getText().toString().equals(confirme.getText().toString())){
+                    if(newe.getText().toString().equals(confirme.getText().toString())){
                         MyApp.getUser().setPassword(newe.getText().toString());
                         hide();
                         updateLayout();
                     } else Toast.makeText(SettingsActivity.this, getText(R.string.error_change_passe), Toast.LENGTH_LONG).show();
                 } else {
-                    if(MyApp.getUser().getEmail().equals(olde.getText().toString()) && newe.getText().toString().equals(confirme.getText().toString())){
+                    if(newe.getText().toString().equals(confirme.getText().toString())){
                         MyApp.getUser().setEmail(newe.getText().toString());
                         hide();
                         updateLayout();
@@ -116,10 +110,8 @@ public class SettingsActivity extends Activity{
     }
 
     public void hide(){
-        old.setVisibility(View.INVISIBLE);
         newc.setVisibility(View.INVISIBLE);
         confirm.setVisibility(View.INVISIBLE);
-        olde.setVisibility(View.INVISIBLE);
         newe.setVisibility(View.INVISIBLE);
         confirme.setVisibility(View.INVISIBLE);
         valide.setVisibility(View.INVISIBLE);
@@ -127,27 +119,20 @@ public class SettingsActivity extends Activity{
 
     public void showPassChange(int mode){
            if(mode==1){
-               old.setText(getText(R.string.old_mdp));
-               olde.setTransformationMethod(new PasswordTransformationMethod());
                newc.setText(getText(R.string.new_mdp));
                newe.setTransformationMethod(new PasswordTransformationMethod());
                confirm.setText(getText(R.string.confirmation_mdp));
                confirme.setTransformationMethod(new PasswordTransformationMethod());
                modetype=1;
            } else {
-               old.setText(getText(R.string.old_email));
-               olde.setTransformationMethod(null);
                newc.setText(getText(R.string.new_email));
                newe.setTransformationMethod(null);
                confirm.setText(getText(R.string.confirmation_email));
                confirme.setTransformationMethod(null);
                modetype=2;
            }
-        old.setVisibility(View.VISIBLE);
         newc.setVisibility(View.VISIBLE);
         confirm.setVisibility(View.VISIBLE);
-        olde.setVisibility(View.VISIBLE);
-        olde.setText("");
         newe.setVisibility(View.VISIBLE);
         newe.setText("");
         confirme.setVisibility(View.VISIBLE);

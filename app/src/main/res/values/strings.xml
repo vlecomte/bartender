@@ -37,6 +37,8 @@
     <string name="error_change_mail">Erreur: données insuffisantes ou incorrectes</string>
     <string name="button_mark_paid">Mark as paid</string>
 
+    <string name="valide_for_table">Confirmer pour table</string>
+    <string name="confirmed_basket_client">La commande du client a été enregistrée</string>
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
 

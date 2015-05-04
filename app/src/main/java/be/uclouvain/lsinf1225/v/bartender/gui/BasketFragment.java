@@ -13,13 +13,17 @@ import android.widget.Toast;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
+import be.uclouvain.lsinf1225.v.bartender.model.Waiter;
 import be.uclouvain.lsinf1225.v.bartender.util.CustomBasket;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 public class BasketFragment extends Fragment implements TablePickerDialogFragment.TableNumListener {
     private ListView mList;
     private TextView mTotal;
+    boolean tablePicked;
+    Customer custom;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +43,26 @@ public class BasketFragment extends Fragment implements TablePickerDialogFragmen
                     TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
                     tablePicker.setListener(BasketFragment.this);
                     tablePicker.show(getFragmentManager(), "table_picker");
+                }
+            }
+        });
+        tablePicked = false;
+        Button confirmForClientButton = (Button) view.findViewById(R.id.confirm_client_button);
+        confirmForClientButton.setVisibility(View.INVISIBLE);
+        if(MyApp.isWaiter()) {
+            confirmForClientButton.setVisibility(View.VISIBLE);
+        }
+        confirmForClientButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (tablePicked) {
+                    Waiter currentWait = (Waiter) MyApp.getCustomer();
+                    currentWait.confirmBasketFor(2);
+                    updateBasketView();
+                    Toast.makeText(getActivity(), R.string.confirmed_basket_client, Toast.LENGTH_LONG).show();
+                } else {
+                    //tablePicked = true;
                 }
             }
         });
