@@ -15,7 +15,7 @@ import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 
 public class MainActivity extends FragmentActivity {
-    private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4, NUM_ITEMS_ADMIN = 6;
+    private static final int NUM_ITEMS_CUSTOMER = 3, NUM_ITEMS_WAITER = 4, NUM_ITEMS_ADMIN = 5; //IL FAUT METTRE 6!!!!!!
     private static final int POS_MENU = 0, POS_BASKET = 1, POS_BILL = 2, POS_TO_SERVE = 3,
             POS_STOCK = 4, POS_GRAPHS = 5;
     private ViewPager mPager;
@@ -80,9 +80,9 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            if (MyApp.isWaiter()) return NUM_ITEMS_WAITER;
-            else if(MyApp.isAdmin())return NUM_ITEMS_ADMIN;
-             else return NUM_ITEMS_CUSTOMER;
+            if (MyApp.isAdmin())return NUM_ITEMS_ADMIN;
+            else if(MyApp.isWaiter()) return NUM_ITEMS_WAITER;
+             else return NUM_ITEMS_CUSTOMER; //NUM_ITEMS_CUSTOMER
         }
 
         @Override
@@ -117,7 +117,7 @@ public class MainActivity extends FragmentActivity {
                 case POS_TO_SERVE:
                     return getString(R.string.tab_to_serve);
                 case POS_STOCK:
-                    return "test Stok";
+                    return getString(R.string.title_fragment_stock);
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }

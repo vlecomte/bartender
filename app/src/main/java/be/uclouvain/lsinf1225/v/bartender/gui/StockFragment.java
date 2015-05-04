@@ -29,7 +29,7 @@ public class StockFragment extends Fragment implements Refreshable {
         insufStock = (Button) view.findViewById(R.id.show_insuf_button);
         showStock = (Button) view.findViewById(R.id.show_stock_button);
         title = (TextView) view.findViewById(R.id.stock_main_title);
-
+        refresh();
         insufStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,6 @@ public class StockFragment extends Fragment implements Refreshable {
                 startActivity(intent);
             }
         });
-
         return view;
     }
 
@@ -48,6 +47,8 @@ public class StockFragment extends Fragment implements Refreshable {
     }
 
     public void refresh(){
-
+        insufStock.setVisibility(View.VISIBLE);
+        showStock.setVisibility(View.VISIBLE);
+        title.setVisibility(View.VISIBLE);
     }
 }

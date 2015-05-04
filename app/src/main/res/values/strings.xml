@@ -48,6 +48,7 @@
     <string name="stock_main_title">Etat du stock</string>
     <string name="stock_actuel">STOCK ACTUEL:</string>
     <string name="stock_seuil">STOCK SEUIL:</string>
+    <string name="title_fragment_stock">Gestion de stock</string>
 
 
 
