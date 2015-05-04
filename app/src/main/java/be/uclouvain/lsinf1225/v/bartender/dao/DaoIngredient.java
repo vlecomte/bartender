@@ -93,6 +93,9 @@ public class DaoIngredient {
         }
         return  insufficient;
     }
+    public static Ingredient[] getStock() {
+        return sStock;
+    }
 
     public static void applyUsages() {
         loadStock();

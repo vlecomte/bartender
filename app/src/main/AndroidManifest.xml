@@ -49,6 +49,10 @@
             android:name=".gui.InsufStockActivity"
             android:label="@string/title_activity_insuf_stock" >
         </activity>
+        <activity
+            android:name=".gui.ActualStockActivity"
+            android:label="@string/title_activity_actual_stock" >
+        </activity>
     </application>
 
 </manifest>

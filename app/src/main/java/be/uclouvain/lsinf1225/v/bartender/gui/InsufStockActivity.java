@@ -33,17 +33,6 @@ public class InsufStockActivity extends Activity {
         name= new String[insufTab.size()];
         sActuel= new Double[insufTab.size()];
         sSeuil= new Double[insufTab.size()];
-        if (insufTab==null) {
-            name= new String[2];
-            sActuel= new Double[2];
-            sSeuil= new Double[2];
-            name[0] = "prout";
-            sActuel[0] = 0.0;
-            sSeuil[0] = 2.0;
-            name[1] = "frite";
-            sActuel[1] = 0.0;
-            sSeuil[1] = 2.0;
-        }
         for (int i = 0; i < insufTab.size(); i++) {
             name[i] = insufTab.get(i).getDisplayName();
             sActuel[i] = insufTab.get(i).getCurrent();

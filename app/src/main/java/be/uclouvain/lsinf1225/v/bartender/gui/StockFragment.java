@@ -37,6 +37,14 @@ public class StockFragment extends Fragment implements Refreshable {
                 startActivity(intent);
             }
         });
+
+        showStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActualStockActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

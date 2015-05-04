@@ -31,7 +31,7 @@ public class CustomInsuffStock extends ArrayAdapter<String> {
         TextView text = (TextView) layout.findViewById(R.id.txt_basket1);
         TextView text2 = (TextView) layout.findViewById(R.id.txt_basket2);
         text.setText(nom[position]);
-        text2.setText("STOCK ACTUEL" + " "+stockActuel[position]+"   "+"STOCK SEUIL"+" "+stockSeuil[position] );
+        text2.setText(" ACTUEL:" + " "+stockActuel[position]+"   "+" SEUIL:"+" "+stockSeuil[position] );
         return layout;
     }
 }
