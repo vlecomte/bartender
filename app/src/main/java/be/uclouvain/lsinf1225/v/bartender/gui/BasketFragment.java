@@ -53,7 +53,6 @@ public class BasketFragment extends Fragment implements TablePickerDialogFragmen
             }
         });
         tablePicked = false;
-        annule = (Button) view.findViewById(R.id.choose_table_annule);
         choose = (Button) view.findViewById(R.id.choose_table_picker);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,31 +61,13 @@ public class BasketFragment extends Fragment implements TablePickerDialogFragmen
                 wait.confirmBasketFor(nbp.getValue());
                 updateBasketView();
                 Toast.makeText(getActivity(), R.string.confirmed_basket_client, Toast.LENGTH_LONG).show();
-                annule.setVisibility(View.INVISIBLE);
                 choose.setVisibility(View.INVISIBLE);
                 nbp.setVisibility(View.INVISIBLE);
-                mList.setVisibility(View.VISIBLE);
-                mTotal.setVisibility(View.VISIBLE);
-                confirmForClientButton.setVisibility(View.VISIBLE);
-                confirmButton.setVisibility(View.VISIBLE);
             }
         });
         nbp = (NumberPicker) view.findViewById(R.id.numberPicker);
         nbp.setMaxValue(10);
         nbp.setMinValue(1);
-        annule.setVisibility(View.INVISIBLE);
-        annule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                annule.setVisibility(View.INVISIBLE);
-                choose.setVisibility(View.INVISIBLE);
-                nbp.setVisibility(View.INVISIBLE);
-                mList.setVisibility(View.VISIBLE);
-                mTotal.setVisibility(View.VISIBLE);
-                confirmForClientButton.setVisibility(View.VISIBLE);
-                confirmButton.setVisibility(View.VISIBLE);
-            }
-        });
         choose.setVisibility(View.INVISIBLE);
         nbp.setVisibility(View.INVISIBLE);
         confirmForClientButton = (Button) view.findViewById(R.id.confirm_client_button);
@@ -98,11 +79,6 @@ public class BasketFragment extends Fragment implements TablePickerDialogFragmen
 
             @Override
             public void onClick(View v) {
-                    mList.setVisibility(View.INVISIBLE);
-                    mTotal.setVisibility(View.INVISIBLE);
-                    confirmForClientButton.setVisibility(View.INVISIBLE);
-                    confirmButton.setVisibility(View.INVISIBLE);
-                    annule.setVisibility(View.VISIBLE);
                     choose.setVisibility(View.VISIBLE);
                     nbp.setVisibility(View.VISIBLE);
             }
