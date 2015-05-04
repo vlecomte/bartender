@@ -82,16 +82,16 @@ public class DaoIngredient {
     }
 
 
-    public static Ingredient[] getInsufficient() {
+    public static ArrayList<Ingredient> getInsufficient() {
         refreshStock();
         ArrayList<Ingredient> insufficient = new ArrayList<>();
 
         for (Ingredient ingredient : sStock) {
-            if (ingredient.getRemaining() < 0.0) {
+            if (ingredient.getRemaining() < ingredient.getCritical()) {
                 insufficient.add(ingredient);
             }
         }
-        return (Ingredient[]) insufficient.toArray();
+        return  insufficient;
     }
 
     public static void applyUsages() {
