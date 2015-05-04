@@ -20,6 +20,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/total_basket" />
 
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPicker"
+        android:layout_gravity="left"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,5 +39,19 @@
         android:id="@+id/confirm_client_button"
         android:layout_toRightOf="@+id/confirm_basket_content"
         android:layout_toEndOf="@+id/confirm_basket_content"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/annuler"
+        android:layout_gravity="center"
+        android:id="@+id/choose_table_annule"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valide"
+        android:id="@+id/choose_table_picker"
+        android:layout_below="@+id/choose_table_annule"/>
 
 </LinearLayout>

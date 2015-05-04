@@ -38,6 +38,7 @@
     <string name="confirmed_basket_client">La commande du client a été enregistrée</string>
 
     <string name="unMarketDetails">Consommation(s) non payée(s)</string>
+    <string name="valide">Valider choix</string>
 
 
     <!-- Preferences -->
