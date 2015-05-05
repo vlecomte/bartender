@@ -65,6 +65,7 @@
     <string name="title_activity_users">Manage users</string>
     <string name="title_activity_insuf_stock">InsufStockActivity</string>
     <string name="title_activity_actual_stock">ActualStockActivity</string>
+    <string name="title_activity_stock_change">StockChangeActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

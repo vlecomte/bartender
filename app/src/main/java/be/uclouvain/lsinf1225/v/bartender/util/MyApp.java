@@ -14,6 +14,7 @@ import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.model.Admin;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
+import be.uclouvain.lsinf1225.v.bartender.model.Ingredient;
 import be.uclouvain.lsinf1225.v.bartender.model.User;
 import be.uclouvain.lsinf1225.v.bartender.model.Waiter;
 
@@ -28,10 +29,13 @@ public class MyApp extends Application {
 
         private SQLiteAssetHelper mDbHelper;
         private User mCurrentUser;
+
         /**
          * Product to be displayed by the product details activity.
          */
         private Product mDisplayedProduct;
+
+        private Ingredient mIngredientToChange;
 
         public App() {
             sApp = this;
@@ -136,4 +140,8 @@ public class MyApp extends Application {
     public static String getLanguage() {
         return Locale.getDefault().getLanguage();
     }
+
+    public static Ingredient getIngredientToChange() {return sApp.mIngredientToChange;}
+
+    public static void setIngredientToChange(Ingredient ingredient) {sApp.mIngredientToChange = ingredient;}
 }

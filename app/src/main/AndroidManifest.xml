@@ -53,6 +53,10 @@
             android:name=".gui.ActualStockActivity"
             android:label="@string/title_activity_actual_stock" >
         </activity>
+        <activity
+            android:name=".gui.StockChangeActivity"
+            android:label="@string/title_activity_stock_change" >
+        </activity>
     </application>
 
 </manifest>

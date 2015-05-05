@@ -27,9 +27,9 @@ public class CustomInsuffStock extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View view, ViewGroup parent){
-        View layout = RelativeLayout.inflate(context, R.layout.list_basket, null);
-        TextView text = (TextView) layout.findViewById(R.id.txt_basket1);
-        TextView text2 = (TextView) layout.findViewById(R.id.txt_basket2);
+        View layout = RelativeLayout.inflate(context, R.layout.list_stock, null);
+        TextView text = (TextView) layout.findViewById(R.id.txt_stock);
+        TextView text2 = (TextView) layout.findViewById(R.id.button_stock);
         text.setText(nom[position]);
         text2.setText(" ACTUEL:" + " "+stockActuel[position]+"   "+" SEUIL:"+" "+stockSeuil[position] );
         return layout;
