@@ -71,7 +71,7 @@ public class StockChangeActivity extends Activity {
                 }
                 else{
                     DaoIngredient.setCurrent(ingredient.getDisplayName(),q);
-                    ingredient = MyApp.getIngredientToChange();
+                    ingredient = DaoIngredient.getByName(ingredient.getName());
                     stock_actuel.setText("Actuel: " + ingredient.getCurrent());
                 }
             }
