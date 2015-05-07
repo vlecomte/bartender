@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.androidplot.xy.SimpleXYSeries;
+
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
@@ -14,7 +16,7 @@ public class DaoPlots {
     public static Map<String, Double> getTurnoverByDate() {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.rawQuery("SELECT SUM(p."+COL_PRICE+") AS turnover"
-                        +", date(o."+COL_DATE_PAID+",'unixepoch') AS the_date"
+                        +", date(o."+COL_DATE_PAID+",'unixepoch','localtime') AS the_date"
                 +" FROM "+TABLE_ORDER+" o, "+TABLE_DETAIL+" d, "+TABLE_PRODUCT+" p"
                 +" WHERE o."+COL_DATE_PAID+" IS NOT NULL"
                         +" AND d."+COL_ORDER_NUM+" = o."+COL_ORDER_NUM
@@ -31,4 +33,5 @@ public class DaoPlots {
         c.close();
         return turnoverByDate;
     }
+    //public static List<> popularProducts()
 }
