@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.text.TextUtils;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
@@ -62,35 +63,39 @@ public class StockChangeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String t = quantite1.getText().toString();
-                Double q= ingredient.getCurrent() + (double)Float.valueOf(t);
-                if (q>ingredient.getMax()){
-                    ingredient.setCurrent(ingredient.getMax());
-                    stock_actuel.setText("Actuel: " + ingredient.getCurrent());
-                    Toast.makeText(StockChangeActivity.this, "Stock au max", Toast.LENGTH_LONG).show();
+                if(TextUtils.isEmpty(t)){
                 }
-                else{
-                    ingredient.setCurrent(q);
-                    ingredient = MyApp.getIngredientToChange();
-                    stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                else {
+                    Double q = ingredient.getCurrent() + (double) Float.valueOf(t);
+                    if (q > ingredient.getMax()) {
+                        ingredient.setCurrent(ingredient.getMax());
+                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                        Toast.makeText(StockChangeActivity.this, "Stock au max", Toast.LENGTH_LONG).show();
+                    } else {
+                        ingredient.setCurrent(q);
+                        ingredient = MyApp.getIngredientToChange();
+                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                    }
                 }
-
             }
         });
 
         retirer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String t = quantite1.getText().toString();
-                Double q= ingredient.getCurrent() - (double)Float.valueOf(t);
-                if (q<0){
-                    ingredient.setCurrent(0.0);
-                    stock_actuel.setText("Actuel: " + ingredient.getCurrent());
-                    Toast.makeText(StockChangeActivity.this, "Stock insuffisant", Toast.LENGTH_LONG).show();
+                if(TextUtils.isEmpty(t)){
                 }
-                else{
-                    ingredient.setCurrent(q);
-                    stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                else {
+                    Double q = ingredient.getCurrent() - (double) Float.valueOf(t);
+                    if (q < 0) {
+                        ingredient.setCurrent(0.0);
+                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                        Toast.makeText(StockChangeActivity.this, "Stock insuffisant", Toast.LENGTH_LONG).show();
+                    } else {
+                        ingredient.setCurrent(q);
+                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                    }
                 }
             }
         });
@@ -99,9 +104,13 @@ public class StockChangeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String t = quantite2.getText().toString();
-                Double q= (double)Float.valueOf(t);
-                ingredient.setCritical(q);
-                stock_critical.setText("Seuil: " + ingredient.getCritical());
+                if(TextUtils.isEmpty(t)){
+                }
+                else {
+                    Double q = (double) Float.valueOf(t);
+                    ingredient.setCritical(q);
+                    stock_critical.setText("Seuil: " + ingredient.getCritical());
+                }
             }
         });
 
@@ -109,9 +118,13 @@ public class StockChangeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String t = quantite3.getText().toString();
-                Double q= (double)Float.valueOf(t);
-                ingredient.setMax(q);
-                stock_max.setText("Max: " + ingredient.getMax());
+                if(TextUtils.isEmpty(t)){
+                }
+                else {
+                    Double q = (double) Float.valueOf(t);
+                    ingredient.setMax(q);
+                    stock_max.setText("Max: " + ingredient.getMax());
+                }
             }
         });
 
