@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +40,7 @@ public class DaoDetail {
                 ContentValues cv = new ContentValues();
                 cv.put(COL_ORDER_NUM, orderNum);
                 cv.put(COL_PRODUCT_NAME, product.getName());
-                cv.put(COL_DATE_ADDED, System.currentTimeMillis());
+                cv.put(COL_DATE_ADDED, System.currentTimeMillis() / 1000);
                 db.insert(TABLE_DETAIL, null, cv);
             }
         }
@@ -60,7 +59,7 @@ public class DaoDetail {
         while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
-            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)));
+            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)) * 1000);
             details.add(getOrCreate(detailId, productName, dateAdded));
         }
         c.close();
@@ -83,7 +82,7 @@ public class DaoDetail {
         while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
             String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
-            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)));
+            Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)) * 1000);
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
 
             if (!openDetailsByTable.containsKey(tableNum)) {
@@ -107,7 +106,7 @@ public class DaoDetail {
         }
 
         ContentValues cv = new ContentValues();
-        cv.put(COL_DATE_DELIVERED, System.currentTimeMillis());
+        cv.put(COL_DATE_DELIVERED, System.currentTimeMillis() / 1000);
 
         SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_DETAIL, cv, whereClause.toString(), detailIds);

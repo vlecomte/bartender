@@ -123,7 +123,7 @@ public class DaoOrder {
 
     public static void setPaid(int orderNum) {
         ContentValues cv = new ContentValues();
-        cv.put(COL_DATE_PAID, System.currentTimeMillis());
+        cv.put(COL_DATE_PAID, System.currentTimeMillis() / 1000);
 
         SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_ORDER, cv, COL_ORDER_NUM+" = ?", new String[]{""+orderNum});

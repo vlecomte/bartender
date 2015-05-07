@@ -10,7 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.GregorianCalendar;
+import java.util.Map;
+
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoPlots;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 
@@ -27,6 +31,12 @@ public class MainActivity extends FragmentActivity {
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(adapter);
+
+        // TODO: Test to see if it crashes, to remove
+        Map<String, Double> turnoverByDate = DaoPlots.getTurnoverByDate();
+        for (Map.Entry<String, Double> entry : turnoverByDate.entrySet()) {
+            System.out.println(entry.getKey()+": "+entry.getValue());
+        }
     }
 
     @Override
