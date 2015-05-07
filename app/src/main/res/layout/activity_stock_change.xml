@@ -41,6 +41,55 @@
 
     </LinearLayout>
 
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/txt_critical_stock" />
+
+        <EditText
+            android:id="@+id/edit_critical_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Quantité"
+            android:maxLines="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1_critical_stock"
+            android:text="modifier"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/txt_max_stock" />
+
+        <EditText
+            android:id="@+id/edit_max_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Quantité"
+            android:maxLines="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1_max_stock"
+            android:text="modifier"/>
+
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
