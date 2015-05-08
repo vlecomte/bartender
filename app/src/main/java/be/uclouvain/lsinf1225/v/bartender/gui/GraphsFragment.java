@@ -4,6 +4,7 @@ package be.uclouvain.lsinf1225.v.bartender.gui;
  * Created by haroldsomers on 7/05/15.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,7 +37,8 @@ public class GraphsFragment extends Fragment {
         graph2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), ChiffreAffaireActivity.class);
+                startActivity(intent);
             }
         });
 
