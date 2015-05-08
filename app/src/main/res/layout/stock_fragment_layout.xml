@@ -24,10 +24,5 @@
         android:text="@string/show_stock"
         android:id="@+id/show_stock_button" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_button"
-        android:id="@+id/button3" />
 
 </LinearLayout>

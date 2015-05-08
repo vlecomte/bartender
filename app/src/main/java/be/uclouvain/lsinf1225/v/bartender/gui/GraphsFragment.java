@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.util.PieGraphActivity;
 
 
 public class GraphsFragment extends Fragment {
@@ -52,7 +53,8 @@ public class GraphsFragment extends Fragment {
         graph4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), PieGraphActivity.class);
+                startActivity(intent);
             }
         });
         return view;
