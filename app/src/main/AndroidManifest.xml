@@ -61,6 +61,10 @@
             android:name=".gui.ChiffreAffaireActivity"
             android:label="@string/title_activity_chiffre_affaire" >
         </activity>
+        <activity
+            android:name=".util.PieGraphActivity"
+            android:label="@string/title_activity_pie_graph" >
+        </activity>
     </application>
 
 </manifest>
