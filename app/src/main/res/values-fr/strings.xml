@@ -126,4 +126,7 @@
     <string name="valide_for_table">Confirmer pour une table</string>
     <string name="valider_change_pass">Confirmer</string>
     <string name="title_activity_chiffre_affaire">Chiffre d\'affaires</string>
+    <string name="title__client_plot">Statistiques consommation client</string>
+    <string name="title__waiter_plot">Statistiques efficacite serveur</string>
+    <string name="title__cons_plot">Statistiques choix consommation</string>
 </resources>

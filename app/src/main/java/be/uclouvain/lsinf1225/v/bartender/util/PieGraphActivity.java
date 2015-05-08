@@ -55,7 +55,6 @@ public class PieGraphActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pie_graph);
-
         calendar1.add(Calendar.DAY_OF_MONTH, -15);
         updateTab();
 

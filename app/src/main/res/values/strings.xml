@@ -70,6 +70,10 @@
     <string name="error_reading_desc_file_impossible">Error: description file impossible to read</string>
     <string name="basket_num_short">no.:</string>
     <string name="not_possible_to_order_anymore">Not possible to order anymore:</string>
+    <string name="title__client_plot">Customer\'s consommation stats</string>
+    <string name="title__waiter_plot">Waiter\'s efficiency stats</string>
+    <string name="title__cons_plot">Consommation choice stats</string>
+
 
     <string name="plus">+</string>
     <string name="minus">-</string>
@@ -98,4 +102,5 @@
     <string name="title_activity_pie_graph">PieGraphActivity</string>
     <string name="title_activity_waiter_plot">WaiterPlotActivity</string>
     <string name="title_activity_client_plot">ClientPlotActivity</string>
+
 </resources>

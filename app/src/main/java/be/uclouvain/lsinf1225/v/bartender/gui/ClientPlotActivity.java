@@ -55,7 +55,6 @@ public class ClientPlotActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_plot);
-
         calendar1.add(Calendar.DAY_OF_MONTH, -15);
         updateTab();
 

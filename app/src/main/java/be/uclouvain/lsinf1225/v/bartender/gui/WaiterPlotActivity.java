@@ -55,7 +55,6 @@ public class WaiterPlotActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiter_plot);
-
         calendar1.add(Calendar.DAY_OF_MONTH, -15);
         updateTab();
 
