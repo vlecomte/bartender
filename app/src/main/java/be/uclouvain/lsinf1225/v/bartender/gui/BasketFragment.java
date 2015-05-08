@@ -58,6 +58,7 @@ public class BasketFragment extends Fragment implements Refreshable {
         Button buttonConfirmForTable = (Button) view.findViewById(R.id.button_confirm_for_table);
         if(MyApp.isWaiter()) {
             buttonConfirmForTable.setVisibility(View.VISIBLE);
+            buttonConfirmBasket.setText(getString(R.string.button_confirm_for_me));
         }
         buttonConfirmForTable.setOnClickListener(new View.OnClickListener() {
             @Override

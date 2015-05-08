@@ -137,7 +137,7 @@
     <string name="confirmed_for_table">Le panier a été confirmé pour la table&#160;</string>
     <string name="elem_basket_empty">Votre panier est vide.</string>
     <string name="elem_no_drinks">Toutes les boissons ont été servies.</string>
-    <string name="elem_space_then_drinks">&#160;boissons</string>
+    <string name="elem_space_then_drinks">&#160;boisson(s)</string>
     <string name="error_no_basket_to_confirm">Vous n\'avez pas de panier à confirmer.</string>
     <string name="image_type">Icône de type de boisson</string>
     <string name="title_activity_client_plot">Meilleurs clients</string>
@@ -146,4 +146,5 @@
     <string name="to_serve_at_table_then_space">À servir - Table&#160;</string>
     <string name="bill_for_table_then_space">Addition de la table&#160;</string>
     <string name="bill_for_then_space">Addition de&#160;</string>
+    <string name="button_confirm_for_me">Confirmer pour moi</string>
 </resources>
