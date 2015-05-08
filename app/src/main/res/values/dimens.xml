@@ -16,6 +16,7 @@
     <dimen name="col_width_total">70dp</dimen>
     <dimen name="col_width_button">60dp</dimen>
     <dimen name="col_width_rank">90dp</dimen>
+    <dimen name="col_width_type">50dp</dimen>
 
     <!-- Horizontal table rules -->
     <dimen name="header_rule_width">1.5dp</dimen>

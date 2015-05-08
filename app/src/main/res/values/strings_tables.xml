@@ -9,6 +9,7 @@
     <string name="col_total">Total</string>
     <string name="col_username">Username</string>
     <string name="col_rank">Rank</string>
+    <string name="col_type">Type</string>
     <!--<string name="col_number">Number</string>-->
 
     <!-- Elements and placeholders -->
@@ -22,7 +23,8 @@
     <string name="rank_waiter">Waiter</string>
     <string name="rank_admin">Admin</string>
 
-    <!-- Image button descriptions -->
+    <!-- Image descriptions -->
+    <string name="image_type">Drink type icon</string>
     <string name="button_desc_open_bill">Open bill</string>
     <string name="button_desc_edit_rank">Edit rank</string>
 
