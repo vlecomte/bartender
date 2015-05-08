@@ -169,7 +169,7 @@ public class TableFiller {
                             @Override
                             public void onObtainRank(String rank) {
                                 DaoUser.setRank(user.getKey(), rank);
-                                UsersActivity.sRefreshRequested = true;
+                                toRefresh.refresh();
                             }
                         });
                         rankPicker.show(manager, "rank_picker");
