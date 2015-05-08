@@ -102,4 +102,27 @@ public class DaoPlots {
         c.close();
         return clientsByTurnover;
     }
+
+    public static List<Pair<String, Integer>> getWaiterByServices(Calendar dateBegin,
+                                                                  Calendar dateEnd) {
+        SQLiteDatabase db = MyApp.getReadableDb();
+        Cursor c = db.rawQuery("SELECT u."+COL_USERNAME+", COUNT(d."+COL_ID+") AS the_count"
+                        +" FROM "+TABLE_USER+" u, "+TABLE_DETAIL+" d"
+                        +" WHERE d."+COL_WAITER_USERNAME+" = u."+COL_USERNAME
+                        +" AND ? <= d."+COL_DATE_ADDED+" AND d."+COL_DATE_ADDED+" <= ?"
+                        +" GROUP BY u."+COL_USERNAME
+                        +" ORDER BY the_count DESC",
+                new String[]{""+(dateBegin.getTimeInMillis() / 1000),
+                        ""+(dateEnd.getTimeInMillis() / 1000)});
+
+        List<Pair<String, Integer>> waiterByServices = new ArrayList<>();
+        while (c.moveToNext()) {
+            String username = c.getString(c.getColumnIndex(COL_USERNAME));
+            int services = c.getInt(c.getColumnIndex("the_count"));
+
+            waiterByServices.add(new Pair<>(username, services));
+        }
+        c.close();
+        return waiterByServices;
+    }
 }

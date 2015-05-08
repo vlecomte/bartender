@@ -50,11 +50,18 @@ public class MainActivity extends FragmentActivity {
         for (Pair<Product, Integer> entry : productsByPopularity) {
             Log.d("hey", entry.first.getDisplayName() + ": " + entry.second);
         }
-        List<Pair<String, Double>> clientsByTurnover = DaoPlots.getCustomersByTurnover(
+        List<Pair<String, Double>> customersByTurnover = DaoPlots.getCustomersByTurnover(
                 new GregorianCalendar(2015, 4, 1),
                 new GregorianCalendar(2015, 4, 10)
         );
-        for (Pair<String, Double> entry : clientsByTurnover) {
+        for (Pair<String, Double> entry : customersByTurnover) {
+            Log.d("hey", entry.first + ": " + entry.second);
+        }
+        List<Pair<String, Integer>> waitersByServices = DaoPlots.getWaiterByServices(
+                new GregorianCalendar(2015, 4, 1),
+                new GregorianCalendar(2015, 4, 10)
+        );
+        for (Pair<String, Integer> entry : waitersByServices) {
             Log.d("hey", entry.first + ": " + entry.second);
         }
     }
