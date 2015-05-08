@@ -4,5 +4,6 @@
     <color name="header_rule_black">#000000</color>
     <color name="inter_rule_gray">#B0B0B0</color>
     <color name="placeholder_gray">#A0A0A0</color>
+    <color name="out_of_stock_red">#E04040</color>
 
 </resources>

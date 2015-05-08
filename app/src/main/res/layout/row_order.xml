@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/row_height_large"
         android:gravity="center_vertical">
         <TextView
             android:id="@+id/elem_username_or_table"
@@ -19,7 +19,7 @@
         <ImageButton
             android:id="@+id/button_open_bill"
             android:layout_width="@dimen/col_width_button"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/row_height_large"
             android:src="@drawable/ic_action_forward"
             android:contentDescription="@string/button_desc_open_bill"
             style="?android:attr/borderlessButtonStyle" />

@@ -10,13 +10,17 @@
     <dimen name="logo_text_size">40sp</dimen>
     <dimen name="logged_in_text_size">5sp</dimen>
 
-    <!-- Table column dimensions -->
+    <!-- Table column widths -->
     <dimen name="col_width_time">60dp</dimen>
     <dimen name="col_width_price">70dp</dimen>
     <dimen name="col_width_total">70dp</dimen>
     <dimen name="col_width_button">60dp</dimen>
     <dimen name="col_width_rank">90dp</dimen>
-    <dimen name="col_width_type">50dp</dimen>
+    <dimen name="col_width_type">70dp</dimen>
+
+    <!-- Table row heights -->
+    <dimen name="row_height_large">45dp</dimen>
+    <dimen name="icon_height_type">40dp</dimen>
 
     <!-- Horizontal table rules -->
     <dimen name="header_rule_width">1.5dp</dimen>

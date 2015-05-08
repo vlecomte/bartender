@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -22,9 +23,11 @@ import java.util.Set;
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
 import be.uclouvain.lsinf1225.v.bartender.gui.BillActivity;
+import be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.RankPickerDialogFragment;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
 public class TableFiller {
 
@@ -38,6 +41,40 @@ public class TableFiller {
         mTable = table;
         mInflater = inflater;
         mContext = mInflater.getContext();
+    }
+
+    public void fillMenu(Product[] menu) {
+        for (final Product product : menu) {
+            LinearLayout row = (LinearLayout) mInflater.inflate(R.layout.row_menu, mTable, false);
+
+            ImageView typeIcon = (ImageView) row.findViewById(R.id.image_type);
+            TextView productName = (TextView) row.findViewById(R.id.elem_product_name);
+
+            String iconFilename = product.getTypeIconFilename();
+            int imageId = mContext.getResources().getIdentifier(iconFilename, "drawable",
+                    mContext.getPackageName());
+            typeIcon.setImageResource(imageId);
+            productName.setText(product.getDisplayName());
+
+            if (product.getNumAvailable() == 0) {
+                productName.setTextColor(mContext.getResources().getColor(
+                        R.color.placeholder_gray));
+            } else if (product.getNumAvailable() < 0) {
+                productName.setTextColor(mContext.getResources().getColor(
+                        R.color.out_of_stock_red));
+            }
+
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyApp.setDisplayedProduct(product);
+                    Intent intent = new Intent(mContext, DescriptionActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            mTable.addView(row);
+        }
     }
 
     public void fillBill(Order order) {

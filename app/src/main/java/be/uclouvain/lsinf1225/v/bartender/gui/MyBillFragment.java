@@ -15,9 +15,9 @@ import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
 public class MyBillFragment extends Fragment implements Refreshable {
-    LinearLayout mBillTable;
-    TextView mRowNoOwnOrder;
-    TableFiller mFiller;
+    private LinearLayout mBillTable;
+    private TextView mRowNoOwnOrder;
+    private TableFiller mFiller;
 
     @Override
     public View onCreateView(LayoutInflater inflater,

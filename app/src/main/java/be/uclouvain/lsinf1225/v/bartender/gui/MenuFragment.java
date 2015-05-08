@@ -8,49 +8,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
+import be.uclouvain.lsinf1225.v.bartender.model.Order;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.util.CustomList;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
+import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
+import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
-public class MenuFragment extends Fragment {
-    ListView list;
-    Product[] menu;
-    String[] fileName;
-    String[] productName;
+public class MenuFragment extends Fragment implements Refreshable {
+    LinearLayout mMenuTable;
+    TableFiller mFiller;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                                 ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_new_command, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        menu = DaoProduct.getMenu();
-        fileName = new String[menu.length];
-        productName = new String[menu.length];
+        mMenuTable = (LinearLayout) view.findViewById(R.id.menu_content);
+        mFiller = new TableFiller(mMenuTable, inflater);
 
-        for(int i=0;i<menu.length;i++){
-            String nim=menu[i].getTypeIconFilename();
-            fileName[i]= nim.substring(0, (nim.length())-4);
-            productName[i] = menu[i].getDisplayName();
-        }
+        refresh();
 
-        Integer[] ids = new Integer[menu.length];
-        for(int i =0;i<menu.length;i++) {
-            ids[i] = getResources().getIdentifier(fileName[i], "drawable", getActivity().getPackageName()); //test avec "coca" à la place de filenName[i], ça fonctionne
-        }
-        list = (ListView) view.findViewById(R.id.list_consommation);
-        CustomList adapter = new CustomList(getActivity(), productName, ids);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyApp.setDisplayedProduct(menu[position]);
-                Intent intent = new Intent(getActivity(), DescriptionActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshLocal();
+    }
+
+    private void refreshLocal() {
+        mMenuTable.removeAllViews();
+        mFiller.fillMenu(DaoProduct.getMenu());
+    }
+
+    public void refresh() {
+        DaoIngredient.refreshStock();
+        refreshLocal();
     }
 }

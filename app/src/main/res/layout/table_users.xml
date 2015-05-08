@@ -32,14 +32,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:paddingBottom="@dimen/table_vertical_margin">
+        android:layout_height="fill_parent">
         <LinearLayout
             android:id="@+id/users_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/table_vertical_margin"
             android:orientation="vertical" />
     </ScrollView>
 </TableLayout>

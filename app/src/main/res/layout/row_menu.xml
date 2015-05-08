@@ -1,0 +1,21 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_height_large"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/image_type"
+            android:layout_width="@dimen/col_width_type"
+            android:layout_height="@dimen/icon_height_type"
+            android:contentDescription="@string/image_type" />
+        <TextView
+            android:id="@+id/elem_product_name"
+            android:layout_weight="1"
+            style="@style/TableCell" />
+    </TableRow>
+    <include layout="@layout/rule_table_inter" />
+</LinearLayout>
