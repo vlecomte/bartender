@@ -7,24 +7,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/efficacite_serveurs"
-        android:text="Efficacité des serveurs"/>
+        android:text="@string/efficiency_waiters"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chiffre_affaire"
-        android:text="Chiffre d'affaire"/>
+        android:text="@string/turnover_evolution"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/meilleurs_clients"
-        android:text="Meilleurs Clients"/>
+        android:text="@string/best_clients"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/meilleurs_boissons"
-        android:text="Meilleurs Boissons"/>
+        android:text="@string/popular_drinks"/>
 
 </LinearLayout>

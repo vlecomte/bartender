@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txt_change_stock"
         android:layout_gravity="center_horizontal"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:paddingBottom="16dp"/>
 
     <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
@@ -26,18 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Quantité"
+            android:hint="@string/quantity"
             android:maxLines="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1_actual_stock"
-            android:text="+"/>
+            android:text="@string/plus"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button2_actual_stock"
-            android:text="-"/>
+            android:text="@string/minus"/>
 
     </LinearLayout>
 
@@ -55,13 +55,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Quantité"
+            android:hint="@string/quantity"
             android:maxLines="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1_critical_stock"
-            android:text="modifier"/>
+            android:text="@string/modify"/>
 
     </LinearLayout>
 
@@ -79,13 +79,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Quantité"
+            android:hint="@string/quantity"
             android:maxLines="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1_max_stock"
-            android:text="modifier"/>
+            android:text="@string/modify"/>
 
 
     </LinearLayout>

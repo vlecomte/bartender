@@ -33,7 +33,7 @@ public class CustomActualStock extends ArrayAdapter<String> {
         TextView text = (TextView) layout.findViewById(R.id.button_stock);
         TextView text2 = (TextView) layout.findViewById(R.id.txt_stock);
         text.setText(nom[position]);
-        text2.setText(" ACTUEL: "+stockActuel[position]+"    SEUIL: "+stockSeuil[position]+"    MAX: "+  stockMax[position] );
+        text2.setText(" "+getContext().getString(R.string.current_caps)+" "+stockActuel[position]+"    "+getContext().getString(R.string.critical_caps)+" "+stockSeuil[position]+"    "+getContext().getString(R.string.max_caps)+" "+  stockMax[position] );
         return layout;
     }
 }

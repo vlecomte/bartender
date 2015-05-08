@@ -96,7 +96,7 @@ public class ToServeFragment extends Fragment {
         final List[] tabList = new List[liste.size()];
         int i=0;
         for(Map.Entry<Integer, List<Detail>> entry : liste.entrySet()) {
-            tabTables[i] = "Table n°" + entry.getKey();
+            tabTables[i] = getString(R.string.table_number) + " " + entry.getKey();
             tabNbrDetByTable[i] = entry.getValue().size();
             tabList[i] = entry.getValue();
             i++;

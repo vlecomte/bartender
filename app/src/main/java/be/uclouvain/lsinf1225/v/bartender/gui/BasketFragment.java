@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
-import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.model.Waiter;
 import be.uclouvain.lsinf1225.v.bartender.util.CustomBasket;
@@ -112,7 +111,7 @@ public class BasketFragment extends Fragment implements TablePickerDialogFragmen
         }
         CustomBasket adapter = new CustomBasket(getActivity(), tab_elem, tab_prix_elem);
         mList.setAdapter(adapter);
-        mTotal.setText("TOTAL: " + count_total + "€");
+        mTotal.setText(getString(R.string.basket_total)+" " + count_total + "€");
     }
 
     public void onObtainTableNum(int tableNum) {

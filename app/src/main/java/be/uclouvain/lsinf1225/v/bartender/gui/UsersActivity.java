@@ -27,7 +27,6 @@ public class UsersActivity extends FragmentActivity implements Refreshable {
     }
 
     public void refresh() {
-        System.out.println("refreshing");
         mUsersTable.removeAllViews();
         Map<String, String> rankByUsername = DaoUser.getAllRanks();
         mFiller.fillUsers(rankByUsername.entrySet(), getSupportFragmentManager(), this);

@@ -55,9 +55,9 @@ public class StockChangeActivity extends Activity {
 
 
         name_ingredient.setText(ingredient.getDisplayName());
-        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
-        stock_critical.setText("Seuil: " + ingredient.getCritical());
-        stock_max.setText("Max: " + ingredient.getMax());
+        stock_actuel.setText(getString(R.string.current_stock)+ " " + ingredient.getCurrent());
+        stock_critical.setText(getString(R.string.critical_stock) + " " + ingredient.getCritical());
+        stock_max.setText(getString(R.string.max_stock) + " " + ingredient.getMax());
 
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +69,12 @@ public class StockChangeActivity extends Activity {
                     Double q = ingredient.getCurrent() + (double) Float.valueOf(t);
                     if (q > ingredient.getMax()) {
                         ingredient.setCurrent(ingredient.getMax());
-                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
-                        Toast.makeText(StockChangeActivity.this, "Stock au max", Toast.LENGTH_LONG).show();
+                        stock_actuel.setText(getString(R.string.current_stock) + " " + ingredient.getCurrent());
+                        Toast.makeText(StockChangeActivity.this, getString(R.string.stock_at_max), Toast.LENGTH_LONG).show();
                     } else {
                         ingredient.setCurrent(q);
                         ingredient = MyApp.getIngredientToChange();
-                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                        stock_actuel.setText(getString(R.string.current_stock) + " " + ingredient.getCurrent());
                     }
                 }
             }
@@ -90,11 +90,11 @@ public class StockChangeActivity extends Activity {
                     Double q = ingredient.getCurrent() - (double) Float.valueOf(t);
                     if (q < 0) {
                         ingredient.setCurrent(0.0);
-                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
-                        Toast.makeText(StockChangeActivity.this, "Stock insuffisant", Toast.LENGTH_LONG).show();
+                        stock_actuel.setText(getString(R.string.current_stock) + " " + ingredient.getCurrent());
+                        Toast.makeText(StockChangeActivity.this, getString(R.string.insufficient_stock), Toast.LENGTH_LONG).show();
                     } else {
                         ingredient.setCurrent(q);
-                        stock_actuel.setText("Actuel: " + ingredient.getCurrent());
+                        stock_actuel.setText(getString(R.string.current_stock) + " " + ingredient.getCurrent());
                     }
                 }
             }
@@ -109,7 +109,7 @@ public class StockChangeActivity extends Activity {
                 else {
                     Double q = (double) Float.valueOf(t);
                     ingredient.setCritical(q);
-                    stock_critical.setText("Seuil: " + ingredient.getCritical());
+                    stock_critical.setText(getString(R.string.critical_stock) + " " + ingredient.getCritical());
                 }
             }
         });
@@ -123,7 +123,7 @@ public class StockChangeActivity extends Activity {
                 else {
                     Double q = (double) Float.valueOf(t);
                     ingredient.setMax(q);
-                    stock_max.setText("Max: " + ingredient.getMax());
+                    stock_max.setText(getString(R.string.max_stock) + " " + ingredient.getMax());
                 }
             }
         });

@@ -1,0 +1,6 @@
+<resources>
+    <string name="efficiency_waiters">Waiter efficiency</string>
+    <string name="turnover_evolution">Turnover evolution</string>
+    <string name="best_clients">Best clients</string>
+    <string name="popular_drinks">Most popular drinks</string>
+</resources>

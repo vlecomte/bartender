@@ -54,13 +54,13 @@ public class DescriptionActivity extends Activity {
             lu = reader.readLine();
             }
         } catch (IOException e){
-            descText.setError("Erreur de lecture du fichier" + e.getMessage());
+            descText.setError(getString(R.string.error_reading_desc_file) + " " + e.getMessage());
             descText.requestFocus();
         } catch (NullPointerException e){
-            descText.setError("Fichier introuvabler" + e.getMessage());
+            descText.setError(getString(R.string.error_desc_file_not_found) + " " + e.getMessage());
             descText.requestFocus();
         } catch (Exception e) {
-            descText.setError("Erreur: lecture de fichier impossible" + e.getMessage());
+            descText.setError(getString(R.string.error_reading_desc_file_impossible) + " " + e.getMessage());
             descText.requestFocus();
         }
 
@@ -101,7 +101,9 @@ public class DescriptionActivity extends Activity {
     }
 
     protected void updateCompte() {
-        compte.setText("n°: "+ MyApp.getCustomer().getNumInBasket(conso) + "  [" + MyApp.getCustomer().getNumInBasket(conso) * conso.getPrice()+"€]");
+        compte.setText(getString(R.string.basket_num_short) + " "
+                + MyApp.getCustomer().getNumInBasket(conso) + "  ["
+                + MyApp.getCustomer().getNumInBasket(conso) * conso.getPrice()+"€]");
     }
 
     protected void updateAdd() {
@@ -110,7 +112,7 @@ public class DescriptionActivity extends Activity {
             add.setVisibility(View.VISIBLE);
         } else {
             add.setVisibility(View.INVISIBLE);
-            Toast.makeText(DescriptionActivity.this, R.string.not_enough_stock + ":" + conso.getDisplayName(), Toast.LENGTH_LONG).show(); //
+            Toast.makeText(DescriptionActivity.this, getString(R.string.not_possible_to_order_anymore) + conso.getDisplayName(), Toast.LENGTH_LONG).show(); //
         }
     }
 }

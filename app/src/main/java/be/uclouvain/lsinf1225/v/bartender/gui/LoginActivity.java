@@ -43,10 +43,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (MyApp.getUser() != null) {
-            Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
-        }
-
         // Set up the login form.
         mUsernameView = (EditText) findViewById(R.id.username);
         mPasswordView = (EditText) findViewById(R.id.password);

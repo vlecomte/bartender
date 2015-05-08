@@ -34,36 +34,6 @@ public class MainActivity extends FragmentActivity {
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(adapter);
-
-        // TODO: Test to see if it crashes, to remove
-        List<Double> turnoverInRange = DaoPlots.getTurnoverInRange(
-                new GregorianCalendar(2015, 4, 1),
-                new GregorianCalendar(2015, 4, 10)
-        );
-        for (double turnover : turnoverInRange) {
-            Log.d("hey", ""+turnover);
-        }
-        List<Pair<Product, Integer>> productsByPopularity = DaoPlots.getProductsByPopularity(
-                new GregorianCalendar(2015, 4, 1),
-                new GregorianCalendar(2015, 4, 10)
-        );
-        for (Pair<Product, Integer> entry : productsByPopularity) {
-            Log.d("hey", entry.first.getDisplayName() + ": " + entry.second);
-        }
-        List<Pair<String, Double>> customersByTurnover = DaoPlots.getCustomersByTurnover(
-                new GregorianCalendar(2015, 4, 1),
-                new GregorianCalendar(2015, 4, 10)
-        );
-        for (Pair<String, Double> entry : customersByTurnover) {
-            Log.d("hey", entry.first + ": " + entry.second);
-        }
-        List<Pair<String, Integer>> waitersByServices = DaoPlots.getWaiterByServices(
-                new GregorianCalendar(2015, 4, 1),
-                new GregorianCalendar(2015, 4, 10)
-        );
-        for (Pair<String, Integer> entry : waitersByServices) {
-            Log.d("hey", entry.first + ": " + entry.second);
-        }
     }
 
     @Override
@@ -156,9 +126,9 @@ public class MainActivity extends FragmentActivity {
                 case POS_TO_SERVE:
                     return getString(R.string.tab_to_serve);
                 case POS_STOCK:
-                    return getString(R.string.title_fragment_stock);
+                    return getString(R.string.tab_stock);
                 case POS_GRAPHS:
-                    return "Graphs";
+                    return getString(R.string.tab_graphs);
                 default:
                     throw new IllegalArgumentException("Position out of bounds");
             }

@@ -7,65 +7,89 @@
     <string name="action_account_settings">Account settings</string>
     <string name="action_manage_users">Manage users</string>
 
-    <string name="not_enough_stock">Plus possible de commander</string>
-    <string name="basket_title">Panier actuel</string>
-    <string name="basket_ss">Panier</string>
-    <string name="confirm_basket_button">Confirmer panier</string>
-    <string name="confirmed_basket">Votre panier a été confirmé. Un serveur se charge de votre commande.</string>
-    <string name="new_command_button">Nouvelle commande</string>
-    <string name="title_Activity_list_details">Commandes ouvertes</string>
-    <string name="inWait_details_text">détail(s) ouvert(s)</string>
-    <string name="choose_table">Choix de table</string>
-    <string name="confrim_table">Confirmer table</string>
-    <string name="annuler">Annuler</string>
-    <string name="set_payed">Marquer payé</string>
+    <string name="not_enough_stock">Not possible to order anymore</string>
+    <string name="basket_title">Current basket</string>
+    <string name="basket_ss">Basket</string>
+    <string name="confirm_basket_button">Confirm basket</string>
+    <string name="confirmed_basket">Your basket has been confirmed. A waiter is taking care of your order.</string>
+    <string name="new_command_button">New order</string>
+    <string name="title_Activity_list_details">Open orders</string>
+    <string name="inWait_details_text">open detail(s)</string>
+    <string name="choose_table">Pick a table</string>
+    <string name="confrim_table">Confirm table</string>
+    <string name="annuler">Cancel</string>
+    <string name="set_payed">Mark as paid</string>
     <string name="refresh">Refresh</string>
-    <string name="change_user_name_button">Changer login</string>
-    <string name="change_user_email_button">Changer email</string>
-    <string name="login_txt">login:</string>
+    <string name="change_user_name_button">Change username</string>
+    <string name="change_user_email_button">Change email</string>
+    <string name="login_txt">username:</string>
     <string name="email_txt">email:</string>
-    <string name="show_pass">Montrer mdp</string>
-    <string name="hide_pass">Cacher mdp</string>
-    <string name="change_pass">Changer mdp</string>
-    <string name="old_mdp">Ancien mdp:</string>
-    <string name="new_mdp">Nouveau mdp:</string>
-    <string name="confirmation_mdp">Confirmer mdp:</string>
-    <string name="old_email">Ancien email:</string>
-    <string name="new_email">Nouveau email:</string>
-    <string name="confirmation_email">Confirmer email:</string>
-    <string name="valider_change_pass">Valider</string>
-    <string name="error_change_passe">Erreur: données insuffisantes ou incorrectes</string>
-    <string name="error_change_mail">Erreur: données insuffisantes ou incorrectes</string>
+    <string name="password_txt">Password:</string>
+    <string name="show_pass">Show password</string>
+    <string name="hide_pass">Hide password</string>
+    <string name="change_pass">Change password</string>
+    <string name="old_mdp">Old password:</string>
+    <string name="new_mdp">New password:</string>
+    <string name="confirmation_mdp">Confirm password:</string>
+    <string name="old_email">Old email:</string>
+    <string name="new_email">New email:</string>
+    <string name="confirmation_email">Confirm email:</string>
+    <string name="valider_change_pass">Confirm</string>
+    <string name="error_change_passe">Error: insufficient or incorrect data</string>
+    <string name="error_change_mail">Error: insufficient or incorrect data</string>
     <string name="button_mark_paid">Mark as paid</string>
+    <string name="quantity">Quantity</string>
+    <string name="modify">modify</string>
 
-    <string name="valide_for_table">Confirmer pour table</string>
-    <string name="confirmed_basket_client">La commande du client a été enregistrée</string>
+    <string name="valide_for_table">Confirm for table</string>
+    <string name="confirmed_basket_client">The customer\'s order has been saved.</string>
 
-    <string name="unMarketDetails">Consommation(s) non payée(s)</string>
-    <string name="valide">Valider choix</string>
-    <string name="show_insuffisant">Insuffisance de stock</string>
-    <string name="show_stock">Etat complet du stock</string>
-    <string name="stock_main_title">Etat du stock</string>
-    <string name="stock_actuel">STOCK ACTUEL:</string>
-    <string name="stock_seuil">STOCK SEUIL:</string>
-    <string name="title_fragment_stock">Gestion de stock</string>
+    <string name="unMarketDetails">Drinks to serve</string>
+    <string name="valide">Confirm choice</string>
+    <string name="show_insuffisant">Critically low stock</string>
+    <string name="show_stock">Complete stock state</string>
+    <string name="stock_main_title">Stock state</string>
+    <string name="current_stock">Current:</string>
+    <string name="current_stock2">Current Stock</string>
+    <string name="critical_stock">Critical:</string>
+    <string name="max_stock">Max:</string>
+    <string name="stock_at_max">Stock at max:</string>
+    <string name="insufficient_stock">Insufficient stock</string>
+    <string name="insufficient_ingredients">Insufficient ingredients</string>
+    <string name="stock_actuel">CURRENT STOCK:</string>
+    <string name="stock_seuil">CRITICAL STOCK:</string>
+    <string name="current_caps">CURRENT:</string>
+    <string name="critical_caps">CRITICAL:</string>
+    <string name="max_caps">MAX:</string>
+    <string name="basket_total">TOTAL:</string>
+    <string name="table_number">Table no.</string>
+    <string name="list_of_products">List of drinks</string>
 
+    <string name="error_reading_desc_file">Error reading the description file</string>
+    <string name="error_desc_file_not_found">Description file not found</string>
+    <string name="error_reading_desc_file_impossible">Error: description file impossible to read</string>
+    <string name="basket_num_short">no.:</string>
+    <string name="not_possible_to_order_anymore">Not possible to order anymore:</string>
 
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+
+    <string name="new_button">New button</string> <!-- ??? -->
 
     <!-- Preferences -->
-    <string name="preference_file_key">
+    <string name="preference_file_key" translatable="false">
         be.uclouvain.lsinf1225.v.bartender.PREFERENCES
     </string>
-    <string name="saved_username">SAVED_USERNAME</string>
-    <string name="saved_password">SAVED_PASSWORD</string>
+    <string name="saved_username" translatable="false">SAVED_USERNAME</string>
+    <string name="saved_password" translatable="false">SAVED_PASSWORD</string>
 
-    <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_description">Description</string>
     <string name="title_activity_bill">Bill details</string>
-    <string name="title_activity_settings">SettingsFragment</string>
+    <string name="title_activity_settings">Settings</string>
     <string name="title_activity_users">Manage users</string>
-    <string name="title_activity_insuf_stock">InsufStockActivity</string>
-    <string name="title_activity_actual_stock">ActualStockActivity</string>
-    <string name="title_activity_stock_change">StockChangeActivity</string>
+    <string name="title_activity_insuf_stock">Critically low stock</string>
+    <string name="title_activity_actual_stock">Stock state</string>
+    <string name="title_activity_stock_change">Change stock</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

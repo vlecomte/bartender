@@ -31,7 +31,7 @@ public class CustomInsuffStock extends ArrayAdapter<String> {
         TextView text = (TextView) layout.findViewById(R.id.txt_stock);
         TextView text2 = (TextView) layout.findViewById(R.id.button_stock);
         text.setText(nom[position]);
-        text2.setText(" ACTUEL:" + " "+stockActuel[position]+"   "+" SEUIL:"+" "+stockSeuil[position] );
+        text2.setText(" "+ getContext().getString(R.string.current_caps) + " "+stockActuel[position]+"    "+getContext().getString(R.string.critical_caps)+" "+stockSeuil[position] );
         return layout;
     }
 }
