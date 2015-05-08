@@ -88,7 +88,8 @@ public class DaoPlots {
                         + " AND d." + COL_ORDER_NUM + " = o." + COL_ORDER_NUM
                         + " AND d." + COL_PRODUCT_NAME + " = p." + COL_PRODUCT_NAME
                         + " AND ? <= o." + COL_DATE_PAID + " AND o." + COL_DATE_PAID + " <= ?"
-                        + " GROUP BY u." + COL_USERNAME,
+                        + " GROUP BY u." + COL_USERNAME
+                        + " ORDER BY turnover DESC",
                 new String[]{"" + (dateBegin.getTimeInMillis() / 1000),
                         "" + (dateEnd.getTimeInMillis() / 1000)});
 
