@@ -85,6 +85,7 @@ public class PieGraphActivity extends Activity
         for(Pair<Product, Integer> entry : list){
             Segment seg = new Segment(entry.first.getDisplayName() + "["+entry.second+"]",entry.second);
             SegmentFormatter sf = new SegmentFormatter(couleur[i]);
+            sf.getLabelPaint().setColor(Color.BLACK);
             sf.getFillPaint().setMaskFilter(emf);
             pie.addSeries(seg,sf);
             i++;
