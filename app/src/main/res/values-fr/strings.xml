@@ -125,4 +125,5 @@
     <string name="valide">Confirmer le choix</string>
     <string name="valide_for_table">Confirmer pour une table</string>
     <string name="valider_change_pass">Confirmer</string>
+    <string name="title_activity_chiffre_affaire">Chiffre d\'affaires</string>
 </resources>

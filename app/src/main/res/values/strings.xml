@@ -90,6 +90,8 @@
     <string name="title_activity_insuf_stock">Critically low stock</string>
     <string name="title_activity_actual_stock">Stock state</string>
     <string name="title_activity_stock_change">Change stock</string>
+    <string name="title_activity_chiffre_affaire">Turnover evolution</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
