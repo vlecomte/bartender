@@ -83,6 +83,7 @@ public class WaiterPlotActivity extends Activity
         int i=1;
         for(Pair<String, Integer> entry : list){
             Segment seg = new Segment(entry.first + "["+entry.second+"]",entry.second);
+            if(i>couleur.length)i=1;
             SegmentFormatter sf = new SegmentFormatter(couleur[i]);
             sf.getLabelPaint().setColor(Color.BLACK);
             sf.getFillPaint().setMaskFilter(emf);
