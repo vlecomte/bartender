@@ -1,23 +1,15 @@
 package be.uclouvain.lsinf1225.v.bartender.gui;
 
 import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoProduct;
-import be.uclouvain.lsinf1225.v.bartender.model.Order;
-import be.uclouvain.lsinf1225.v.bartender.model.Product;
-import be.uclouvain.lsinf1225.v.bartender.util.CustomList;
-import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 

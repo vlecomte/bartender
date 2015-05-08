@@ -20,7 +20,6 @@ import java.io.InputStreamReader;
 
 
 public class DescriptionActivity extends Activity {
-    private TextView sstitre;
     private TextView descText;
     private TextView compte;
     private ImageView image;
@@ -34,7 +33,6 @@ public class DescriptionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-        sstitre = (TextView) findViewById(R.id.tV_descr);
         descText = (TextView) findViewById(R.id.grdtextdescr);
         image = (ImageView) findViewById(R.id.imgDesc);
         compte = (TextView) findViewById(R.id.compte_desc);
@@ -70,7 +68,6 @@ public class DescriptionActivity extends Activity {
         updateAdd();
         indexFile = indexFile.substring(0,indexFile.length() -4);
         image.setImageResource(getResources().getIdentifier(indexFile, "drawable", getPackageName()));
-        sstitre.setText("");
         setTitle(conso.getDisplayName() + " - " + conso.getPrice() +"€");
         descText.setText(desc);
 

@@ -19,7 +19,7 @@
     <dimen name="col_width_type">70dp</dimen>
 
     <!-- Table row heights -->
-    <dimen name="row_height_large">45dp</dimen>
+    <dimen name="row_height_large">50dp</dimen>
     <dimen name="icon_height_type">40dp</dimen>
 
     <!-- Horizontal table rules -->

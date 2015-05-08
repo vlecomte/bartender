@@ -1,69 +1,54 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imgDesc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_weight="4"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tV_descr"
-        android:layout_gravity="left"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_alignTop="@+id/imgDesc" />
+        android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:layout_gravity="bottom"
         android:id="@+id/grdtextdescr"
-        android:layout_marginBottom="50dp"
-        android:layout_above="@+id/rem_pro"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="50dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/minus"
-        android:id="@+id/rem_pro"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/add_pro"
-        android:layout_toEndOf="@+id/add_pro" />
+        android:layout_height="wrap_content">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/plus"
-        android:id="@+id/add_pro"
-        android:layout_toRightOf="@+id/tV_descr"
-        android:layout_toEndOf="@+id/tV_descr"
-        android:layout_alignParentBottom="true"
-/>
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus"
+            android:id="@+id/add_pro" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/compte_desc"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_alignBottom="@+id/rem_pro"
-        android:layout_toRightOf="@+id/rem_pro"
-        android:layout_toEndOf="@+id/rem_pro" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minus"
+            android:id="@+id/rem_pro" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/compte_desc"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
