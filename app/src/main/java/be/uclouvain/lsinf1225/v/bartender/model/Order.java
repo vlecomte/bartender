@@ -18,8 +18,7 @@ public class Order {
         mOrderNum = orderNum;
         mCustomerUsername = customerUsername;
         mTableNum = tableNum;
-        mDetails = new ArrayList<>();
-        refreshTotal();
+        setDetails(new ArrayList<Detail>());
     }
 
     private void refreshTotal() {
@@ -61,6 +60,6 @@ public class Order {
 
     public void addBasket(Customer.Basket basket) {
         DaoDetail.create(mOrderNum, basket);
-        mDetails = DaoDetail.getFromOrder(mOrderNum);
+        setDetails(DaoDetail.getFromOrder(mOrderNum));
     }
 }

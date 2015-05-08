@@ -22,12 +22,12 @@
             <TextView
                 android:text="@string/col_number_short"
                 android:layout_width="@dimen/col_width_time"
-                android:gravity="center_horizontal"
+                android:gravity="end"
                 style="@style/TableCell.Header" />
             <TextView
                 android:text="@string/col_price"
                 android:layout_width="@dimen/col_width_price"
-                android:gravity="center_horizontal"
+                android:gravity="end"
                 style="@style/TableCell.Header" />
         </TableRow>
 

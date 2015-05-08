@@ -70,13 +70,17 @@
     <string name="error_reading_desc_file">Error reading the description file</string>
     <string name="error_desc_file_not_found">Description file not found</string>
     <string name="error_reading_desc_file_impossible">Error: description file impossible to read</string>
-    <string name="basket_num_short">no.:</string>
+    <string name="basket_num_short">qty:</string>
     <string name="not_possible_to_order_anymore">Not possible to order anymore:</string>
     <string name="title__client_plot">Customer\'s consommation stats</string>
     <string name="title__waiter_plot">Waiter\'s efficiency stats</string>
     <string name="title__cons_plot">Consommation choice stats</string>
 
     <string name="to_serve_at_table_then_space">To serve - Table&#160;</string>
+    <string name="error_no_basket_to_confirm">You have no basket to be confirmed.</string>
+
+    <string name="bill_for_then_space">Bill for&#160;</string>
+    <string name="bill_for_table_then_space">Bill for table&#160;</string>
 
 
     <string name="plus">+</string>
@@ -103,8 +107,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_pie_graph">PieGraphActivity</string>
-    <string name="title_activity_waiter_plot">WaiterPlotActivity</string>
-    <string name="title_activity_client_plot">ClientPlotActivity</string>
+    <string name="title_activity_pie_graph">Pie graph</string>
+    <string name="title_activity_waiter_plot">Waiter efficiency</string>
+    <string name="title_activity_client_plot">Best customers</string>
 
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
@@ -16,6 +17,7 @@ import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
 public class BasketFragment extends Fragment implements Refreshable {
     private LinearLayout mBasketTable;
+    private TextView mRowBasketEmpty;
     private TableFiller mFiller;
 
     @Override
@@ -25,24 +27,30 @@ public class BasketFragment extends Fragment implements Refreshable {
         View view = inflater.inflate(R.layout.fragment_basket, container, false);
 
         mBasketTable = (LinearLayout) view.findViewById(R.id.basket_content);
+        mRowBasketEmpty = (TextView) view.findViewById(R.id.row_basket_empty);
         mFiller = new TableFiller(mBasketTable, inflater);
 
         Button buttonConfirmBasket = (Button) view.findViewById(R.id.button_confirm_basket);
         buttonConfirmBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MyApp.getCustomer().hasCurrentOrder()) {
-                    confirmBasketAndRefresh();
+                if (!MyApp.getCustomer().getBasket().isEmpty()) {
+                    if (MyApp.getCustomer().hasCurrentOrder()) {
+                        confirmBasketAndRefresh();
+                    } else {
+                        TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
+                        tablePicker.setListener(new TablePickerDialogFragment.TableNumListener() {
+                            @Override
+                            public void onObtainTableNum(int tableNum) {
+                                MyApp.getCustomer().openOrder(tableNum);
+                                confirmBasketAndRefresh();
+                            }
+                        });
+                        tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
+                    }
                 } else {
-                    TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
-                    tablePicker.setListener(new TablePickerDialogFragment.TableNumListener() {
-                        @Override
-                        public void onObtainTableNum(int tableNum) {
-                            MyApp.getCustomer().openOrder(tableNum);
-                            confirmBasketAndRefresh();
-                        }
-                    });
-                    tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
+                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -54,17 +62,22 @@ public class BasketFragment extends Fragment implements Refreshable {
         buttonConfirmForTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
-                tablePicker.setListener(new TablePickerDialogFragment.TableNumListener() {
-                    @Override
-                    public void onObtainTableNum(int tableNum) {
-                        MyApp.getWaiter().confirmBasketFor(tableNum);
-                        refresh();
-                        Toast.makeText(getActivity(), getString(R.string.confirmed_for_table)
-                                + tableNum, Toast.LENGTH_LONG).show();
-                    }
-                });
-                tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
+                if (!MyApp.getCustomer().getBasket().isEmpty()) {
+                    TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
+                    tablePicker.setListener(new TablePickerDialogFragment.TableNumListener() {
+                        @Override
+                        public void onObtainTableNum(int tableNum) {
+                            MyApp.getWaiter().confirmBasketFor(tableNum);
+                            refresh();
+                            Toast.makeText(getActivity(), getString(R.string.confirmed_for_table)
+                                    + tableNum, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;
@@ -79,12 +92,18 @@ public class BasketFragment extends Fragment implements Refreshable {
     public void confirmBasketAndRefresh() {
         MyApp.getCustomer().confirmBasket();
         refresh();
-        Toast.makeText(getActivity(), R.string.confirmed_basket, Toast.LENGTH_LONG).show();
+
+        Toast.makeText(getActivity(), R.string.confirmed_basket, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void refresh() {
         mBasketTable.removeAllViews();
-        mFiller.fillBasket(MyApp.getCustomer());
+        if (!MyApp.getCustomer().getBasket().isEmpty()) {
+            mRowBasketEmpty.setVisibility(View.GONE);
+            mFiller.fillBasket(MyApp.getCustomer());
+        } else {
+            mRowBasketEmpty.setVisibility(View.VISIBLE);
+        }
     }
 }

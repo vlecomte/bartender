@@ -19,8 +19,14 @@ public class BillActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
 
-        final int orderNum = getIntent().getIntExtra("order_num", 0);
+        final int orderNum = getIntent().getIntExtra(ARGUMENT_ORDER_NUM, 0);
         Order order = DaoOrder.getByNum(orderNum);
+
+        if (order.hasCustomer()) {
+            setTitle(getString(R.string.bill_for_then_space) + order.getCustomerUsername());
+        } else {
+            setTitle(getString(R.string.bill_for_table_then_space) + order.getTableNum());
+        }
 
         LinearLayout billTable = (LinearLayout) findViewById(R.id.bill_content);
         TableFiller filler = new TableFiller(billTable, getLayoutInflater());
