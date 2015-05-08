@@ -2,12 +2,19 @@ package be.uclouvain.lsinf1225.v.bartender.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.util.Pair;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-import com.androidplot.xy.SimpleXYSeries;
-
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 
 import static be.uclouvain.lsinf1225.v.bartender.dao.Contract.*;
@@ -33,5 +40,42 @@ public class DaoPlots {
         c.close();
         return turnoverByDate;
     }
-    //public static List<> popularProducts()
+
+    public static List<Double> getTurnoverInRange(Calendar dateBegin, Calendar dateEnd) {
+        Map<String, Double> turnoverByDate = getTurnoverByDate();
+        ArrayList<Double> turnovers = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        for (; !dateBegin.after(dateEnd); dateBegin.add(Calendar.DATE, 1)) {
+            Double turnover = turnoverByDate.get(sdf.format(dateBegin.getTime()));
+            Log.w("here", sdf.format(dateBegin.getTime()));
+            if (turnover == null) turnover = 0.0;
+            turnovers.add(turnover);
+        }
+        return turnovers;
+    }
+
+    public static List<Pair<Product, Integer>> getProductsByPopularity(Calendar dateBegin,
+                                                                       Calendar dateEnd) {
+        SQLiteDatabase db = MyApp.getReadableDb();
+        Cursor c = db.rawQuery("SELECT p."+COL_PRODUCT_NAME+", COUNT(d."+COL_ID+") AS the_count"
+                +" FROM "+TABLE_PRODUCT+" p, "+TABLE_DETAIL+" d"
+                +" WHERE d."+COL_PRODUCT_NAME+" = p."+COL_PRODUCT_NAME
+                        +" AND ? <= d."+COL_DATE_ADDED+" AND d."+COL_DATE_ADDED+" <= ?"
+                +" GROUP BY p."+COL_PRODUCT_NAME
+                +" ORDER BY the_count DESC",
+                new String[]{""+(dateBegin.getTimeInMillis() / 1000),
+                        ""+(dateEnd.getTimeInMillis() / 1000)});
+
+        List<Pair<Product, Integer>> productsByPopularity = new ArrayList<>();
+        while (c.moveToNext()) {
+            String productName = c.getString(c.getColumnIndex(COL_PRODUCT_NAME));
+            Product product = DaoProduct.getByName(productName);
+            int popularity = c.getInt(c.getColumnIndex("the_count"));
+
+            productsByPopularity.add(new Pair<>(product, popularity));
+        }
+        c.close();
+        return productsByPopularity;
+    }
 }

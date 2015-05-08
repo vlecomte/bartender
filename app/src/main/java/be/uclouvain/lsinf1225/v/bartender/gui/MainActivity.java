@@ -7,14 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoPlots;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 
@@ -28,15 +34,25 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TODO: Test to see if it crashes, to remove
+        List<Double> turnoverInRange = DaoPlots.getTurnoverInRange(
+                new GregorianCalendar(2015, 4, 1),
+                new GregorianCalendar(2015, 4, 10)
+        );
+        for (double turnover : turnoverInRange) {
+            Log.w("hey", ""+turnover);
+        }
+        List<Pair<Product, Integer>> productsByPopularity = DaoPlots.getProductsByPopularity(
+                new GregorianCalendar(2015, 4, 1),
+                new GregorianCalendar(2015, 4, 10)
+        );
+        for (Pair<Product, Integer> entry : productsByPopularity) {
+            Log.w("hey", entry.first.getDisplayName() + ": " + entry.second);
+        }
+
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(adapter);
-
-        // TODO: Test to see if it crashes, to remove
-        Map<String, Double> turnoverByDate = DaoPlots.getTurnoverByDate();
-        for (Map.Entry<String, Double> entry : turnoverByDate.entrySet()) {
-            System.out.println(entry.getKey()+": "+entry.getValue());
-        }
     }
 
     @Override
