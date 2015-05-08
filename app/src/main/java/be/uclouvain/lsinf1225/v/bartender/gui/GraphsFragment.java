@@ -31,7 +31,8 @@ public class GraphsFragment extends Fragment {
         graph1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), WaiterPlotActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -46,7 +47,8 @@ public class GraphsFragment extends Fragment {
         graph3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), ClientPlotActivity.class);
+                startActivity(intent);
             }
         });
 
