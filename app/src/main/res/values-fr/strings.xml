@@ -147,4 +147,6 @@
     <string name="bill_for_table_then_space">Addition de la table&#160;</string>
     <string name="bill_for_then_space">Addition de&#160;</string>
     <string name="button_confirm_for_me">Confirmer pour moi</string>
+    <string name="title_affairtune_stats">Chiffre d\'affaire des 20 derniers jours</string>
+    <string name="affair_profit">Chiffre d\'affaire</string>
 </resources>

@@ -6,10 +6,13 @@ import android.os.Bundle;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.*;
+
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Calendar;
+import java.text.Format;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoPlots;
@@ -49,7 +52,7 @@ public class ChiffreAffaireActivity extends Activity
         XYSeries series1 = new SimpleXYSeries(
                 Arrays.asList(series1Numbers),
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-                "Chiffre d'affaire");
+                getString(R.string.affair_profit));
 
         LineAndPointFormatter series1Format = new LineAndPointFormatter();
         series1Format.setPointLabelFormatter(new PointLabelFormatter());
@@ -63,6 +66,7 @@ public class ChiffreAffaireActivity extends Activity
         plot.setDomainLabel("Dates");
         plot.setRangeLabel("euros");
         plot.getGraphWidget().setDomainLabelOrientation(-45);
+        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1); plot.setDomainValueFormat(new DecimalFormat("#"));
 
     }
 }

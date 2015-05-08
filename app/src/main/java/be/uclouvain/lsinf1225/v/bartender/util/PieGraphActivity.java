@@ -71,19 +71,16 @@ public class PieGraphActivity extends Activity
         prend.setDonutSize((float) 0/100, PieRenderer.DonutMode.PERCENT);
     }
 
-    protected void updateDonutText() {
-        donutSizeTextView.setText(donutSizeSeekBar.getProgress() + "%");
-    }
 
     private void updateTab(){
         list = DaoPlots.getProductsByPopularity(calendar1,calendar2);
     }
 
     private void updatePie(){
-        int i=1;
+        int i=0;
         for(Pair<Product, Integer> entry : list){
             Segment seg = new Segment(entry.first.getDisplayName() + "["+entry.second+"]",entry.second);
-            if(i>couleur.length)i=1;
+            if(i>couleur.length-1)i=3;
             SegmentFormatter sf = new SegmentFormatter(couleur[i]);
             sf.getLabelPaint().setColor(Color.BLACK);
             sf.getFillPaint().setMaskFilter(emf);
