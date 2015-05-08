@@ -27,6 +27,7 @@ import be.uclouvain.lsinf1225.v.bartender.gui.BillActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.RankPickerDialogFragment;
 import be.uclouvain.lsinf1225.v.bartender.gui.UsersActivity;
+import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
@@ -216,6 +217,22 @@ public class TableFiller {
 
             productName.setText(detail.getProduct().getDisplayName());
             timeAdded.setText(sdf.format(detail.getDateAdded()));
+
+            mTable.addView(row);
+        }
+    }
+
+    public void fillBasket(Customer customer) {
+        for (Map.Entry<Product, Integer> entry : customer.getBasket().entrySet()) {
+            LinearLayout row = (LinearLayout) mInflater.inflate(R.layout.row_basket, mTable, false);
+
+            TextView productName = (TextView) row.findViewById(R.id.elem_product_name);
+            TextView number = (TextView) row.findViewById(R.id.elem_number);
+            TextView price = (TextView) row.findViewById(R.id.elem_price);
+
+            productName.setText(entry.getKey().getDisplayName());
+            number.setText(entry.getValue()+"");
+            price.setText(entry.getKey().getPrice()+"");
 
             mTable.addView(row);
         }

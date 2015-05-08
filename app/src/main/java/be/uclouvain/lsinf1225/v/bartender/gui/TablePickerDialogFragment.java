@@ -13,6 +13,7 @@ import android.widget.NumberPicker;
 import be.uclouvain.lsinf1225.v.bartender.R;
 
 public class TablePickerDialogFragment extends DialogFragment {
+    public static final String TAG = "table_picker";
     private static final int TABLE_NUM_MIN = 1, TABLE_NUM_MAX = 10;
 
     private NumberPicker mTablePicker;

@@ -13,11 +13,13 @@
     <string name="col_table">Table</string>
     <string name="col_number">Number</string>
     <string name="col_time_added">Added</string>
+    <string name="col_number_short">Num</string>
 
     <!-- Elements and placeholders -->
     <string name="elem_total">TOTAL</string>
     <string name="elem_table_then_space">Table&#160;</string>
     <string name="elem_space_then_drinks">&#160;drinks</string>
+    <string name="elem_basket_empty">Your basket is empty.</string>
     <string name="elem_no_order">There is no open order.</string>
     <string name="elem_no_own_order">You have no open order.</string>
     <string name="elem_no_drinks">All the drinks have been served.</string>

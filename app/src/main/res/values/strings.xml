@@ -12,6 +12,7 @@
     <string name="basket_ss">Basket</string>
     <string name="confirm_basket_button">Confirm basket</string>
     <string name="confirmed_basket">Your basket has been confirmed. A waiter is taking care of your order.</string>
+    <string name="confirmed_for_table">The basket has been confirmed for table&#160;</string>
     <string name="new_command_button">New order</string>
     <string name="title_Activity_list_details">Open orders</string>
     <string name="inWait_details_text">open detail(s)</string>

@@ -119,6 +119,10 @@ public class MyApp extends Application {
         return (Customer) getUser();
     }
 
+    public static Waiter getWaiter() {
+        return (Waiter) getUser();
+    }
+
     public static boolean isWaiter() {
         return getUser() instanceof Waiter;
     }

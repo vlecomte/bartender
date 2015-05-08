@@ -20,7 +20,7 @@
                 android:layout_weight="1"
                 style="@style/TableCell.Header" />
             <TextView
-                android:text="@string/col_time"
+                android:text="@string/col_number_short"
                 android:layout_width="@dimen/col_width_time"
                 android:gravity="center_horizontal"
                 style="@style/TableCell.Header" />
@@ -47,16 +47,16 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/bill_content"
+                android:id="@+id/basket_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
             <TextView
-                android:id="@+id/row_no_own_order"
+                android:id="@+id/row_basket_empty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/elem_no_own_order"
+                android:text="@string/elem_basket_empty"
                 android:visibility="gone"
                 style="@style/TableCell.Placeholder" />
 
