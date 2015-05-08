@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.androidplot.pie.PieChart;
@@ -14,8 +15,14 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.*;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+import android.util.Pair;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoPlots;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
 import android.app.Activity;
 import android.graphics.*;
@@ -26,87 +33,61 @@ import com.androidplot.pie.PieChart;
 import com.androidplot.pie.PieRenderer;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
+import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
-/**
- * The simplest possible example of using AndroidPlot to plot some data.
- */
 public class PieGraphActivity extends Activity
 {
 
     private TextView donutSizeTextView;
     private SeekBar donutSizeSeekBar;
+    private int[] couleur = {Color.BLUE, Color.RED, Color.GRAY, Color.GREEN, Color.CYAN, Color.DKGRAY, Color.YELLOW, Color.MAGENTA, Color.WHITE};
+    private EmbossMaskFilter emf;
 
     private PieChart pie;
+    private List<Pair<Product, Integer>> list;
 
-    private Segment s1;
-    private Segment s2;
-    private Segment s3;
-    private Segment s4;
+    Calendar calendar1 = new GregorianCalendar();
+    Calendar calendar2 = new GregorianCalendar();
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.simple_xy_plot_example);
+        setContentView(R.layout.activity_pie_graph);
 
-        // initialize our XYPlot reference:
+        calendar1.add(Calendar.DAY_OF_MONTH, -15);
+        updateTab();
+
         pie = (PieChart) findViewById(R.id.barak);
-        donutSizeSeekBar = (SeekBar) findViewById(R.id.donutSizeSeekBar);
 
-        donutSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                pie.getRenderer(PieRenderer.class).setDonutSize(0/100f,
-                        PieRenderer.DonutMode.PERCENT);
-                pie.redraw();
-                updateDonutText();
-            }
-        });
-
-        donutSizeTextView = (TextView) findViewById(R.id.donutSizeTextView);
-        updateDonutText();
-
-        s1 = new Segment("s1", 10);
-        s2 = new Segment("s2", 1);
-        s3 = new Segment("s3", 10);
-        s4 = new Segment("s4", 10);
-
-        EmbossMaskFilter emf = new EmbossMaskFilter(
+        emf = new EmbossMaskFilter(
                 new float[]{1, 1, 1}, 0.4f, 10, 8.2f);
 
-        SegmentFormatter sf1 = new SegmentFormatter(Color.GREEN);
-
-        sf1.getFillPaint().setMaskFilter(emf);
-
-        SegmentFormatter sf2 = new SegmentFormatter(Color.YELLOW);
-
-        sf2.getFillPaint().setMaskFilter(emf);
-
-        SegmentFormatter sf3 = new SegmentFormatter(Color.GREEN);
-
-        sf3.getFillPaint().setMaskFilter(emf);
-
-        SegmentFormatter sf4 = new SegmentFormatter(Color.BLUE);
-
-        sf4.getFillPaint().setMaskFilter(emf);
-
-        pie.addSeries(s1, sf1);
-        pie.addSeries(s2, sf2);
-        pie.addSeries(s3, sf3);
-        pie.addSeries(s4, sf4);
+        updatePie();
 
         pie.getBorderPaint().setColor(Color.TRANSPARENT);
         pie.getBackgroundPaint().setColor(Color.TRANSPARENT);
+        PieRenderer prend = pie.getRenderer(PieRenderer.class);
+        prend.setDonutSize((float) 0/100, PieRenderer.DonutMode.PERCENT);
     }
 
     protected void updateDonutText() {
         donutSizeTextView.setText(donutSizeSeekBar.getProgress() + "%");
+    }
+
+    private void updateTab(){
+        list = DaoPlots.getProductsByPopularity(calendar1,calendar2);
+    }
+
+    private void updatePie(){
+        int i=1;
+        for(Pair<Product, Integer> entry : list){
+            Segment seg = new Segment(entry.first.getDisplayName() + "["+entry.second+"]",entry.second);
+            SegmentFormatter sf = new SegmentFormatter(couleur[i]);
+            sf.getFillPaint().setMaskFilter(emf);
+            pie.addSeries(seg,sf);
+            i++;
+        }
     }
 }
