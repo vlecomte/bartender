@@ -12,11 +12,8 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoPlots;
@@ -34,25 +31,32 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(adapter);
+
         // TODO: Test to see if it crashes, to remove
         List<Double> turnoverInRange = DaoPlots.getTurnoverInRange(
                 new GregorianCalendar(2015, 4, 1),
                 new GregorianCalendar(2015, 4, 10)
         );
         for (double turnover : turnoverInRange) {
-            Log.w("hey", ""+turnover);
+            Log.d("hey", ""+turnover);
         }
         List<Pair<Product, Integer>> productsByPopularity = DaoPlots.getProductsByPopularity(
                 new GregorianCalendar(2015, 4, 1),
                 new GregorianCalendar(2015, 4, 10)
         );
         for (Pair<Product, Integer> entry : productsByPopularity) {
-            Log.w("hey", entry.first.getDisplayName() + ": " + entry.second);
+            Log.d("hey", entry.first.getDisplayName() + ": " + entry.second);
         }
-
-        MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(adapter);
+        List<Pair<String, Double>> clientsByTurnover = DaoPlots.getCustomersByTurnover(
+                new GregorianCalendar(2015, 4, 1),
+                new GregorianCalendar(2015, 4, 10)
+        );
+        for (Pair<String, Double> entry : clientsByTurnover) {
+            Log.d("hey", entry.first + ": " + entry.second);
+        }
     }
 
     @Override
