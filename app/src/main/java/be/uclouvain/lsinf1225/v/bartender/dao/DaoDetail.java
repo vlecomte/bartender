@@ -19,6 +19,7 @@ import be.uclouvain.lsinf1225.v.bartender.model.Product;
 
 public class DaoDetail {
     private static Map<Integer, Detail> sDetailById = new HashMap<>();
+    private static Map<Integer, List<Detail>> sOpenByTable;
 
     private static Detail getOrCreate(int detailId, String productName, Date dateAdded) {
         if (!sDetailById.containsKey(detailId)) {
@@ -67,6 +68,11 @@ public class DaoDetail {
         return details;
     }
 
+    // Supposes getOpenByTable has been called before!
+    public static List<Detail> getOpenAtTable(int tableNum) {
+        return sOpenByTable.get(tableNum);
+    }
+
     public static Map<Integer, List<Detail>> getOpenByTable() {
         SQLiteDatabase db = MyApp.getReadableDb();
         Cursor c = db.rawQuery("SELECT d."+COL_ID+", d."+COL_PRODUCT_NAME+", d."+COL_DATE_ADDED
@@ -77,7 +83,7 @@ public class DaoDetail {
                         +" ORDER BY d."+COL_DATE_ADDED+", d."+COL_PRODUCT_NAME,
                 new String[]{});
 
-        Map<Integer, List<Detail>> openDetailsByTable = new HashMap<>();
+        sOpenByTable = new HashMap<>();
 
         while (c.moveToNext()) {
             int detailId = c.getInt(c.getColumnIndex(COL_ID));
@@ -85,14 +91,14 @@ public class DaoDetail {
             Date dateAdded = new Date(c.getLong(c.getColumnIndex(COL_DATE_ADDED)) * 1000);
             int tableNum = c.getInt(c.getColumnIndex(COL_TABLE_NUM));
 
-            if (!openDetailsByTable.containsKey(tableNum)) {
-                openDetailsByTable.put(tableNum, new ArrayList<Detail>());
+            if (!sOpenByTable.containsKey(tableNum)) {
+                sOpenByTable.put(tableNum, new ArrayList<Detail>());
             }
-            openDetailsByTable.get(tableNum).add(getOrCreate(detailId, productName, dateAdded));
+            sOpenByTable.get(tableNum).add(getOrCreate(detailId, productName, dateAdded));
         }
         c.close();
 
-        return openDetailsByTable;
+        return sOpenByTable;
     }
 
     public static void markDelivered(List<Detail> details) {

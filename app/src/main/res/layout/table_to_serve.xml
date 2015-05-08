@@ -15,13 +15,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="@string/col_username_or_table"
+                android:text="@string/col_table"
                 android:layout_weight="1"
                 style="@style/TableCell.Header" />
             <TextView
-                android:text="@string/col_total"
-                android:layout_width="@dimen/col_width_price"
-                android:gravity="center_horizontal"
+                android:text="@string/col_number"
+                android:layout_width="@dimen/col_width_number"
                 style="@style/TableCell.Header" />
         </TableRow>
 
@@ -41,16 +40,16 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/orders_content"
+                android:id="@+id/to_serve_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
             <TextView
-                android:id="@+id/row_no_order"
+                android:id="@+id/row_no_drinks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/elem_no_order"
+                android:text="@string/elem_no_drinks"
                 android:visibility="gone"
                 style="@style/TableCell.Placeholder" />
 

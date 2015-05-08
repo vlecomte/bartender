@@ -12,6 +12,8 @@ import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
 public class UsersActivity extends FragmentActivity implements Refreshable {
+    public static boolean sRefreshRequested = false;
+
     private LinearLayout mUsersTable;
     private TableFiller mFiller;
 
@@ -26,6 +28,16 @@ public class UsersActivity extends FragmentActivity implements Refreshable {
         refresh();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sRefreshRequested) {
+            refresh();
+            sRefreshRequested = false;
+        }
+    }
+
+    @Override
     public void refresh() {
         mUsersTable.removeAllViews();
         Map<String, String> rankByUsername = DaoUser.getAllRanks();

@@ -22,9 +22,11 @@ import java.util.Set;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoUser;
+import be.uclouvain.lsinf1225.v.bartender.gui.AtTableActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.BillActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.RankPickerDialogFragment;
+import be.uclouvain.lsinf1225.v.bartender.gui.UsersActivity;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
 import be.uclouvain.lsinf1225.v.bartender.model.Product;
@@ -108,20 +110,19 @@ public class TableFiller {
 
             TextView usernameOrTable = (TextView) row.findViewById(R.id.elem_username_or_table);
             TextView total = (TextView) row.findViewById(R.id.elem_total);
-            ImageButton openBill = (ImageButton) row.findViewById(R.id.button_open_bill);
 
             if (order.hasCustomer()) {
                 usernameOrTable.setText(order.getCustomerUsername());
             } else {
-                usernameOrTable.setText(mContext.getString(R.string.elem_table_with_space)
+                usernameOrTable.setText(mContext.getString(R.string.elem_table_then_space)
                         + order.getTableNum());
             }
             total.setText(String.format(PRICE_FORMAT, order.getTotal()));
-            openBill.setOnClickListener(new View.OnClickListener() {
+            row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, BillActivity.class);
-                    intent.putExtra("order_num", order.getOrderNum());
+                    intent.putExtra(BillActivity.ARGUMENT_ORDER_NUM, order.getOrderNum());
                     mContext.startActivity(intent);
                 }
             });
@@ -167,13 +168,54 @@ public class TableFiller {
                             @Override
                             public void onObtainRank(String rank) {
                                 DaoUser.setRank(user.getKey(), rank);
-                                toRefresh.refresh();
+                                UsersActivity.sRefreshRequested = true;
                             }
                         });
                         rankPicker.show(manager, "rank_picker");
                     }
                 }
             });
+
+            mTable.addView(row);
+        }
+    }
+
+    public void fillToServe(Map<Integer, List<Detail>> openByTable) {
+        for (final Map.Entry<Integer, List<Detail>> entry : openByTable.entrySet()) {
+            LinearLayout row = (LinearLayout) mInflater.inflate(R.layout.row_to_serve, mTable,
+                    false);
+
+            TextView table = (TextView) row.findViewById(R.id.elem_table);
+            TextView number = (TextView) row.findViewById(R.id.elem_number);
+
+            table.setText(mContext.getString(R.string.elem_table_then_space) + entry.getKey());
+            number.setText(entry.getValue().size() + mContext.getString(
+                    R.string.elem_space_then_drinks));
+
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, AtTableActivity.class);
+                    intent.putExtra(AtTableActivity.ARGUMENT_TABLE_NUM, entry.getKey());
+                    mContext.startActivity(intent);
+                }
+            });
+
+            mTable.addView(row);
+        }
+    }
+
+    public void fillAtTable(List<Detail> details) {
+        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
+
+        for (Detail detail : details) {
+            TableRow row = (TableRow) mInflater.inflate(R.layout.row_at_table, mTable, false);
+
+            TextView productName = (TextView) row.findViewById(R.id.elem_product_name);
+            TextView timeAdded = (TextView) row.findViewById(R.id.elem_time_added);
+
+            productName.setText(detail.getProduct().getDisplayName());
+            timeAdded.setText(sdf.format(detail.getDateAdded()));
 
             mTable.addView(row);
         }

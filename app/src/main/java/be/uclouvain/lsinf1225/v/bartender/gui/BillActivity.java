@@ -12,6 +12,8 @@ import be.uclouvain.lsinf1225.v.bartender.model.Order;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
 public class BillActivity extends Activity {
+    public static final String ARGUMENT_ORDER_NUM = "order_num";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class BillActivity extends Activity {
             @Override
             public void onClick(View v) {
                 DaoOrder.setPaid(orderNum);
+                OrdersFragment.sRefreshRequested = true;
                 finish();
             }
         });

@@ -46,7 +46,7 @@
     <string name="efficiency_waiters">Efficacité des serveurs</string>
     <string name="elem_no_order">Il n\'y a pas de commande ouverte.</string>
     <string name="elem_no_own_order">Vous n\'avez pas de commande ouverte.</string>
-    <string name="elem_table_with_space">Table&#160;</string>
+    <string name="elem_table_then_space">Table&#160;</string>
     <string name="elem_total">TOTAL</string>
     <string name="email_txt">email:</string>
     <string name="error_change_mail">Erreur : données insuffisantes ou incorrectes</string>

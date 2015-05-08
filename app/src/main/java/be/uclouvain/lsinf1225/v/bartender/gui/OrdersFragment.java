@@ -17,6 +17,8 @@ import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
 public class OrdersFragment extends Fragment implements Refreshable {
+    public static boolean sRefreshRequested = false;
+
     LinearLayout mOrdersTable;
     TextView mRowNoOrder;
     TableFiller mFiller;
@@ -33,6 +35,15 @@ public class OrdersFragment extends Fragment implements Refreshable {
         refresh();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sRefreshRequested) {
+            refresh();
+            sRefreshRequested = false;
+        }
     }
 
     public void refresh() {

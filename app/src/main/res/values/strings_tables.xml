@@ -10,13 +10,17 @@
     <string name="col_username">Username</string>
     <string name="col_rank">Rank</string>
     <string name="col_type">Type</string>
-    <!--<string name="col_number">Number</string>-->
+    <string name="col_table">Table</string>
+    <string name="col_number">Number</string>
+    <string name="col_time_added">Added</string>
 
     <!-- Elements and placeholders -->
     <string name="elem_total">TOTAL</string>
-    <string name="elem_table_with_space">Table&#160;</string>
+    <string name="elem_table_then_space">Table&#160;</string>
+    <string name="elem_space_then_drinks">&#160;drinks</string>
     <string name="elem_no_order">There is no open order.</string>
     <string name="elem_no_own_order">You have no open order.</string>
+    <string name="elem_no_drinks">All the drinks have been served.</string>
 
     <!-- Rank display names -->
     <string name="rank_customer">Customer</string>
@@ -25,7 +29,6 @@
 
     <!-- Image descriptions -->
     <string name="image_type">Drink type icon</string>
-    <string name="button_desc_open_bill">Open bill</string>
     <string name="button_desc_edit_rank">Edit rank</string>
 
 </resources>

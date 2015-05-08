@@ -5,9 +5,7 @@
     android:orientation="vertical">
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="@dimen/row_height_large"
-        android:gravity="center_vertical"
-        android:background="?android:attr/selectableItemBackground">
+        style="@style/ClickableTableRow">
         <ImageView
             android:id="@+id/image_type"
             android:layout_width="@dimen/col_width_type"

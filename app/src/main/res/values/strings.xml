@@ -38,6 +38,7 @@
     <string name="error_change_passe">Error: insufficient or incorrect data</string>
     <string name="error_change_mail">Error: insufficient or incorrect data</string>
     <string name="button_mark_paid">Mark as paid</string>
+    <string name="button_mark_delivered">I will deliver this</string>
     <string name="quantity">Quantity</string>
     <string name="modify">modify</string>
 
@@ -73,6 +74,8 @@
     <string name="title__client_plot">Customer\'s consommation stats</string>
     <string name="title__waiter_plot">Waiter\'s efficiency stats</string>
     <string name="title__cons_plot">Consommation choice stats</string>
+
+    <string name="to_serve_at_table_then_space">To serve - Table&#160;</string>
 
 
     <string name="plus">+</string>

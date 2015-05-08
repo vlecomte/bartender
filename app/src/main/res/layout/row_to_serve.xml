@@ -7,13 +7,12 @@
         android:layout_width="match_parent"
         style="@style/ClickableTableRow">
         <TextView
-            android:id="@+id/elem_username_or_table"
+            android:id="@+id/elem_table"
             android:layout_weight="1"
             style="@style/TableCell" />
         <TextView
-            android:id="@+id/elem_total"
-            android:layout_width="@dimen/col_width_total"
-            android:gravity="end"
+            android:id="@+id/elem_number"
+            android:layout_width="@dimen/col_width_number"
             style="@style/TableCell" />
     </TableRow>
     <include layout="@layout/rule_table_inter" />
