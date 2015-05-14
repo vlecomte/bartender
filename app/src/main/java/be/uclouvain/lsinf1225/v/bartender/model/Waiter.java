@@ -1,5 +1,8 @@
 package be.uclouvain.lsinf1225.v.bartender.model;
 
+import java.util.List;
+
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoOrder;
 
 /**
@@ -14,5 +17,9 @@ public class Waiter extends Customer {
     public void confirmBasketFor(int tableNum) {
         DaoOrder.getOpenOrCreateFor(tableNum).addBasket(mBasket);
         mBasket.clear();
+    }
+
+    public void serve(List<Detail> details) {
+        DaoDetail.markDelivered(details, getUsername());
     }
 }

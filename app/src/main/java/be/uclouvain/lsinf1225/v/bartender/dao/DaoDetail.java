@@ -101,7 +101,7 @@ public class DaoDetail {
         return sOpenByTable;
     }
 
-    public static void markDelivered(List<Detail> details) {
+    public static void markDelivered(List<Detail> details, String waiterUsername) {
         StringBuilder whereClause = new StringBuilder();
         String[] detailIds = new String[details.size()];
 
@@ -113,6 +113,7 @@ public class DaoDetail {
 
         ContentValues cv = new ContentValues();
         cv.put(COL_DATE_DELIVERED, System.currentTimeMillis() / 1000);
+        cv.put(COL_WAITER_USERNAME, waiterUsername);
 
         SQLiteDatabase db = MyApp.getWritableDb();
         db.update(TABLE_DETAIL, cv, whereClause.toString(), detailIds);

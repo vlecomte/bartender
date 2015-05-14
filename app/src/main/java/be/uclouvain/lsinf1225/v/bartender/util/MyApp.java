@@ -25,7 +25,7 @@ public class MyApp extends Application {
     public static class App extends Application {
 
         private static final String DATABASE_NAME = "bartender.sqlite";
-        private static final int DATABASE_VERSION = 10;
+        private static final int DATABASE_VERSION = 11;
         private static final String[] SUPPORTED_LANGUAGES = {"en", "fr"};
         private static final String DEFAULT_LANGUAGE = "en";
 

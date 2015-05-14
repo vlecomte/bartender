@@ -11,6 +11,7 @@ import java.util.List;
 import be.uclouvain.lsinf1225.v.bartender.R;
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
+import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
 
@@ -35,7 +36,7 @@ public class AtTableActivity extends Activity {
         markDelivered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DaoDetail.markDelivered(toServe);
+                MyApp.getWaiter().serve(toServe);
                 ToServeFragment.sRefreshRequested = true;
                 finish();
             }
