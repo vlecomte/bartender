@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.v.bartender.dao.DaoDetail;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 
 public class Order {
     private int mOrderNum;
@@ -61,5 +62,6 @@ public class Order {
     public void addBasket(Customer.Basket basket) {
         DaoDetail.create(mOrderNum, basket);
         setDetails(DaoDetail.getFromOrder(mOrderNum));
+        DaoIngredient.applyUsages();
     }
 }
