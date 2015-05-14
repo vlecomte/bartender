@@ -2,8 +2,6 @@ package be.uclouvain.lsinf1225.v.bartender.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 
 
@@ -29,7 +27,7 @@ public class InsufStockActivity extends Activity {
     }
 
     public void updateTab(){
-        ArrayList<Ingredient> insufTab = DaoIngredient.getInsufficient();
+        ArrayList<Ingredient> insufTab = DaoIngredient.getUnderCritical();
         name= new String[insufTab.size()];
         sActuel= new Double[insufTab.size()];
         sSeuil= new Double[insufTab.size()];

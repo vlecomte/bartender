@@ -85,6 +85,8 @@
     <string name="title_affairtune_stats">Profits of the last 20 days</string>
     <string name="affair_profit">Affairs profit</string>
 
+    <string name="error_ingredient_insufficient">The stock has diminished since you added the products to your basket. They will be displayed in red in the menu. Please make another choice.</string>
+
 
     <string name="plus">+</string>
     <string name="minus">-</string>

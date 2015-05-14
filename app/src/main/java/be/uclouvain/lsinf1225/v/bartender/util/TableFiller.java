@@ -26,7 +26,6 @@ import be.uclouvain.lsinf1225.v.bartender.gui.AtTableActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.BillActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.DescriptionActivity;
 import be.uclouvain.lsinf1225.v.bartender.gui.RankPickerDialogFragment;
-import be.uclouvain.lsinf1225.v.bartender.gui.UsersActivity;
 import be.uclouvain.lsinf1225.v.bartender.model.Customer;
 import be.uclouvain.lsinf1225.v.bartender.model.Detail;
 import be.uclouvain.lsinf1225.v.bartender.model.Order;
@@ -59,12 +58,12 @@ public class TableFiller {
             typeIcon.setImageResource(imageId);
             productName.setText(product.getDisplayName());
 
-            if (product.getNumAvailable() == 0) {
-                productName.setTextColor(mContext.getResources().getColor(
-                        R.color.placeholder_gray));
-            } else if (product.getNumAvailable() < 0) {
+            if (product.getNumAvailable() < 0 && MyApp.getCustomer().getNumInBasket(product) > 0) {
                 productName.setTextColor(mContext.getResources().getColor(
                         R.color.out_of_stock_red));
+            } else if (product.getNumAvailable() <= 0) {
+                productName.setTextColor(mContext.getResources().getColor(
+                        R.color.placeholder_gray));
             }
 
             row.setOnClickListener(new View.OnClickListener() {

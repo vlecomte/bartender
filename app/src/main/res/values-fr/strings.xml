@@ -149,4 +149,5 @@
     <string name="button_confirm_for_me">Confirmer pour moi</string>
     <string name="title_affairtune_stats">Chiffre d\'affaire des 20 derniers jours</string>
     <string name="affair_profit">Chiffre d\'affaire</string>
+    <string name="error_ingredient_insufficient">Le stock a diminué depuis que vous avez ajouté les produits à votre panier. Ils seront affichés en rouge dans le menu. Veuillez faire un autre choix.</string>
 </resources>

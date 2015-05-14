@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.v.bartender.R;
+import be.uclouvain.lsinf1225.v.bartender.dao.DaoIngredient;
 import be.uclouvain.lsinf1225.v.bartender.util.MyApp;
 import be.uclouvain.lsinf1225.v.bartender.util.Refreshable;
 import be.uclouvain.lsinf1225.v.bartender.util.TableFiller;
@@ -34,7 +35,13 @@ public class BasketFragment extends Fragment implements Refreshable {
         buttonConfirmBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!MyApp.getCustomer().getBasket().isEmpty()) {
+                if (MyApp.getCustomer().getBasket().isEmpty()) {
+                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
+                            Toast.LENGTH_LONG).show();
+                } else if (!DaoIngredient.getInsufficient().isEmpty()) {
+                    Toast.makeText(getActivity(), getString(R.string.error_ingredient_insufficient),
+                            Toast.LENGTH_LONG).show();
+                } else {
                     if (MyApp.getCustomer().hasCurrentOrder()) {
                         confirmBasketAndRefresh();
                     } else {
@@ -48,9 +55,6 @@ public class BasketFragment extends Fragment implements Refreshable {
                         });
                         tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
                     }
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
-                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -63,7 +67,13 @@ public class BasketFragment extends Fragment implements Refreshable {
         buttonConfirmForTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!MyApp.getCustomer().getBasket().isEmpty()) {
+                if (MyApp.getCustomer().getBasket().isEmpty()) {
+                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
+                            Toast.LENGTH_SHORT).show();
+                } else if (!DaoIngredient.getInsufficient().isEmpty()) {
+                    Toast.makeText(getActivity(), getString(R.string.error_ingredient_insufficient),
+                            Toast.LENGTH_SHORT).show();
+                } else {
                     TablePickerDialogFragment tablePicker = new TablePickerDialogFragment();
                     tablePicker.setListener(new TablePickerDialogFragment.TableNumListener() {
                         @Override
@@ -75,9 +85,6 @@ public class BasketFragment extends Fragment implements Refreshable {
                         }
                     });
                     tablePicker.show(getFragmentManager(), TablePickerDialogFragment.TAG);
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.error_no_basket_to_confirm),
-                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
