@@ -87,7 +87,8 @@ public class DaoIngredient {
         ArrayList<Ingredient> insufficient = new ArrayList<>();
 
         for (Ingredient ingredient : sStock) {
-            if (ingredient.getRemaining() < ingredient.getCritical()) {
+            if (ingredient.getCritical() != null
+                    && ingredient.getRemaining() < ingredient.getCritical()) {
                 insufficient.add(ingredient);
             }
         }
