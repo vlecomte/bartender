@@ -26,6 +26,8 @@ public class MyApp extends Application {
 
         private static final String DATABASE_NAME = "bartender.sqlite";
         private static final int DATABASE_VERSION = 10;
+        private static final String[] SUPPORTED_LANGUAGES = {"en", "fr"};
+        private static final String DEFAULT_LANGUAGE = "en";
 
         private SQLiteAssetHelper mDbHelper;
         private User mCurrentUser;
@@ -34,11 +36,18 @@ public class MyApp extends Application {
          * Product to be displayed by the product details activity.
          */
         private Product mDisplayedProduct;
-
         private Ingredient mIngredientToChange;
+
+        private String mLanguage;
 
         public App() {
             sApp = this;
+
+            String aimLanguage = Locale.getDefault().getLanguage();
+            for (String language : App.SUPPORTED_LANGUAGES) {
+                if (language.equals(aimLanguage)) mLanguage = aimLanguage;
+            }
+            mLanguage = App.DEFAULT_LANGUAGE;
         }
 
         private synchronized SQLiteAssetHelper getDbHelper() {
@@ -142,7 +151,7 @@ public class MyApp extends Application {
 
 
     public static String getLanguage() {
-        return Locale.getDefault().getLanguage();
+        return sApp.mLanguage;
     }
 
     public static Ingredient getIngredientToChange() {return sApp.mIngredientToChange;}
